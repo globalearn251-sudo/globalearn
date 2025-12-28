@@ -59,6 +59,19 @@ export const profileApi = {
     if (error) throw error;
     return data;
   },
+
+  // Admin function to update user role
+  updateUserRole: async (userId: string, role: 'user' | 'admin') => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ role })
+      .eq('id', userId)
+      .select()
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data as Profile;
+  },
 };
 
 // Product API
@@ -553,6 +566,19 @@ export const kycApi = {
     if (error) throw error;
     return data;
   },
+
+  // Alias functions for admin pages
+  approveKycSubmission: async (submissionId: string, adminNote?: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+    return kycApi.approveKyc(submissionId, user.id, adminNote);
+  },
+
+  rejectKycSubmission: async (submissionId: string, adminNote: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+    return kycApi.rejectKyc(submissionId, user.id, adminNote);
+  },
 };
 
 // Company Settings API
@@ -613,6 +639,45 @@ export const storageApi = {
     const { error } = await supabase.storage
       .from('app_8ildgs548gzl_investment_images')
       .remove([path]);
+    
+    if (error) throw error;
+  },
+};
+
+// Admin wrapper functions that auto-inject adminId
+export const adminRechargeApi = {
+  approve: async (requestId: string, adminNote?: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+    return rechargeApi.approveRechargeRequest(requestId, user.id, adminNote);
+  },
+  reject: async (requestId: string, adminNote: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+    return rechargeApi.rejectRechargeRequest(requestId, user.id, adminNote);
+  },
+};
+
+export const adminWithdrawalApi = {
+  approve: async (requestId: string, adminNote?: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+    return withdrawalApi.approveWithdrawalRequest(requestId, user.id, adminNote);
+  },
+  reject: async (requestId: string, adminNote: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+    return withdrawalApi.rejectWithdrawalRequest(requestId, user.id, adminNote);
+  },
+};
+
+// Add delete function for Lucky Draw
+export const adminLuckyDrawApi = {
+  deleteReward: async (rewardId: string) => {
+    const { error } = await supabase
+      .from('lucky_draw_config')
+      .delete()
+      .eq('id', rewardId);
     
     if (error) throw error;
   },

@@ -5,75 +5,127 @@
 ### 1.1 Application Name
 Investment Product Platform
 
-### 1.2 Application Description
-A full production-ready responsive web application for investment product management, featuring user investment, daily earnings, wallet management, referral system, and lucky draw functionality.
+### 1.2 Application Description\nA full production-ready responsive web application for investment product management, featuring user investment, daily earnings, wallet management, referral system, and lucky draw functionality.
 
 ### 1.3 Core Features
-- User authentication and profile management
-- Investment product browsing and purchasing
+- Comprehensive admin panel\n- User authentication and profile management\n- Investment product browsing and purchasing
 - Wallet system with recharge and withdrawal
 - Daily automatic earnings distribution
 - Referral team management
-- Lucky draw system\n- Basic KYC verification
-- Comprehensive admin panel
+- Lucky draw system
+- Basic KYC verification
+\n## 2. Admin Panel
 
-## 2. Technical Requirements
+### 2.1 Admin Dashboard
+- Overview statistics (total users, active investments, pending requests)
+- Quick access to all management modules
+- Real-time transaction monitoring
+\n### 2.2 User Management
+- View all registered users
+- User details and activity logs
+- Wallet balance overview
+- Suspend or activate user accounts
 
-### 2.1 Database\nLocal database\n\n### 2.2 Responsive Design
-Mobile-first responsive design approach
+### 2.3 KYC Approval System
+- Review submitted KYC documents
+- View government ID uploads (front and back)
+- Review bank details
+- Approve or reject KYC submissions
+- Simple verification workflow
 
-## 3. User Interface Design
+### 2.4 Product Management\n- Add new investment products
+- Edit existing products\n- Delete products
+- Set price, daily income, and duration\n- Activate or deactivate products
+- Upload product images
 
-### 3.1 Theme
-Light theme with clean financial app aesthetic
+### 2.5 Recharge Request Handling
+- View pending recharge requests
+- Review payment screenshots
+- Approve requests (add balance to user wallet)
+- Reject requests with reason
+- Update payment QR code anytime
 
-### 3.2 Navigation Structure
-Fixed bottom navigation bar (mobile) with five sections:
-- Home
-- Products
-- Lucky Draw
+### 2.6 Withdrawal Request Processing
+- View pending withdrawal requests
+- Manual transfer processing
+- Approve or reject requests
+- Update user wallet upon approval
+- Maintain withdrawal history logs
+
+### 2.7 Wallet Transaction Logs
+- Complete transaction history
+- Filter by user, date, or transaction type
+- Export transaction reports
+\n### 2.8 Company Information Updates
+- Update company banner
+- Edit company notice and information
+- Manage company details displayed on dashboard
+
+### 2.9 Banner Management
+- Upload and update dashboard banners
+- Set banner display order
+- Activate or deactivate banners
+
+### 2.10 Lucky Draw Reward Configuration
+- Configure reward options\n- Set reward amounts\n- Manage reward probabilities
+- View lucky draw history
+
+## 3. Technical Requirements
+
+### 3.1 Database
+Local database
+
+### 3.2 Responsive Design\nMobile-first responsive design approach
+
+## 4. User Interface Design
+
+### 4.1 Theme
+Light theme with clean financial app aesthetic\n
+### 4.2 Navigation Structure
+Fixed bottom navigation bar (mobile) with five sections:\n- Home
+- Products\n- Lucky Draw
 - Team
 - Profile
-\n### 3.3 Design Style
+
+### 4.3 Design Style
 - Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions
-- Visual Details: Subtle shadows for card elevation, 8px rounded corners, minimalist icons, smooth transitions
-- Layout: Card-based layout with clear visual hierarchy and adequate white space
+- Visual Details: Subtle shadows for card elevation, 8px rounded corners, minimalist icons, smooth transitions\n- Layout: Card-based layout with clear visual hierarchy and adequate white space
 
-## 4. User Authentication
+## 5. User Authentication
 
-### 4.1 Login & Signup
+### 5.1 Login & Signup
 - Simple phone number and password authentication
 - Forgot password functionality
 - No OTP verification required
 - Redirect to dashboard after successful login
 
-## 5. User Dashboard
+## 6. User Dashboard
 
-### 5.1 Top Section
+### 6.1 Top Section
 - Company banner (admin-updatable)
 - Company notice and information display
-\n### 5.2 Wallet Summary
-- Total Balance display
+
+### 6.2 Wallet Summary\n- Total Balance display
 - Earnings display
 - Withdrawable Amount display
 - Recharge button
 - Withdraw button
-\n### 5.3 Dashboard Sections
+
+### 6.3 Dashboard Sections
 - My Assets overview
 - Daily Check-in Bonus
 - Company Details (admin-updatable)
-\n## 6. KYC Verification
 
-### 6.1 User Submission
+## 7. KYC Verification
+
+### 7.1 User Submission
 - Government ID upload (front and back)
 - Bank details submission
-\n### 6.2 Admin Review
-- Approve or reject KYC submissions
-- Simple verification workflow
 
-## 7. Products Module
-
-### 7.1 Product Display
+### 7.2 Admin Review
+- Approve or reject KYC submissions\n- Simple verification workflow
+\n## 8. Products Module\n
+### 8.1 Product Display
 Each product shows:
 - Product image
 - Price
@@ -81,81 +133,61 @@ Each product shows:
 - Contract duration
 - Buy button
 
-### 7.2 Purchase Flow
+### 8.2 Purchase Flow
 - Deduct amount from user wallet
 - Activate daily earning schedule
-- Record transaction\n\n### 7.3 Admin Product Management
-- Add new products
-- Edit existing products
-- Delete products
-- Set price, daily income, and duration
-- Activate or deactivate products
-
-## 8. Recharge System
-
-### 8.1 User Process
+- Record transaction
+\n## 9. Recharge System\n
+### 9.1 User Process
 1. Enter recharge amount
 2. View admin QR code
 3. Upload payment screenshot
 4. Status shows as pending
 
-### 8.2 Admin Management
-- Approve recharge requests (add balance to user wallet)
+### 9.2 Admin Management\n- Approve recharge requests (add balance to user wallet)
 - Reject recharge requests
 - Update QR code anytime
-\n## 9. Daily Earning System
 
-### 9.1 Automatic Distribution
-- Daily automatic earnings calculation
+## 10. Daily Earning System
+
+### 10.1 Automatic Distribution\n- Daily automatic earnings calculation
 - Add earnings to user wallet
 - Stop after contract period expires
 - Maintain detailed earning logs
 
-## 10. Withdrawal System
+## 11. Withdrawal System
 
-### 10.1 User Request
+### 11.1 User Request
 - Submit withdrawal request from available balance
-\n### 10.2 Admin Processing
+
+### 11.2 Admin Processing
 - Manual transfer processing
 - Approve or reject requests
 - Update user wallet upon approval
 
-## 11. Lucky Draw\n
-### 11.1 User Features
+## 12. Lucky Draw
+
+### 12.1 User Features
 - One spin per day limit
 - Random bonus rewards
 - Auto-add rewards to wallet
-\n### 11.2 Admin Management
-- Configure reward options
-- Manage reward probabilities
-\n## 12. Referral Team System
+\n### 12.2 Admin Management
+- Configure reward options\n- Manage reward probabilities\n
+## 13. Referral Team System
 
-### 12.1 Features
-- Unique referral link generation
+### 13.1 Features\n- Unique referral link generation
 - Display list of referred users
 - Show referral earnings summary
 - Single-level referral structure
 
-## 13. User Profile\n
-### 13.1 Profile Sections
+## 14. User Profile
+
+### 14.1 Profile Sections
 - Personal details
 - KYC status display
 - Order history
-- Transaction history
-- Withdrawal history
+- Transaction history\n- Withdrawal history
 - Change password functionality
-
-## 14. Admin Panel
-\n### 14.1 Management Modules
-- User management
-- KYC approval system
-- Product management
-- Recharge request handling
-- Withdrawal request processing
-- Wallet transaction logs
-- Company information updates
-- Banner management
-- Lucky draw reward configuration
 
 ## 15. Security Requirements
 
@@ -163,8 +195,7 @@ Each product shows:
 - Secure login authentication
 - Admin access protection
 - Input validation
-- Wallet transaction security
-- Prevention of balance manipulation
+- Wallet transaction security\n- Prevention of balance manipulation
 
 ## 16. Development Goals
 

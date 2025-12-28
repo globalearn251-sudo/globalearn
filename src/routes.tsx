@@ -13,7 +13,16 @@ const WithdrawalPage = lazy(() => import('./pages/WithdrawalPage'));
 const KycSubmitPage = lazy(() => import('./pages/KycSubmitPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
+
+// Admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AdminUsersPage = lazy(() => import('./pages/admin/AdminUsersPage'));
+const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage'));
+const AdminRechargesPage = lazy(() => import('./pages/admin/AdminRechargesPage'));
+const AdminWithdrawalsPage = lazy(() => import('./pages/admin/AdminWithdrawalsPage'));
+const AdminKycPage = lazy(() => import('./pages/admin/AdminKycPage'));
+const AdminLuckyDrawPage = lazy(() => import('./pages/admin/AdminLuckyDrawPage'));
+const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage'));
 
 interface RouteConfig {
   name: string;
@@ -83,6 +92,41 @@ const routes: RouteConfig[] = [
         name: 'Admin Dashboard',
         path: '',
         element: <AdminDashboard />,
+      },
+      {
+        name: 'Users',
+        path: 'users',
+        element: <AdminUsersPage />,
+      },
+      {
+        name: 'Products',
+        path: 'products',
+        element: <AdminProductsPage />,
+      },
+      {
+        name: 'Recharges',
+        path: 'recharges',
+        element: <AdminRechargesPage />,
+      },
+      {
+        name: 'Withdrawals',
+        path: 'withdrawals',
+        element: <AdminWithdrawalsPage />,
+      },
+      {
+        name: 'KYC',
+        path: 'kyc',
+        element: <AdminKycPage />,
+      },
+      {
+        name: 'Lucky Draw',
+        path: 'lucky-draw',
+        element: <AdminLuckyDrawPage />,
+      },
+      {
+        name: 'Settings',
+        path: 'settings',
+        element: <AdminSettingsPage />,
       },
     ],
   },
