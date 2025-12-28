@@ -7,19 +7,23 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { companyApi, userProductApi, transactionApi } from '@/db/api';
 import { Wallet, TrendingUp, DollarSign, Gift, Info } from 'lucide-react';
-import type { CompanySetting, UserProduct, Transaction } from '@/types/types';
+import type { UserProduct, Transaction } from '@/types/types';
 
 export default function HomePage() {
-  const { profile, refreshProfile } = useAuth();
+  const { profile } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [companySettings, setCompanySettings] = useState<Record<string, string>>({});
+  const [bannerUrl, setBannerUrl] = useState('');
+  const [companyNotice, setCompanyNotice] = useState('');
+  const [companyDetails, setCompanyDetails] = useState('');
   const [activeProducts, setActiveProducts] = useState<UserProduct[]>([]);
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    loadData();
-  }, [profile]);
+    if (profile) {
+      loadData();
+    }
+  }, [profile?.id]); // Only depend on profile.id to avoid unnecessary re-renders
 
   const loadData = async () => {
     if (!profile) return;
@@ -27,23 +31,22 @@ export default function HomePage() {
     try {
       setLoading(true);
       
-      // Load company settings
-      const settings = await companyApi.getAllSettings();
-      const settingsMap: Record<string, string> = {};
-      settings.forEach((s: CompanySetting) => {
-        settingsMap[s.key] = s.value;
+      // Fetch all data in parallel for better performance
+      const [settings, products, transactions] = await Promise.all([
+        companyApi.getAllSettings().catch(() => []),
+        userProductApi.getActiveUserProducts(profile.id).catch(() => []),
+        transactionApi.getUserTransactions(profile.id, 5).catch(() => []),
+      ]);
+
+      // Process settings
+      settings.forEach((s) => {
+        if (s.key === 'banner_url') setBannerUrl(s.value);
+        if (s.key === 'company_notice') setCompanyNotice(s.value);
+        if (s.key === 'company_details') setCompanyDetails(s.value);
       });
-      setCompanySettings(settingsMap);
 
-      // Load active products
-      const products = await userProductApi.getActiveUserProducts(profile.id);
       setActiveProducts(products);
-
-      // Load recent transactions
-      const transactions = await transactionApi.getUserTransactions(profile.id, 5);
       setRecentTransactions(transactions);
-
-      await refreshProfile();
     } catch (error) {
       console.error('Error loading dashboard data:', error);
     } finally {
@@ -67,22 +70,23 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background pb-20">
       {/* Company Banner */}
-      {companySettings.banner_url && (
+      {bannerUrl && (
         <div className="w-full h-48 overflow-hidden">
           <img
-            src={companySettings.banner_url}
+            src={bannerUrl}
             alt="Company Banner"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
         </div>
       )}
 
       <div className="p-4 space-y-4">
         {/* Company Notice */}
-        {companySettings.company_notice && (
+        {companyNotice && (
           <Alert>
             <Info className="h-4 w-4" />
-            <AlertDescription>{companySettings.company_notice}</AlertDescription>
+            <AlertDescription>{companyNotice}</AlertDescription>
           </Alert>
         )}
 
@@ -220,14 +224,14 @@ export default function HomePage() {
         )}
 
         {/* Company Details */}
-        {companySettings.company_details && (
+        {companyDetails && (
           <Card>
             <CardHeader>
               <CardTitle>About Us</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                {companySettings.company_details}
+                {companyDetails}
               </p>
             </CardContent>
           </Card>
