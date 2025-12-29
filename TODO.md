@@ -43,12 +43,15 @@
   - [x] Bottom navigation for mobile
   - [x] Admin layout with sidebar
   - [x] Update App.tsx with routing
-- [ ] Step 8: Implement daily earnings automation
-  - [ ] Create edge function for daily earnings calculation
-  - [ ] Deploy edge function
+- [x] Step 8: Implement daily earnings automation
+  - [x] Create edge function for daily earnings calculation
+  - [x] Create update_user_balance database function
+  - [x] Deploy edge function to Supabase
+  - [x] Create admin page for manual triggering
+  - [x] Create setup documentation
 - [x] Step 9: Final validation and testing
   - [x] Run lint and fix issues
-  - [ ] Verify all features work correctly
+  - [ ] Verify all features work correctly (user testing required)
 
 ## Notes
 - Using Supabase for backend (database, auth, storage)
@@ -71,17 +74,16 @@
 
 ## Remaining Tasks
 ### HIGH PRIORITY:
-1. **Implement Daily Earnings Edge Function**:
-   - Create edge function to calculate daily earnings
-   - Schedule to run daily
-   - Update user balances and transaction records
-   - Deploy to Supabase
-
-### MEDIUM PRIORITY:
-2. **Add Initial Data**:
+1. **Add Initial Data** (Can be done via Admin Panel):
    - Create sample investment products via admin panel
    - Set up company information (banner, notice, QR code)
    - Configure lucky draw rewards
+
+2. **Set Up Cron Trigger** (Supabase Dashboard):
+   - Go to Supabase Dashboard → Edge Functions
+   - Find "daily-earnings" function
+   - Add cron trigger: `0 0 * * *` (daily at midnight UTC)
+   - See DAILY_EARNINGS_SETUP.md for details
 
 ### COMPLETED:
 - ✅ All user-facing pages and features
@@ -92,5 +94,7 @@
 - ✅ Mobile-responsive design
 - ✅ Bottom navigation and admin layout
 - ✅ **Complete admin panel with all management pages**
+- ✅ **Daily earnings edge function deployed**
+- ✅ **Admin page for manual earnings trigger**
 
-**Overall Progress: 95% Complete**
+**Overall Progress: 98% Complete**
