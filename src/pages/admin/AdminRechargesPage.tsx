@@ -32,17 +32,21 @@ export default function AdminRechargesPage() {
   const loadRequests = async () => {
     try {
       setLoading(true);
+      console.log('Loading recharge requests...');
       const [pending, all] = await Promise.all([
         rechargeApi.getPendingRechargeRequests(),
         rechargeApi.getAllRechargeRequests(),
       ]);
+      console.log('Pending requests:', pending);
+      console.log('All requests:', all);
       setPendingRequests(pending);
       setAllRequests(all);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error loading recharge requests:', error);
+      console.error('Error details:', error.message, error.details, error.hint);
       toast({
         title: 'Error',
-        description: 'Failed to load recharge requests',
+        description: `Failed to load recharge requests: ${error.message || 'Unknown error'}`,
         variant: 'destructive',
       });
     } finally {

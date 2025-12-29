@@ -35,17 +35,21 @@ export default function AdminKycPage() {
   const loadSubmissions = async () => {
     try {
       setLoading(true);
+      console.log('Loading KYC submissions...');
       const [pending, all] = await Promise.all([
         kycApi.getPendingKycSubmissions(),
         kycApi.getAllKycSubmissions(),
       ]);
+      console.log('Pending KYC:', pending);
+      console.log('All KYC:', all);
       setPendingSubmissions(pending);
       setAllSubmissions(all);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error loading KYC submissions:', error);
+      console.error('Error details:', error.message, error.details, error.hint);
       toast({
         title: 'Error',
-        description: 'Failed to load KYC submissions',
+        description: `Failed to load KYC submissions: ${error.message || 'Unknown error'}`,
         variant: 'destructive',
       });
     } finally {

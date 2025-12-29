@@ -60,9 +60,12 @@
 - Mobile-first responsive design with bottom navigation
 - Primary color: Blue (#2563eb), Accent: Green (#10b981)
 - Image uploads: KYC documents, payment screenshots, product images, company banner
-- Daily earnings will be calculated automatically via edge function (to be implemented)
+- Daily earnings calculated automatically via edge function (deployed and ready)
 - Lucky draw limited to one spin per day per user
 - Referral system is single-level only
+- **Debugging**: Added detailed console logging to admin pages (recharges, withdrawals, KYC)
+- **Data Verified**: Test data exists in database, RLS policies confirmed working
+- **Troubleshooting**: See ADMIN_DATA_DEBUG.md for debugging steps if data doesn't show
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

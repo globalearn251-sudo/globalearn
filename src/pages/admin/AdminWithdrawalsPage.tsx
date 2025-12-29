@@ -32,17 +32,21 @@ export default function AdminWithdrawalsPage() {
   const loadRequests = async () => {
     try {
       setLoading(true);
+      console.log('Loading withdrawal requests...');
       const [pending, all] = await Promise.all([
         withdrawalApi.getPendingWithdrawalRequests(),
         withdrawalApi.getAllWithdrawalRequests(),
       ]);
+      console.log('Pending withdrawals:', pending);
+      console.log('All withdrawals:', all);
       setPendingRequests(pending);
       setAllRequests(all);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error loading withdrawal requests:', error);
+      console.error('Error details:', error.message, error.details, error.hint);
       toast({
         title: 'Error',
-        description: 'Failed to load withdrawal requests',
+        description: `Failed to load withdrawal requests: ${error.message || 'Unknown error'}`,
         variant: 'destructive',
       });
     } finally {
