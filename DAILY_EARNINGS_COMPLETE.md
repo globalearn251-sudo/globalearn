@@ -358,15 +358,15 @@ ORDER BY total_earnings DESC;
 3. ❌ **Recharges**: NOT added to withdrawable (used for investment)
 
 #### Actions that DEDUCT from Withdrawable Amount:
-1. ❌ **Product Purchase**: Deducts from withdrawable amount
-2. ❌ **Withdrawal**: Deducts from withdrawable amount
+1. ✅ **Withdrawal**: Deducts from withdrawable amount
+2. ❌ **Product Purchase**: Does NOT deduct from withdrawable (uses balance only)
 
 ### Balance vs Withdrawable Amount
 
 | Action | Balance | Withdrawable Amount |
 |--------|---------|---------------------|
 | Recharge ₹1000 | +₹1000 | No change |
-| Purchase ₹500 product | -₹500 | -₹500 |
+| Purchase ₹500 product | -₹500 | No change |
 | Earn ₹50 daily | +₹50 | +₹50 |
 | Lucky draw ₹100 | +₹100 | +₹100 |
 | Withdraw ₹200 | -₹200 | -₹200 |
@@ -384,7 +384,7 @@ Day 1: User recharges ₹1,000
 
 Day 1: User purchases ₹500 product (50 days, ₹10/day)
 - Balance: ₹500
-- Withdrawable: ₹0 (max(0, 0-500))
+- Withdrawable: ₹0 (unchanged)
 
 Day 2: Daily earnings ₹10
 - Balance: ₹510

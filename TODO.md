@@ -71,14 +71,15 @@
 - Image uploads: KYC documents, payment screenshots, product images, company banner
 - Daily earnings calculated automatically via edge function (deployed and ready)
 - **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_amount
-- **WITHDRAWABLE LOGIC**: Earnings are withdrawable, recharges are not; purchases deduct from withdrawable
+- **PURCHASE LOGIC**: Products purchased using total balance only (not withdrawable amount)
+- **WITHDRAWABLE LOGIC**: Only earnings and rewards are withdrawable, not recharges
 - Lucky draw limited to one spin per day per user
 - Referral system is single-level only
 - **FIXED**: Admin panel data display issue - explicitly specified foreign key constraints in API queries
 - **Resolved**: "More than one relationship" error by using `!table_column_fkey` syntax in Supabase queries
-- **FIXED**: Withdrawable amount now correctly deducts when purchasing products
+- **FIXED**: Product purchase now uses balance only, not withdrawable_amount (fixes "withdrawable amount does not exist" error)
 - **FIXED**: Currency symbol changed from $ (Dollar) to ₹ (Rupee) throughout the application
-- **Logic Update**: Recharges add to balance only; earnings add to both balance and withdrawable_amount
+- **Logic Update**: Recharges add to balance only; earnings add to both balance and withdrawable_amount; purchases deduct from balance only
 - **NEW**: Notification system implemented with header notification icon, marquee banner for important notifications, and admin management page
 - **UPDATED**: Header layout - User greeting on left side, notification icon on right side
 

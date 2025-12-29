@@ -17,12 +17,12 @@ When daily earnings are distributed:
 | Action | Balance | Withdrawable |
 |--------|---------|--------------|
 | Recharge ₹1000 | +₹1000 | No change |
-| Purchase ₹500 | -₹500 | -₹500 |
+| Purchase ₹500 | -₹500 | No change |
 | Daily Earning ₹50 | +₹50 | +₹50 ✅ |
 | Lucky Draw ₹100 | +₹100 | +₹100 ✅ |
 | Withdrawal ₹200 | -₹200 | -₹200 |
 
-**Key Point**: Only earnings and rewards are withdrawable, not recharges!
+**Key Point**: Only earnings and rewards are withdrawable, not recharges! Purchases use balance only.
 
 ## 🔄 How It Works
 
