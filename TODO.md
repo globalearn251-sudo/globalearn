@@ -83,6 +83,7 @@
 - **NEW**: Notification system implemented with header notification icon, marquee banner for important notifications, and admin management page
 - **UPDATED**: Header layout - User greeting on left side, notification icon on right side
 - **UI UPDATE**: Home dashboard redesigned with blue gradient wallet card and four action buttons (Recharge, Withdraw, Invite, Support)
+- **UI UPDATE**: Lucky Draw page redesigned with colorful spinning wheel (8 segments), stats cards (Total Won, Spins Left), and smooth animations
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account
