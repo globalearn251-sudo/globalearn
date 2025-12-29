@@ -24,6 +24,7 @@ const AdminKycPage = lazy(() => import('./pages/admin/AdminKycPage'));
 const AdminLuckyDrawPage = lazy(() => import('./pages/admin/AdminLuckyDrawPage'));
 const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage'));
 const AdminEarningsPage = lazy(() => import('./pages/admin/AdminEarningsPage'));
+const AdminNotificationsPage = lazy(() => import('./pages/admin/AdminNotificationsPage'));
 
 interface RouteConfig {
   name: string;
@@ -128,6 +129,11 @@ const routes: RouteConfig[] = [
         name: 'Daily Earnings',
         path: 'earnings',
         element: <AdminEarningsPage />,
+      },
+      {
+        name: 'Notifications',
+        path: 'notifications',
+        element: <AdminNotificationsPage />,
       },
       {
         name: 'Settings',

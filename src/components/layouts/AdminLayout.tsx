@@ -11,7 +11,8 @@ import {
   Settings,
   Home,
   Gift,
-  Coins
+  Coins,
+  Bell
 } from 'lucide-react';
 
 const navItems = [
@@ -23,6 +24,7 @@ const navItems = [
   { path: '/admin/kyc', label: 'KYC Verification', icon: FileText },
   { path: '/admin/lucky-draw', label: 'Lucky Draw', icon: Gift },
   { path: '/admin/earnings', label: 'Daily Earnings', icon: Coins },
+  { path: '/admin/notifications', label: 'Notifications', icon: Bell },
   { path: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 

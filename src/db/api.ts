@@ -12,6 +12,9 @@ import type {
   LuckyDrawHistory,
   KycSubmission,
   CompanySetting,
+  Notification,
+  NotificationWithReadStatus,
+  NotificationType,
 } from '@/types/types';
 
 // Profile API
@@ -680,5 +683,162 @@ export const adminLuckyDrawApi = {
       .eq('id', rewardId);
     
     if (error) throw error;
+  },
+};
+
+// Notification API
+export const notificationApi = {
+  // Get all notifications for current user with read status
+  getUserNotifications: async (userId: string) => {
+    const { data, error } = await supabase
+      .from('notifications')
+      .select(`
+        *,
+        user_notifications!left(is_read, read_at)
+      `)
+      .eq('is_active', true)
+      .eq('user_notifications.user_id', userId)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    
+    // Transform the data to flatten the structure
+    const notifications = (data || []).map((notif: any) => ({
+      ...notif,
+      is_read: notif.user_notifications?.[0]?.is_read || false,
+      read_at: notif.user_notifications?.[0]?.read_at || null,
+      user_notifications: undefined,
+    }));
+    
+    return notifications as NotificationWithReadStatus[];
+  },
+
+  // Get important notifications only
+  getImportantNotifications: async (userId: string) => {
+    const { data, error } = await supabase
+      .from('notifications')
+      .select(`
+        *,
+        user_notifications!left(is_read, read_at)
+      `)
+      .eq('is_active', true)
+      .eq('type', 'important')
+      .eq('user_notifications.user_id', userId)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    
+    const notifications = (data || []).map((notif: any) => ({
+      ...notif,
+      is_read: notif.user_notifications?.[0]?.is_read || false,
+      read_at: notif.user_notifications?.[0]?.read_at || null,
+      user_notifications: undefined,
+    }));
+    
+    return notifications as NotificationWithReadStatus[];
+  },
+
+  // Get unread notification count
+  getUnreadCount: async (userId: string) => {
+    const { data, error } = await supabase.rpc('get_unread_notification_count', {
+      p_user_id: userId,
+    });
+    
+    if (error) throw error;
+    return data as number;
+  },
+
+  // Mark notification as read
+  markAsRead: async (userId: string, notificationId: string) => {
+    const { error } = await supabase.rpc('mark_notification_as_read', {
+      p_user_id: userId,
+      p_notification_id: notificationId,
+    });
+    
+    if (error) throw error;
+  },
+
+  // Mark all notifications as read
+  markAllAsRead: async (userId: string) => {
+    const notifications = await notificationApi.getUserNotifications(userId);
+    const unreadNotifications = notifications.filter(n => !n.is_read);
+    
+    await Promise.all(
+      unreadNotifications.map(n => notificationApi.markAsRead(userId, n.id))
+    );
+  },
+};
+
+// Admin Notification API
+export const adminNotificationApi = {
+  // Get all notifications (admin view)
+  getAllNotifications: async () => {
+    const { data, error } = await supabase
+      .from('notifications')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return (Array.isArray(data) ? data : []) as Notification[];
+  },
+
+  // Create notification for all users
+  createNotification: async (
+    title: string,
+    message: string,
+    type: NotificationType,
+    createdBy: string
+  ) => {
+    const { data, error } = await supabase.rpc('create_notification_for_all_users', {
+      p_title: title,
+      p_message: message,
+      p_type: type,
+      p_created_by: createdBy,
+    });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Update notification
+  updateNotification: async (
+    notificationId: string,
+    updates: Partial<Notification>
+  ) => {
+    const { data, error } = await supabase
+      .from('notifications')
+      .update(updates)
+      .eq('id', notificationId)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data as Notification;
+  },
+
+  // Delete notification (set inactive)
+  deleteNotification: async (notificationId: string) => {
+    const { error } = await supabase
+      .from('notifications')
+      .update({ is_active: false })
+      .eq('id', notificationId);
+    
+    if (error) throw error;
+  },
+
+  // Get notification statistics
+  getNotificationStats: async (notificationId: string) => {
+    const { data, error } = await supabase
+      .from('user_notifications')
+      .select('is_read')
+      .eq('notification_id', notificationId);
+    
+    if (error) throw error;
+    
+    const total = data?.length || 0;
+    const read = data?.filter(n => n.is_read).length || 0;
+    const unread = total - read;
+    
+    return { total, read, unread };
   },
 };

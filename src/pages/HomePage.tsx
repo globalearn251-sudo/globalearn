@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Header } from '@/components/layouts/Header';
+import { ImportantNotificationBanner } from '@/components/layouts/ImportantNotificationBanner';
 import { companyApi, userProductApi, transactionApi } from '@/db/api';
 import { Wallet, TrendingUp, DollarSign, Gift, Info } from 'lucide-react';
 import type { UserProduct, Transaction } from '@/types/types';
@@ -69,6 +71,9 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background pb-20">
+      {/* Header */}
+      <Header />
+
       {/* Company Banner */}
       {bannerUrl && (
         <div className="w-full h-48 overflow-hidden">
@@ -132,6 +137,9 @@ export default function HomePage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Important Notification Banner */}
+        <ImportantNotificationBanner />
 
         {/* My Assets */}
         <Card>

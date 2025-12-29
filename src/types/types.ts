@@ -197,3 +197,32 @@ export interface ProductFormData {
   contract_days: number;
   status: ProductStatus;
 }
+
+// Notification Types
+export type NotificationType = 'general' | 'important';
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  type: NotificationType;
+  created_by: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UserNotification {
+  id: string;
+  user_id: string;
+  notification_id: string;
+  is_read: boolean;
+  read_at: string | null;
+  created_at: string;
+  notification?: Notification;
+}
+
+export interface NotificationWithReadStatus extends Notification {
+  is_read: boolean;
+  read_at: string | null;
+}
