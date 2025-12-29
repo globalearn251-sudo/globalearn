@@ -10,7 +10,7 @@ export interface Profile {
   role: UserRole;
   balance: number;
   total_earnings: number;
-  withdrawable_balance: number;
+  withdrawable_amount: number;
   referral_code: string;
   referred_by: string | null;
   kyc_status: KycStatus | null;

@@ -267,11 +267,11 @@ export default function AdminProductsPage() {
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
                   <p className="text-muted-foreground">Price</p>
-                  <p className="font-bold">${product.price.toFixed(2)}</p>
+                  <p className="font-bold">₹{product.price.toFixed(2)}</p>
                 </div>
                 <div>
                   <p className="text-muted-foreground">Daily Earning</p>
-                  <p className="font-bold text-success">${product.daily_earning.toFixed(2)}</p>
+                  <p className="font-bold text-success">₹{product.daily_earning.toFixed(2)}</p>
                 </div>
                 <div>
                   <p className="text-muted-foreground">Contract Days</p>
@@ -280,7 +280,7 @@ export default function AdminProductsPage() {
                 <div>
                   <p className="text-muted-foreground">Total Return</p>
                   <p className="font-bold text-primary">
-                    ${(product.daily_earning * product.contract_days).toFixed(2)}
+                    ₹{(product.daily_earning * product.contract_days).toFixed(2)}
                   </p>
                 </div>
               </div>

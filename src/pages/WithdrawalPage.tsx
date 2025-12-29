@@ -33,7 +33,7 @@ export default function WithdrawalPage() {
       return;
     }
 
-    if (amountNum > profile.withdrawable_balance) {
+    if (amountNum > profile.withdrawable_amount) {
       toast({
         title: 'Insufficient Balance',
         description: 'You do not have enough withdrawable balance',
@@ -84,7 +84,7 @@ export default function WithdrawalPage() {
         <Alert>
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription>
-            Withdrawable Balance: <span className="font-bold">${profile?.withdrawable_balance?.toFixed(2) || '0.00'}</span>
+            Withdrawable Balance: <span className="font-bold">₹{profile?.withdrawable_amount?.toFixed(2) || '0.00'}</span>
           </AlertDescription>
         </Alert>
 
@@ -101,7 +101,7 @@ export default function WithdrawalPage() {
                   type="number"
                   step="0.01"
                   min="0.01"
-                  max={profile?.withdrawable_balance || 0}
+                  max={profile?.withdrawable_amount || 0}
                   placeholder="Enter amount"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}

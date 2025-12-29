@@ -48,7 +48,7 @@ export default function LuckyDrawPage() {
       
       toast({
         title: 'Congratulations! 🎉',
-        description: `You won ${result.reward_name}! $${result.reward_amount} has been added to your balance.`,
+        description: `You won ${result.reward_name}! ₹{result.reward_amount} has been added to your balance.`,
       });
 
       setCanSpin(false);
@@ -125,7 +125,7 @@ export default function LuckyDrawPage() {
                         {new Date(item.created_at).toLocaleDateString()}
                       </p>
                     </div>
-                    <p className="font-bold text-success">+${item.reward_amount.toFixed(2)}</p>
+                    <p className="font-bold text-success">+₹{item.reward_amount.toFixed(2)}</p>
                   </div>
                 ))}
               </div>

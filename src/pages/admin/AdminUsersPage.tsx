@@ -136,11 +136,11 @@ export default function AdminUsersPage() {
                 <div className="flex items-center gap-4">
                   <div className="text-right">
                     <p className="text-sm text-muted-foreground">Balance</p>
-                    <p className="font-bold">${user.balance.toFixed(2)}</p>
+                    <p className="font-bold">₹{user.balance.toFixed(2)}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-muted-foreground">Total Earnings</p>
-                    <p className="font-bold text-success">${user.total_earnings.toFixed(2)}</p>
+                    <p className="font-bold text-success">₹{user.total_earnings.toFixed(2)}</p>
                   </div>
                   <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
                     {user.role}

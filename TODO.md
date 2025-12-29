@@ -65,6 +65,9 @@
 - Referral system is single-level only
 - **FIXED**: Admin panel data display issue - explicitly specified foreign key constraints in API queries
 - **Resolved**: "More than one relationship" error by using `!table_column_fkey` syntax in Supabase queries
+- **FIXED**: Withdrawable amount now correctly deducts when purchasing products
+- **FIXED**: Currency symbol changed from $ (Dollar) to ₹ (Rupee) throughout the application
+- **Logic Update**: Recharges add to balance only; earnings add to both balance and withdrawable_amount
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

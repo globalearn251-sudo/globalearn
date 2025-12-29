@@ -147,11 +147,11 @@ export default function ProfilePage() {
                         <div className="grid grid-cols-3 gap-2 text-sm">
                           <div>
                             <p className="text-muted-foreground">Price</p>
-                            <p className="font-medium">${order.purchase_price.toFixed(2)}</p>
+                            <p className="font-medium">₹{order.purchase_price.toFixed(2)}</p>
                           </div>
                           <div>
                             <p className="text-muted-foreground">Earned</p>
-                            <p className="font-medium text-success">${order.total_earned.toFixed(2)}</p>
+                            <p className="font-medium text-success">₹{order.total_earned.toFixed(2)}</p>
                           </div>
                           <div>
                             <p className="text-muted-foreground">Days Left</p>
@@ -191,11 +191,11 @@ export default function ProfilePage() {
                           )}
                         </div>
                         <div className="text-right">
-                          <p className={`font-bold ${tx.amount >= 0 ? 'text-success' : 'text-destructive'}`}>
-                            {tx.amount >= 0 ? '+' : ''}${tx.amount.toFixed(2)}
+                          <p className={`font-bold ₹{tx.amount >= 0 ? 'text-success' : 'text-destructive'}`}>
+                            {tx.amount >= 0 ? '+' : ''}₹{tx.amount.toFixed(2)}
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            Balance: ${tx.balance_after.toFixed(2)}
+                            Balance: ₹{tx.balance_after.toFixed(2)}
                           </p>
                         </div>
                       </div>
@@ -219,7 +219,7 @@ export default function ProfilePage() {
                     {rechargeRequests.map((req) => (
                       <div key={req.id} className="flex justify-between items-center py-2 border-b last:border-0">
                         <div>
-                          <p className="font-medium">${req.amount.toFixed(2)}</p>
+                          <p className="font-medium">₹{req.amount.toFixed(2)}</p>
                           <p className="text-xs text-muted-foreground">
                             {new Date(req.created_at).toLocaleDateString()}
                           </p>
@@ -244,7 +244,7 @@ export default function ProfilePage() {
                     {withdrawalRequests.map((req) => (
                       <div key={req.id} className="flex justify-between items-center py-2 border-b last:border-0">
                         <div>
-                          <p className="font-medium">${req.amount.toFixed(2)}</p>
+                          <p className="font-medium">₹{req.amount.toFixed(2)}</p>
                           <p className="text-xs text-muted-foreground">
                             {new Date(req.created_at).toLocaleDateString()}
                           </p>

@@ -13,7 +13,7 @@ export const formatBytes = (
   const dm = decimals < 0 ? 0 : decimals
   const sizes = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
 
-  if (bytes === 0 || bytes === undefined) return size !== undefined ? `0 ${size}` : '0 bytes'
+  if (bytes === 0 || bytes === undefined) return size !== undefined ? `0 ₹{size}` : '0 bytes'
   const i = size !== undefined ? sizes.indexOf(size) : Math.floor(Math.log(bytes) / Math.log(k))
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
 }
@@ -100,7 +100,7 @@ const DropzoneContent = ({ className }: { className?: string }) => {
 
         return (
           <div
-            key={`${file.name}-${idx}`}
+            key={`₹{file.name}-₹{idx}`}
             className="flex items-center gap-x-4 border-b py-2 first:mt-4 last:mb-4 "
           >
             {file.type.startsWith('image/') ? (
@@ -122,7 +122,7 @@ const DropzoneContent = ({ className }: { className?: string }) => {
                   {file.errors
                     .map((e) =>
                       e.message.startsWith('File is larger than')
-                        ? `File is larger than ${formatBytes(maxFileSize, 2)} (Size: ${formatBytes(file.size, 2)})`
+                        ? `File is larger than ₹{formatBytes(maxFileSize, 2)} (Size: ₹{formatBytes(file.size, 2)})`
                         : e.message
                     )
                     .join(', ')}
@@ -190,7 +190,7 @@ const DropzoneEmptyState = ({ className }: { className?: string }) => {
     <div className={cn('flex flex-col items-center gap-y-2', className)}>
       <Upload size={20} className="text-muted-foreground" />
       <p className="text-sm">
-        Upload{!!maxFiles && maxFiles > 1 ? ` ${maxFiles}` : ''} file
+        Upload{!!maxFiles && maxFiles > 1 ? ` ₹{maxFiles}` : ''} file
         {!maxFiles || maxFiles > 1 ? 's' : ''}
       </p>
       <div className="flex flex-col items-center gap-y-1">

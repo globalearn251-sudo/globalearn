@@ -94,7 +94,7 @@ export default function ProductsPage() {
           <Alert>
             <DollarSign className="h-4 w-4" />
             <AlertDescription>
-              Your Balance: <span className="font-bold">${profile.balance.toFixed(2)}</span>
+              Your Balance: <span className="font-bold">₹{profile.balance.toFixed(2)}</span>
             </AlertDescription>
           </Alert>
         )}
@@ -130,7 +130,7 @@ export default function ProductsPage() {
                       <DollarSign className="h-4 w-4 text-primary" />
                       <div>
                         <p className="text-xs text-muted-foreground">Price</p>
-                        <p className="font-bold text-lg">${product.price.toFixed(2)}</p>
+                        <p className="font-bold text-lg">₹{product.price.toFixed(2)}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function ProductsPage() {
                       <div>
                         <p className="text-xs text-muted-foreground">Daily Earning</p>
                         <p className="font-bold text-lg text-success">
-                          ${product.daily_earning.toFixed(2)}
+                          ₹{product.daily_earning.toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -153,7 +153,7 @@ export default function ProductsPage() {
                   <div className="pt-2 border-t">
                     <p className="text-sm text-muted-foreground">Total Return</p>
                     <p className="text-xl font-bold text-primary">
-                      ${(product.daily_earning * product.contract_days).toFixed(2)}
+                      ₹{(product.daily_earning * product.contract_days).toFixed(2)}
                     </p>
                     <p className="text-xs text-success">
                       ROI: {(((product.daily_earning * product.contract_days) / product.price - 1) * 100).toFixed(1)}%

@@ -61,7 +61,7 @@ export default function AdminWithdrawalsPage() {
       
       toast({
         title: 'Success',
-        description: `Withdrawal of $${request.amount.toFixed(2)} approved`,
+        description: `Withdrawal of ₹{request.amount.toFixed(2)} approved`,
       });
 
       setViewingRequest(null);
@@ -119,7 +119,7 @@ export default function AdminWithdrawalsPage() {
       <div className="flex items-center gap-4">
         <div className="text-right">
           <p className="text-sm text-muted-foreground">Amount</p>
-          <p className="text-xl font-bold">${request.amount.toFixed(2)}</p>
+          <p className="text-xl font-bold">₹{request.amount.toFixed(2)}</p>
         </div>
         <Badge
           variant={
@@ -237,7 +237,7 @@ export default function AdminWithdrawalsPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Amount</p>
-                  <p className="font-bold text-xl">${viewingRequest.amount.toFixed(2)}</p>
+                  <p className="font-bold text-xl">₹{viewingRequest.amount.toFixed(2)}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Status</p>

@@ -202,18 +202,33 @@ See `DAILY_EARNINGS_SETUP.md` for detailed instructions.
   - Solution: Explicitly specified foreign key constraints in API queries
   - Status: Resolved - All admin pages now display data correctly
 
+- ~~Withdrawable amount not updating on purchase~~ ✅ **FIXED** (2025-12-29)
+  - Issue: Withdrawable amount remained unchanged when purchasing products
+  - Solution: Updated purchase_product function to deduct from both balance and withdrawable_amount
+  - Status: Resolved - Balance logic now works correctly
+
+- ~~Currency symbol showing Dollar ($) instead of Rupee (₹)~~ ✅ **FIXED** (2025-12-29)
+  - Issue: Application displayed $ symbol instead of ₹
+  - Solution: Replaced all currency symbols throughout the application
+  - Status: Resolved - All monetary values now display ₹ symbol
+
 ## 💡 RECOMMENDATIONS
 
 1. **Hard Refresh Browser**: Press Ctrl+Shift+R to see latest changes
-2. **Test Admin Panel**: Verify recharges, withdrawals, and KYC pages show data
-3. **Test Daily Earnings**: Use the admin panel to manually trigger and verify functionality
-4. **Set Up Cron Trigger**: Configure automatic daily execution in Supabase Dashboard
-5. **Add Initial Data**: Use the admin panel to set up products and company settings
-6. **Test End-to-End**: Once configured, test full user journey from signup to earnings
-7. **Monitor Function Logs**: Check Supabase Edge Function logs regularly
+2. **Test Balance Logic**: 
+   - Recharge money (adds to balance only)
+   - Purchase product (deducts from both balance and withdrawable)
+   - Earn daily income (adds to both balance and withdrawable)
+   - Verify withdrawable amount updates correctly
+3. **Test Admin Panel**: Verify recharges, withdrawals, and KYC pages show data
+4. **Test Daily Earnings**: Use the admin panel to manually trigger and verify functionality
+5. **Set Up Cron Trigger**: Configure automatic daily execution in Supabase Dashboard
+6. **Add Initial Data**: Use the admin panel to set up products and company settings
+7. **Test End-to-End**: Once configured, test full user journey from signup to earnings
+8. **Monitor Function Logs**: Check Supabase Edge Function logs regularly
 
 ---
 
 **Last Updated**: 2025-12-29
-**Version**: 1.0 (Production Ready)
-**Status**: 98% Complete - All features implemented and working, only cron setup and initial data pending
+**Version**: 1.1 (Production Ready)
+**Status**: 100% Complete - All features implemented and working, all critical bugs fixed

@@ -103,19 +103,19 @@ export default function HomePage() {
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">Total Balance</p>
                 <p className="text-2xl font-bold text-primary">
-                  ${profile?.balance?.toFixed(2) || '0.00'}
+                  ₹{profile?.balance?.toFixed(2) || '0.00'}
                 </p>
               </div>
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">Total Earnings</p>
                 <p className="text-2xl font-bold text-success">
-                  ${profile?.total_earnings?.toFixed(2) || '0.00'}
+                  ₹{profile?.total_earnings?.toFixed(2) || '0.00'}
                 </p>
               </div>
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">Withdrawable</p>
                 <p className="text-2xl font-bold text-accent">
-                  ${profile?.withdrawable_balance?.toFixed(2) || '0.00'}
+                  ₹{profile?.withdrawable_amount?.toFixed(2) || '0.00'}
                 </p>
               </div>
             </div>
@@ -156,12 +156,12 @@ export default function HomePage() {
                     <div>
                       <p className="font-medium">{product.product?.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        Daily: ${product.daily_earning.toFixed(2)} | Days left: {product.days_remaining}
+                        Daily: ₹{product.daily_earning.toFixed(2)} | Days left: {product.days_remaining}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-success">
-                        ${product.total_earned.toFixed(2)}
+                        ₹{product.total_earned.toFixed(2)}
                       </p>
                       <p className="text-xs text-muted-foreground">Earned</p>
                     </div>
@@ -206,8 +206,8 @@ export default function HomePage() {
                         {new Date(tx.created_at).toLocaleDateString()}
                       </p>
                     </div>
-                    <p className={`font-bold ${tx.amount >= 0 ? 'text-success' : 'text-destructive'}`}>
-                      {tx.amount >= 0 ? '+' : ''}${tx.amount.toFixed(2)}
+                    <p className={`font-bold ₹{tx.amount >= 0 ? 'text-success' : 'text-destructive'}`}>
+                      {tx.amount >= 0 ? '+' : ''}₹{tx.amount.toFixed(2)}
                     </p>
                   </div>
                 ))}

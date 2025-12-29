@@ -230,7 +230,7 @@ export default function AdminLuckyDrawPage() {
                       <Input
                         value={reward.reward_name}
                         onChange={(e) => handleUpdateReward(index, 'reward_name', e.target.value)}
-                        placeholder="e.g., $5 Bonus"
+                        placeholder="e.g., ₹5 Bonus"
                       />
                     </div>
 
