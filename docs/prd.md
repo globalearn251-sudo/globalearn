@@ -1,38 +1,36 @@
 # Investment Product Web Application Requirements Document
-
-## 1. Application Overview
-
+\n## 1. Application Overview\n
 ### 1.1 Application Name
 Investment Product Platform
 
 ### 1.2 Application Description\nA full production-ready responsive web application for investment product management, featuring user investment, daily earnings, wallet management, referral system, lucky draw functionality, and comprehensive notification system.
 
 ### 1.3 Core Features
-- Comprehensive admin panel
-- User authentication and profile management
-- Investment product browsing and purchasing
+- Comprehensive admin panel\n- User authentication and profile management\n- Investment product browsing and purchasing
 - Wallet system with recharge and withdrawal
-- Daily automatic earnings distribution\n- Referral team management\n- Lucky draw system
+- Daily automatic earnings distribution
+- Referral team management
+- Lucky draw system
 - Basic KYC verification
 - Notification system with admin broadcast capability
-\n## 2. Admin Panel\n
+
+## 2. Admin Panel
+
 ### 2.1 Admin Dashboard
 - Overview statistics (total users, active investments, pending requests)
-- Quick access to all management modules
-- Real-time transaction monitoring
-
+- Quick access to all management modules\n- Real-time transaction monitoring\n
 ### 2.2 User Management
 - View all registered users
 - User details and activity logs
 - Wallet balance overview
 - Suspend or activate user accounts
-\n### 2.3 KYC Approval System
+
+### 2.3 KYC Approval System
 - Review submitted KYC documents
 - View government ID uploads (front and back)
-- Review bank details\n- Approve or reject KYC submissions
-- Simple verification workflow
-
-### 2.4 Product Management
+- Review bank details
+- Approve or reject KYC submissions\n- Simple verification workflow
+\n### 2.4 Product Management
 - Add new investment products
 - Edit existing products
 - Delete products
@@ -42,39 +40,36 @@ Investment Product Platform
 
 ### 2.5 Recharge Request Handling
 - View pending recharge requests
-- Review payment screenshots\n- Approve requests (add balance to user wallet)
+- Review payment screenshots
+- Approve requests (add balance to user wallet)
 - Reject requests with reason
 - Update payment QR code anytime
-\n### 2.6 Withdrawal Request Processing
-- View pending withdrawal requests
-- Manual transfer processing
+
+### 2.6 Withdrawal Request Processing
+- View pending withdrawal requests\n- Manual transfer processing
 - Approve or reject requests
 - Update user wallet upon approval
 - Maintain withdrawal history logs
-
-### 2.7 Wallet Transaction Logs\n- Complete transaction history
+\n### 2.7 Wallet Transaction Logs
+- Complete transaction history
 - Filter by user, date, or transaction type
-- Export transaction reports\n
+- Export transaction reports
+
 ### 2.8 Company Information Updates
-- Update company banner
-- Edit company notice and information
-- Manage company details displayed on dashboard
+- Update company banner\n- Edit company notice and information\n- Manage company details displayed on dashboard
 
 ### 2.9 Banner Management
 - Upload and update dashboard banners
 - Set banner display order
 - Activate or deactivate banners
 
-### 2.10 Lucky Draw Reward Configuration
-- Configure reward options
+### 2.10 Lucky Draw Reward Configuration\n- Configure reward options
 - Set reward amounts
 - Manage reward probabilities
 - View lucky draw history
-\n### 2.11 Notification Management
-- Create notifications for all users
-- Set notification priority (Important or General)
-- Edit notification content
-- Delete notifications
+
+### 2.11 Notification Management\n- Create notifications for all users\n- Set notification priority (Important or General)
+- Edit notification content\n- Delete notifications
 - View notification history
 - Track notification delivery status
 
@@ -83,21 +78,20 @@ Investment Product Platform
 ### 3.1 Database
 Local database
 
-### 3.2 Responsive Design
-Mobile-first responsive design approach\n
+### 3.2 Responsive Design\nMobile-first responsive design approach
+
 ## 4. User Interface Design
 
 ### 4.1 Theme
-Light theme with clean financial app aesthetic
-
+Light theme with clean financial app aesthetic\n
 ### 4.2 Navigation Structure
-Fixed bottom navigation bar (mobile) with five sections:
-- Home
-- Products
-- Lucky Draw
-- Team\n- Profile
+Fixed bottom navigation bar (mobile) with five sections:\n- Home
+- Products\n- Lucky Draw
+- Team
+- Profile
 
-### 4.3 Design Style\n- Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions, red badge (#ef4444) for notification indicators
+### 4.3 Design Style
+- Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions, red badge (#ef4444) for notification indicators
 - Visual Details: Subtle shadows for card elevation, 8px rounded corners, minimalist icons, smooth transitions, marquee animation for important notifications
 - Layout: Card-based layout with clear visual hierarchy and adequate white space
 
@@ -109,19 +103,17 @@ Fixed bottom navigation bar (mobile) with five sections:
 - No OTP verification required
 - Redirect to dashboard after successful login
 
-## 6. User App Header
-
+## 6. User App Header\n
 ### 6.1 Header Layout
 - Fixed top header bar across all user pages
 - Left side: Notification bell icon with unread count badge
-- Right side: 'Welcome back, [User Name]' greeting text
-\n### 6.2 Notification Icon
+- Right side: 'Welcome back, [User Name]' greeting text\n
+### 6.2 Notification Icon
 - Bell icon with red badge showing unread notification count
 - Click to open notification center
 - Badge disappears when all notifications are read
 
-## 7. Notification Center
-
+## 7. Notification Center\n
 ### 7.1 Notification List
 - Display all notifications sent by admin
 - Show notification title and content
@@ -134,21 +126,18 @@ Fixed bottom navigation bar (mobile) with five sections:
 ### 7.2 Notification Types
 - Important: Highlighted with red or orange indicator
 - General: Standard display style
-\n## 8. User Dashboard
-
+\n## 8. User Dashboard\n
 ### 8.1 Top Section
-- User app header (Welcome message and notification icon)
-- Company banner (admin-updatable)
+- User app header (Welcome message and notification icon)\n- Company banner (admin-updatable)
 - Company notice and information display
-\n### 8.2 Wallet Summary
+
+### 8.2 Wallet Summary
 - Total Balance display
 - Earnings display
 - Withdrawable Amount display
 - Recharge button
-- Withdraw button
-
-### 8.3 Important Notification Marquee
-- Positioned below 'My Wallet' section
+- Withdraw button\n
+### 8.3 Important Notification Marquee\n- Positioned below 'My Wallet' section
 - Display important notifications in left-to-right scrolling style
 - Continuous loop animation
 - Click to view full notification details
@@ -162,53 +151,80 @@ Fixed bottom navigation bar (mobile) with five sections:
 ## 9. KYC Verification
 
 ### 9.1 User Submission
-- Government ID upload (front and back)\n- Bank details submission
-\n### 9.2 Admin Review
+- Government ID upload (front and back)
+- Bank details submission
+
+### 9.2 Admin Review
 - Approve or reject KYC submissions
 - Simple verification workflow
 
 ## 10. Products Module
-
-### 10.1 Product Display
-Each product shows:
-- Product image
+\n### 10.1 Product Display
+Each product shows:\n- Product image
 - Price
 - Daily earnings amount
 - Contract duration
 - Buy button
-\n### 10.2 Purchase Flow
+
+### 10.2 Purchase Flow
 - Deduct amount from user wallet
 - Activate daily earning schedule
 - Record transaction
 
-## 11. Recharge System
-
+## 11. Recharge System\n
 ### 11.1 User Process
 1. Enter recharge amount
 2. View admin QR code
 3. Upload payment screenshot
 4. Status shows as pending
 
-### 11.2 Admin Management
-- Approve recharge requests (add balance to user wallet)
+### 11.2 Admin Management\n- Approve recharge requests (add balance to user wallet)
 - Reject recharge requests
 - Update QR code anytime
 
-## 12. Daily Earning System\n
-### 12.1 Automatic Distribution
-- Daily automatic earnings calculation
-- Add earnings to user wallet
-- Stop after contract period expires
-- Maintain detailed earning logs
+## 12. Daily Earning System
+
+### 12.1 Automatic Distribution\n- System runs daily at a fixed time (e.g., 00:00 UTC) to calculate earnings for all active investments
+- For each active investment product:\n  - Calculate daily earnings based on product's daily income rate
+  - Add calculated earnings to user's Total Balance
+  - Add calculated earnings to user's Withdrawable Amount
+  - Record earning transaction in wallet transaction logs
+  - Update earning history for the user
+- Automatically stop earnings distribution when contract period expires
+- Mark expired investments as completed
+- Maintain detailed earning logs with date, amount, and product information
+
+### 12.2 Earning Calculation Logic
+- Daily earnings = Product daily income amount (as configured by admin)
+- Earnings are added to both Total Balance and Withdrawable Amount simultaneously
+- Track number of days earnings have been distributed
+- Compare with contract duration to determine when to stop\n\n### 12.3 Withdrawable Amount Management
+- Withdrawable Amount increases with:\n  - Daily earnings from active investments
+  - Referral bonuses
+  - Lucky draw rewards
+  - Daily check-in bonuses
+- Withdrawable Amount decreases with:
+  - Approved withdrawal requests
+  - Product purchases (deducted from Total Balance, not Withdrawable Amount)
+- Display Withdrawable Amount separately on dashboard
+- Only allow withdrawal requests up to available Withdrawable Amount
 
 ## 13. Withdrawal System
 
 ### 13.1 User Request
-- Submit withdrawal request from available balance
+- Submit withdrawal request from available Withdrawable Amount
+- System validates request amount does not exceed Withdrawable Amount
+- Display pending status after submission
 
-### 13.2 Admin Processing\n- Manual transfer processing
+### 13.2 Admin Processing
+- Manual transfer processing
 - Approve or reject requests
-- Update user wallet upon approval
+- Upon approval:\n  - Deduct amount from user's Total Balance
+  - Deduct amount from user's Withdrawable Amount
+  - Record transaction in withdrawal history
+- Upon rejection:
+  - No changes to wallet balances
+  - Notify user with rejection reason
 \n## 14. Lucky Draw\n
 ### 14.1 User Features
 - One spin per day limit
@@ -249,6 +265,7 @@ Each product shows:
 - Simple and fast user experience
 - Working investment features
 - Reliable wallet system
+- Automated daily earnings distribution
 - Manual recharge and withdrawal processes
 - Basic referral functionality
 - Lucky draw engagement feature

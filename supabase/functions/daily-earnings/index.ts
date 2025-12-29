@@ -105,7 +105,7 @@ Deno.serve(async (req) => {
           continue;
         }
 
-        // Update user's balance and withdrawable balance
+        // Update user's balance and withdrawable amount
         const { error: updateBalanceError } = await supabase.rpc('update_user_balance', {
           p_user_id: product.user_id,
           p_amount: product.daily_earning,
@@ -115,6 +115,23 @@ Deno.serve(async (req) => {
           console.error(`Error updating balance for user ${product.user_id}:`, updateBalanceError);
           result.errors.push(`User ${product.user_id} balance: ${updateBalanceError.message}`);
           continue;
+        }
+
+        // Create daily earnings record
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+        const { error: earningsError } = await supabase
+          .from('daily_earnings')
+          .insert({
+            user_id: product.user_id,
+            user_product_id: product.id,
+            amount: product.daily_earning,
+            earning_date: today,
+          });
+
+        if (earningsError) {
+          console.error(`Error creating daily earnings record for user ${product.user_id}:`, earningsError);
+          result.errors.push(`Daily earnings ${product.id}: ${earningsError.message}`);
+          // Continue anyway as balance was already updated
         }
 
         // Create transaction record
@@ -131,7 +148,7 @@ Deno.serve(async (req) => {
         if (transactionError) {
           console.error(`Error creating transaction for user ${product.user_id}:`, transactionError);
           result.errors.push(`Transaction ${product.id}: ${transactionError.message}`);
-          continue;
+          // Continue anyway as balance was already updated
         }
 
         result.processed++;

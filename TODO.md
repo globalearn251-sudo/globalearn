@@ -70,6 +70,8 @@
 - Primary color: Blue (#2563eb), Accent: Green (#10b981)
 - Image uploads: KYC documents, payment screenshots, product images, company banner
 - Daily earnings calculated automatically via edge function (deployed and ready)
+- **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_amount
+- **WITHDRAWABLE LOGIC**: Earnings are withdrawable, recharges are not; purchases deduct from withdrawable
 - Lucky draw limited to one spin per day per user
 - Referral system is single-level only
 - **FIXED**: Admin panel data display issue - explicitly specified foreign key constraints in API queries
