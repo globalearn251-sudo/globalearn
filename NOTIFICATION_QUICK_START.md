@@ -6,7 +6,7 @@ The notification system allows admins to send announcements to all users with tw
 ## 👤 For Users
 
 ### Viewing Notifications
-1. Look for the **bell icon** 🔔 in the header (left side)
+1. Look for the **bell icon** 🔔 in the header (right side)
 2. **Badge** shows unread count
 3. **Click** bell icon to open notification panel
 4. **Click** on unread notification to mark as read
@@ -19,7 +19,7 @@ The notification system allows admins to send announcements to all users with tw
 - Scroll continuously until admin deletes
 
 ### User Greeting
-- **Right side** of header shows "Welcome back, [Your Name]"
+- **Left side** of header shows "Welcome back, [Your Name]"
 
 ## 👨‍💼 For Admins
 
@@ -65,7 +65,7 @@ The notification system allows admins to send announcements to all users with tw
 ### User View
 ```
 ┌─────────────────────────────────────┐
-│  🔔 (3)    Welcome back, John Doe   │  ← Header
+│  Welcome back, John Doe       🔔 (3) │  ← Header
 ├─────────────────────────────────────┤
 │  [Company Banner]                   │
 ├─────────────────────────────────────┤

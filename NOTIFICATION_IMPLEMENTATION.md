@@ -8,8 +8,8 @@ The notification system has been successfully implemented with all requested fea
 
 ### User Interface
 ✅ **Header Component**
-- Left side: Notification bell icon with unread count badge
-- Right side: "Welcome back, [Username]" greeting
+- Left side: "Welcome back, [Username]" greeting
+- Right side: Notification bell icon with unread count badge
 - Sticky header that stays visible while scrolling
 
 ✅ **Notification Panel**

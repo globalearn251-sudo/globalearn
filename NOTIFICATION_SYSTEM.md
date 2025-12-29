@@ -7,7 +7,7 @@ The Investment Product Platform now includes a comprehensive notification system
 
 ### User Features
 1. **Header Notification Icon**
-   - Located on the left side of the header
+   - Located on the right side of the header
    - Shows unread notification count badge
    - Click to open notification panel
 
@@ -27,7 +27,7 @@ The Investment Product Platform now includes a comprehensive notification system
    - Red/destructive theme for visibility
 
 4. **User Greeting**
-   - Located on the right side of the header
+   - Located on the left side of the header
    - Displays "Welcome back, [Username]"
 
 ### Admin Features

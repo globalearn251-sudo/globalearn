@@ -78,6 +78,7 @@
 - **FIXED**: Currency symbol changed from $ (Dollar) to ₹ (Rupee) throughout the application
 - **Logic Update**: Recharges add to balance only; earnings add to both balance and withdrawable_amount
 - **NEW**: Notification system implemented with header notification icon, marquee banner for important notifications, and admin management page
+- **UPDATED**: Header layout - User greeting on left side, notification icon on right side
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account
