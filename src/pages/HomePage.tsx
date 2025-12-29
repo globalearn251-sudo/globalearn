@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Header } from '@/components/layouts/Header';
 import { ImportantNotificationBanner } from '@/components/layouts/ImportantNotificationBanner';
 import { companyApi, userProductApi, transactionApi } from '@/db/api';
-import { Wallet, TrendingUp, DollarSign, Gift, Info } from 'lucide-react';
+import { Wallet, TrendingUp, Plus, ArrowUpRight, UserPlus, Headphones, Eye, History, Gift, Info } from 'lucide-react';
 import type { UserProduct, Transaction } from '@/types/types';
 
 export default function HomePage() {
@@ -95,48 +95,94 @@ export default function HomePage() {
           </Alert>
         )}
 
-        {/* Wallet Summary */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Wallet className="h-5 w-5" />
-              My Wallet
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-3 gap-4">
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">Total Balance</p>
-                <p className="text-2xl font-bold text-primary">
-                  ₹{profile?.balance?.toFixed(2) || '0.00'}
-                </p>
-              </div>
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">Total Earnings</p>
-                <p className="text-2xl font-bold text-success">
-                  ₹{profile?.total_earnings?.toFixed(2) || '0.00'}
-                </p>
-              </div>
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">Withdrawable</p>
-                <p className="text-2xl font-bold text-accent">
-                  ₹{profile?.withdrawable_amount?.toFixed(2) || '0.00'}
-                </p>
-              </div>
+        {/* Wallet Summary - New Design */}
+        <div className="relative rounded-2xl bg-gradient-to-br from-primary via-primary to-primary/80 p-6 text-white shadow-lg">
+          {/* Header Row */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium opacity-90">Total Balance</span>
+              <Eye className="h-4 w-4 opacity-70" />
             </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/10 gap-1"
+              onClick={() => navigate('/profile')}
+            >
+              <History className="h-4 w-4" />
+              <span className="text-sm">History</span>
+            </Button>
+          </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <Button onClick={() => navigate('/recharge')} className="w-full">
-                <DollarSign className="mr-2 h-4 w-4" />
-                Recharge
-              </Button>
-              <Button onClick={() => navigate('/withdrawal')} variant="outline" className="w-full">
-                <TrendingUp className="mr-2 h-4 w-4" />
-                Withdraw
-              </Button>
+          {/* Balance Amount */}
+          <div className="mb-6">
+            <p className="text-4xl font-bold">
+              ₹{profile?.balance?.toFixed(2) || '0.00'}
+            </p>
+          </div>
+
+          {/* Withdrawable and Daily Earnings */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+              <p className="text-xs opacity-80 mb-1">Withdrawable</p>
+              <p className="text-xl font-bold">
+                ₹{profile?.withdrawable_amount?.toFixed(2) || '0.00'}
+              </p>
             </div>
-          </CardContent>
-        </Card>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+              <p className="text-xs opacity-80 mb-1">Daily Earnings</p>
+              <p className="text-xl font-bold text-green-300">
+                +₹{profile?.total_earnings?.toFixed(2) || '0.00'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="grid grid-cols-4 gap-4">
+          <button
+            onClick={() => navigate('/recharge')}
+            className="flex flex-col items-center gap-2"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Plus className="h-6 w-6 text-primary" />
+            </div>
+            <span className="text-sm font-medium">Recharge</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/withdrawal')}
+            className="flex flex-col items-center gap-2"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center">
+              <ArrowUpRight className="h-6 w-6 text-secondary" />
+            </div>
+            <span className="text-sm font-medium">Withdraw</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/team')}
+            className="flex flex-col items-center gap-2"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center">
+              <UserPlus className="h-6 w-6 text-accent" />
+            </div>
+            <span className="text-sm font-medium">Invite</span>
+          </button>
+
+          <button
+            onClick={() => {
+              // You can add a support page or open a dialog
+              alert('Support feature coming soon!');
+            }}
+            className="flex flex-col items-center gap-2"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center">
+              <Headphones className="h-6 w-6 text-muted-foreground" />
+            </div>
+            <span className="text-sm font-medium">Support</span>
+          </button>
+        </div>
 
         {/* Important Notification Banner */}
         <ImportantNotificationBanner />
