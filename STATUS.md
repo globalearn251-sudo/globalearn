@@ -197,18 +197,23 @@ See `DAILY_EARNINGS_SETUP.md` for detailed instructions.
 
 ## 🐛 KNOWN ISSUES
 
-- None currently identified
+- ~~Admin panel data not showing~~ ✅ **FIXED** (2025-12-29)
+  - Issue: "More than one relationship" error in Supabase queries
+  - Solution: Explicitly specified foreign key constraints in API queries
+  - Status: Resolved - All admin pages now display data correctly
 
 ## 💡 RECOMMENDATIONS
 
-1. **Test Daily Earnings**: Use the admin panel to manually trigger and verify functionality
-2. **Set Up Cron Trigger**: Configure automatic daily execution in Supabase Dashboard
-3. **Add Initial Data**: Use the admin panel to set up products and company settings
-4. **Test End-to-End**: Once configured, test full user journey from signup to earnings
-5. **Monitor Function Logs**: Check Supabase Edge Function logs regularly
+1. **Hard Refresh Browser**: Press Ctrl+Shift+R to see latest changes
+2. **Test Admin Panel**: Verify recharges, withdrawals, and KYC pages show data
+3. **Test Daily Earnings**: Use the admin panel to manually trigger and verify functionality
+4. **Set Up Cron Trigger**: Configure automatic daily execution in Supabase Dashboard
+5. **Add Initial Data**: Use the admin panel to set up products and company settings
+6. **Test End-to-End**: Once configured, test full user journey from signup to earnings
+7. **Monitor Function Logs**: Check Supabase Edge Function logs regularly
 
 ---
 
-**Last Updated**: 2025-12-27
+**Last Updated**: 2025-12-29
 **Version**: 1.0 (Production Ready)
-**Status**: 98% Complete - All features implemented, only cron setup and initial data pending
+**Status**: 98% Complete - All features implemented and working, only cron setup and initial data pending

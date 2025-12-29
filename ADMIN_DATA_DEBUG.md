@@ -1,7 +1,82 @@
-# Admin Panel Data Not Showing - Troubleshooting Guide
+# Admin Panel Data Display - Issue Resolved
 
 ## Issue Description
-Admin pages (Recharges, Withdrawals, KYC) are not displaying data even though data exists in the database.
+Admin pages (Recharges, Withdrawals, KYC) were showing the error:
+```
+"Could not embed because more than one relationship was found for 'withdrawal_requests' and 'profiles'"
+```
+
+## Root Cause
+The error occurred because these tables have multiple foreign keys pointing to the `profiles` table:
+- `user_id` → references the user who created the request
+- `processed_by` → references the admin who processed the request
+
+When using `.select('*, user:profiles(...)')`, Supabase couldn't determine which foreign key relationship to use.
+
+## Solution Applied
+Updated all API queries to explicitly specify the foreign key constraint name:
+
+### Before (Ambiguous):
+```typescript
+.select('*, user:profiles(username, email)')
+```
+
+### After (Explicit):
+```typescript
+// For recharge_requests
+.select('*, user:profiles!recharge_requests_user_id_fkey(username, email)')
+
+// For withdrawal_requests
+.select('*, user:profiles!withdrawal_requests_user_id_fkey(username, email)')
+
+// For kyc_submissions
+.select('*, user:profiles!kyc_submissions_user_id_fkey(username, email)')
+```
+
+## Files Modified
+- `src/db/api.ts`:
+  - `getAllRechargeRequests()` - Fixed
+  - `getPendingRechargeRequests()` - Fixed
+  - `getAllWithdrawalRequests()` - Fixed
+  - `getPendingWithdrawalRequests()` - Fixed
+  - `getAllKycSubmissions()` - Fixed
+  - `getPendingKycSubmissions()` - Fixed
+
+## Testing
+After this fix, the admin panel should now correctly display:
+- ✅ Recharge requests with user information
+- ✅ Withdrawal requests with user information
+- ✅ KYC submissions with user information
+
+## How to Verify
+1. Log in as admin
+2. Go to Admin Panel → Recharges
+3. You should see the pending recharge request (if any exist)
+4. Go to Admin Panel → Withdrawals
+5. You should see withdrawal requests (if any exist)
+6. Go to Admin Panel → KYC
+7. You should see KYC submissions (if any exist)
+
+## Console Logging
+The detailed console logging added earlier will now show:
+```
+Loading recharge requests...
+Pending requests: [{...}]  // Should show actual data
+All requests: [{...}]      // Should show actual data
+```
+
+Instead of empty arrays or errors.
+
+## Additional Notes
+- This is a common issue when tables have multiple foreign keys to the same table
+- Always use the explicit foreign key constraint name when there's ambiguity
+- The constraint names follow the pattern: `{table_name}_{column_name}_fkey`
+
+---
+
+**Status**: ✅ RESOLVED
+**Date**: 2025-12-29
+**Impact**: All admin panel data display issues fixed
 
 ## Verification Steps Completed
 

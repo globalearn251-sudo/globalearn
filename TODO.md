@@ -63,9 +63,8 @@
 - Daily earnings calculated automatically via edge function (deployed and ready)
 - Lucky draw limited to one spin per day per user
 - Referral system is single-level only
-- **Debugging**: Added detailed console logging to admin pages (recharges, withdrawals, KYC)
-- **Data Verified**: Test data exists in database, RLS policies confirmed working
-- **Troubleshooting**: See ADMIN_DATA_DEBUG.md for debugging steps if data doesn't show
+- **FIXED**: Admin panel data display issue - explicitly specified foreign key constraints in API queries
+- **Resolved**: "More than one relationship" error by using `!table_column_fkey` syntax in Supabase queries
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

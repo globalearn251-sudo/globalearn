@@ -234,7 +234,7 @@ export const rechargeApi = {
   getAllRechargeRequests: async () => {
     const { data, error } = await supabase
       .from('recharge_requests')
-      .select('*, user:profiles(username, email)')
+      .select('*, user:profiles!recharge_requests_user_id_fkey(username, email)')
       .order('created_at', { ascending: false });
     
     if (error) throw error;
@@ -244,7 +244,7 @@ export const rechargeApi = {
   getPendingRechargeRequests: async () => {
     const { data, error } = await supabase
       .from('recharge_requests')
-      .select('*, user:profiles(username, email)')
+      .select('*, user:profiles!recharge_requests_user_id_fkey(username, email)')
       .eq('status', 'pending')
       .order('created_at', { ascending: false });
     
@@ -312,7 +312,7 @@ export const withdrawalApi = {
   getAllWithdrawalRequests: async () => {
     const { data, error } = await supabase
       .from('withdrawal_requests')
-      .select('*, user:profiles(username, email)')
+      .select('*, user:profiles!withdrawal_requests_user_id_fkey(username, email)')
       .order('created_at', { ascending: false });
     
     if (error) throw error;
@@ -322,7 +322,7 @@ export const withdrawalApi = {
   getPendingWithdrawalRequests: async () => {
     const { data, error } = await supabase
       .from('withdrawal_requests')
-      .select('*, user:profiles(username, email)')
+      .select('*, user:profiles!withdrawal_requests_user_id_fkey(username, email)')
       .eq('status', 'pending')
       .order('created_at', { ascending: false });
     
@@ -527,7 +527,7 @@ export const kycApi = {
   getAllKycSubmissions: async () => {
     const { data, error } = await supabase
       .from('kyc_submissions')
-      .select('*, user:profiles(username, email)')
+      .select('*, user:profiles!kyc_submissions_user_id_fkey(username, email)')
       .order('created_at', { ascending: false });
     
     if (error) throw error;
@@ -537,7 +537,7 @@ export const kycApi = {
   getPendingKycSubmissions: async () => {
     const { data, error } = await supabase
       .from('kyc_submissions')
-      .select('*, user:profiles(username, email)')
+      .select('*, user:profiles!kyc_submissions_user_id_fkey(username, email)')
       .eq('status', 'pending')
       .order('created_at', { ascending: false });
     
