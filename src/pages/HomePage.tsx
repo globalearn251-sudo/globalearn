@@ -9,7 +9,7 @@ import { Header } from '@/components/layouts/Header';
 import { ImportantNotificationBanner } from '@/components/layouts/ImportantNotificationBanner';
 import { companyApi, userProductApi, transactionApi } from '@/db/api';
 import { Wallet, TrendingUp, Plus, ArrowUpRight, UserPlus, Headphones, Eye, History, Gift, Info } from 'lucide-react';
-import type { UserProduct, Transaction } from '@/types/types';
+import type { UserProduct, Transaction, CompanySetting } from '@/types/types';
 
 export default function HomePage() {
   const { profile } = useAuth();
@@ -35,13 +35,13 @@ export default function HomePage() {
       
       // Fetch all data in parallel for better performance
       const [settings, products, transactions] = await Promise.all([
-        companyApi.getAllSettings().catch(() => []),
+        companyApi.getAllSettings().catch(() => [] as CompanySetting[]),
         userProductApi.getActiveUserProducts(profile.id).catch(() => []),
         transactionApi.getUserTransactions(profile.id, 5).catch(() => []),
       ]);
 
       // Process settings
-      settings.forEach((s) => {
+      settings.forEach((s: CompanySetting) => {
         if (s.key === 'banner_url') setBannerUrl(s.value);
         if (s.key === 'company_notice') setCompanyNotice(s.value);
         if (s.key === 'company_details') setCompanyDetails(s.value);
@@ -126,7 +126,7 @@ export default function HomePage() {
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
               <p className="text-xs opacity-80 mb-1">Withdrawable</p>
               <p className="text-xl font-bold">
-                ₹{profile?.withdrawable_amount?.toFixed(2) || '0.00'}
+                ₹{profile?.withdrawable_balance?.toFixed(2) || '0.00'}
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">

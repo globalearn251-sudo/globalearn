@@ -12,12 +12,30 @@ interface SpinWheelProps {
 
 export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
   const [targetRotation, setTargetRotation] = useState(0);
+  const [canvasSize, setCanvasSize] = useState(400);
+
+  // Handle responsive sizing
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        // Set canvas size to container width, max 400px
+        const size = Math.min(containerWidth - 40, 400);
+        setCanvasSize(size);
+      }
+    };
+
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   useEffect(() => {
     drawWheel();
-  }, [segments, rotation]);
+  }, [segments, rotation, canvasSize]);
 
   useEffect(() => {
     if (isSpinning) {
@@ -62,12 +80,12 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
+    const centerX = canvasSize / 2;
+    const centerY = canvasSize / 2;
     const radius = Math.min(centerX, centerY) - 10;
 
     // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvasSize, canvasSize);
 
     // Save context
     ctx.save();
@@ -104,23 +122,27 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 18px Arial';
+      // Responsive font size
+      const fontSize = Math.max(14, canvasSize / 22);
+      ctx.font = `bold ${fontSize}px Arial`;
       ctx.fillText(segment.label, radius * 0.65, 0);
       ctx.restore();
     });
 
-    // Draw center circle
+    // Draw center circle (responsive)
+    const centerCircleRadius = canvasSize / 10;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 40, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, centerCircleRadius, 0, 2 * Math.PI);
     ctx.fillStyle = '#ffffff';
     ctx.fill();
     ctx.strokeStyle = '#3b82f6';
     ctx.lineWidth = 4;
     ctx.stroke();
 
-    // Draw inner circle
+    // Draw inner circle (responsive)
+    const innerCircleRadius = canvasSize / 16;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, innerCircleRadius, 0, 2 * Math.PI);
     ctx.fillStyle = '#3b82f6';
     ctx.fill();
 
@@ -129,19 +151,21 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
   };
 
   return (
-    <div className="relative inline-block">
+    <div ref={containerRef} className="relative inline-block w-full max-w-md">
       {/* Pointer */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 z-10">
         <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[25px] border-t-primary drop-shadow-lg" />
       </div>
       
       {/* Canvas */}
-      <canvas
-        ref={canvasRef}
-        width={400}
-        height={400}
-        className="drop-shadow-2xl"
-      />
+      <div className="flex justify-center">
+        <canvas
+          ref={canvasRef}
+          width={canvasSize}
+          height={canvasSize}
+          className="drop-shadow-2xl"
+        />
+      </div>
     </div>
   );
 }

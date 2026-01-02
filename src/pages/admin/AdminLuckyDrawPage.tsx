@@ -235,7 +235,7 @@ export default function AdminLuckyDrawPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Amount ($) *</Label>
+                      <Label>Amount (₹) *</Label>
                       <Input
                         type="number"
                         step="0.01"

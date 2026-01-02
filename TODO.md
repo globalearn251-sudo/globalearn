@@ -70,20 +70,23 @@
 - Primary color: Blue (#2563eb), Accent: Green (#10b981)
 - Image uploads: KYC documents, payment screenshots, product images, company banner
 - Daily earnings calculated automatically via edge function (deployed and ready)
-- **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_amount
-- **PURCHASE LOGIC**: Products purchased using total balance only (not withdrawable amount)
+- **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_balance
+- **PURCHASE LOGIC**: Products purchased using total balance only (not withdrawable balance)
 - **WITHDRAWABLE LOGIC**: Only earnings and rewards are withdrawable, not recharges
 - Lucky draw limited to one spin per day per user
 - Referral system is single-level only
 - **FIXED**: Admin panel data display issue - explicitly specified foreign key constraints in API queries
 - **Resolved**: "More than one relationship" error by using `!table_column_fkey` syntax in Supabase queries
-- **FIXED**: Product purchase now uses balance only, not withdrawable_amount (fixes "withdrawable amount does not exist" error)
+- **FIXED**: Product purchase now uses balance only, not withdrawable_balance (fixes "withdrawable amount does not exist" error)
 - **FIXED**: Currency symbol changed from $ (Dollar) to ₹ (Rupee) throughout the application
-- **Logic Update**: Recharges add to balance only; earnings add to both balance and withdrawable_amount; purchases deduct from balance only
+- **Logic Update**: Recharges add to balance only; earnings add to both balance and withdrawable_balance; purchases deduct from balance only
 - **NEW**: Notification system implemented with header notification icon, marquee banner for important notifications, and admin management page
 - **UPDATED**: Header layout - User greeting on left side, notification icon on right side
 - **UI UPDATE**: Home dashboard redesigned with blue gradient wallet card and four action buttons (Recharge, Withdraw, Invite, Support)
 - **UI UPDATE**: Lucky Draw page redesigned with colorful spinning wheel (8 segments), stats cards (Total Won, Spins Left), and smooth animations
+- **FIXED**: Lucky draw "withdrawable_amount does not exist" error - corrected column name to withdrawable_balance throughout application
+- **FIXED**: Spinning wheel made responsive - adapts to screen size with dynamic canvas sizing and font scaling
+- **FIXED**: Admin lucky draw page currency symbol updated to ₹
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

@@ -67,7 +67,7 @@ export default function AdminKycPage() {
 
     try {
       setProcessing(true);
-      await kycApi.approveKycSubmission(viewingSubmission.id, adminNote || null);
+      await kycApi.approveKycSubmission(viewingSubmission.id, adminNote || undefined);
       
       toast({
         title: 'Success',
