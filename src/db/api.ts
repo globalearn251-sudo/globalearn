@@ -842,3 +842,21 @@ export const adminNotificationApi = {
     return { total, read, unread };
   },
 };
+
+// Daily Earnings API
+export const dailyEarningsApi = {
+  // Trigger daily earnings calculation via edge function
+  calculateDailyEarnings: async () => {
+    const { data, error } = await supabase.functions.invoke('daily-earnings', {
+      body: {},
+    });
+    
+    if (error) {
+      const errorMsg = await error?.context?.text();
+      console.error('Edge function error in daily-earnings:', errorMsg || error?.message);
+      throw new Error(errorMsg || error?.message || 'Failed to calculate daily earnings');
+    }
+    
+    return data;
+  },
+};

@@ -71,6 +71,7 @@
 - Image uploads: KYC documents, payment screenshots, product images, company banner
 - Daily earnings calculated automatically via edge function (deployed and ready)
 - **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_balance
+- **DAILY EARNINGS TRIGGER**: Automatically calculates earnings on home page load - processes all missed days at once
 - **PURCHASE LOGIC**: Products purchased using total balance only (not withdrawable balance)
 - **WITHDRAWABLE LOGIC**: Only earnings and rewards are withdrawable, not recharges
 - Lucky draw limited to one spin per day per user
@@ -87,6 +88,7 @@
 - **FIXED**: Lucky draw "withdrawable_amount does not exist" error - corrected column name to withdrawable_balance throughout application
 - **FIXED**: Spinning wheel made responsive - adapts to screen size with dynamic canvas sizing and font scaling
 - **FIXED**: Admin lucky draw page currency symbol updated to ₹
+- **FIXED**: My Assets not updating - implemented automatic daily earnings calculation on page load, processes multiple days of missed earnings
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

@@ -7,12 +7,12 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Header } from '@/components/layouts/Header';
 import { ImportantNotificationBanner } from '@/components/layouts/ImportantNotificationBanner';
-import { companyApi, userProductApi, transactionApi } from '@/db/api';
+import { companyApi, userProductApi, transactionApi, dailyEarningsApi } from '@/db/api';
 import { Wallet, TrendingUp, Plus, ArrowUpRight, UserPlus, Headphones, Eye, History, Gift, Info } from 'lucide-react';
 import type { UserProduct, Transaction, CompanySetting } from '@/types/types';
 
 export default function HomePage() {
-  const { profile } = useAuth();
+  const { profile, refreshProfile } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [bannerUrl, setBannerUrl] = useState('');
@@ -33,7 +33,17 @@ export default function HomePage() {
     try {
       setLoading(true);
       
-      // Fetch all data in parallel for better performance
+      // First, trigger daily earnings calculation and wait for it
+      try {
+        await dailyEarningsApi.calculateDailyEarnings();
+        // Refresh profile to get updated balance and earnings
+        await refreshProfile();
+      } catch (err) {
+        console.error('Daily earnings calculation error:', err);
+        // Continue even if this fails
+      }
+      
+      // Then fetch all data in parallel for better performance
       const [settings, products, transactions] = await Promise.all([
         companyApi.getAllSettings().catch(() => [] as CompanySetting[]),
         userProductApi.getActiveUserProducts(profile.id).catch(() => []),
