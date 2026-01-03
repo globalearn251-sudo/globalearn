@@ -64,6 +64,14 @@
   - [x] Create admin notification management page
   - [x] Update API layer with notification functions
   - [x] Test notification flow end-to-end
+- [x] Step 11: Clarify withdrawable amount logic and add minimum withdrawal limit
+  - [x] Verify withdrawable_balance only includes earnings (daily, lucky draw, referral)
+  - [x] Add min_withdrawal_amount company setting (default: 500)
+  - [x] Update WithdrawalPage to validate minimum withdrawal amount
+  - [x] Add UI warnings when user balance is below minimum
+  - [x] Disable withdrawal form when below minimum
+  - [x] Add admin configuration for minimum withdrawal amount
+  - [x] Create comprehensive documentation
 
 ## Notes
 - Using Supabase for backend (database, auth, storage)
@@ -76,7 +84,8 @@
 - **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_balance
 - **DAILY EARNINGS TRIGGER**: Automatically calculates earnings on home page load - processes all missed days at once
 - **PURCHASE LOGIC**: Products purchased using total balance only (not withdrawable balance)
-- **WITHDRAWABLE LOGIC**: Only earnings and rewards are withdrawable, not recharges
+- **WITHDRAWABLE LOGIC**: Only earnings (daily earnings, lucky draw wins, referral commissions) are withdrawable, NOT recharges
+- **MINIMUM WITHDRAWAL**: Admin-configurable minimum withdrawal amount (default: ₹500) - users must have at least this amount to withdraw
 - **REFERRAL SYSTEM**: Single-level referral with automatic commission payment on purchases (configurable percentage in admin settings)
 - Lucky draw limited to one spin per day per user
 - **FIXED**: Admin panel data display issue - explicitly specified foreign key constraints in API queries
@@ -94,6 +103,7 @@
 - **FIXED**: My Assets not updating - implemented automatic daily earnings calculation on page load, processes multiple days of missed earnings
 - **FIXED**: Missing reject functions - added reject_withdrawal_request and reject_recharge_request RPC functions
 - **IMPLEMENTED**: Complete referral commission system - referrers earn configurable percentage when referred users purchase products
+- **IMPLEMENTED**: Minimum withdrawal limit - users must have at least the configured amount (default ₹500) in withdrawable balance to submit withdrawal requests
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

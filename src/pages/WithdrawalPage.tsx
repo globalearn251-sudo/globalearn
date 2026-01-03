@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { withdrawalApi } from '@/db/api';
+import { withdrawalApi, companyApi } from '@/db/api';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
 export default function WithdrawalPage() {
@@ -18,6 +18,23 @@ export default function WithdrawalPage() {
   const [amount, setAmount] = useState('');
   const [bankDetails, setBankDetails] = useState('');
   const [loading, setLoading] = useState(false);
+  const [minWithdrawalAmount, setMinWithdrawalAmount] = useState(500);
+
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      const settings = await companyApi.getAllSettings();
+      const minSetting = settings.find(s => s.key === 'min_withdrawal_amount');
+      if (minSetting) {
+        setMinWithdrawalAmount(parseFloat(minSetting.value));
+      }
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +45,24 @@ export default function WithdrawalPage() {
       toast({
         title: 'Invalid Amount',
         description: 'Please enter a valid amount',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (profile.withdrawable_balance < minWithdrawalAmount) {
+      toast({
+        title: 'Minimum Withdrawal Not Met',
+        description: `Your withdrawable balance must be at least ₹${minWithdrawalAmount} to submit a withdrawal request. Current balance: ₹${profile.withdrawable_balance.toFixed(2)}`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (amountNum < minWithdrawalAmount) {
+      toast({
+        title: 'Amount Too Low',
+        description: `Minimum withdrawal amount is ₹${minWithdrawalAmount}`,
         variant: 'destructive',
       });
       return;
@@ -84,9 +119,22 @@ export default function WithdrawalPage() {
         <Alert>
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription>
-            Withdrawable Balance: <span className="font-bold">₹{profile?.withdrawable_balance?.toFixed(2) || '0.00'}</span>
+            <div className="space-y-1">
+              <div>Withdrawable Balance: <span className="font-bold">₹{profile?.withdrawable_balance?.toFixed(2) || '0.00'}</span></div>
+              <div className="text-sm">Minimum Withdrawal: <span className="font-semibold">₹{minWithdrawalAmount}</span></div>
+            </div>
           </AlertDescription>
         </Alert>
+
+        {profile && profile.withdrawable_balance < minWithdrawalAmount && (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>
+              Your withdrawable balance is below the minimum withdrawal limit of ₹{minWithdrawalAmount}. 
+              You need at least ₹{(minWithdrawalAmount - profile.withdrawable_balance).toFixed(2)} more to withdraw.
+            </AlertDescription>
+          </Alert>
+        )}
 
         <Card>
           <CardHeader>
@@ -100,14 +148,17 @@ export default function WithdrawalPage() {
                   id="amount"
                   type="number"
                   step="0.01"
-                  min="0.01"
+                  min={minWithdrawalAmount}
                   max={profile?.withdrawable_balance || 0}
-                  placeholder="Enter amount"
+                  placeholder={`Enter amount (min: ₹${minWithdrawalAmount})`}
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  disabled={loading}
+                  disabled={loading || (profile ? profile.withdrawable_balance < minWithdrawalAmount : false)}
                   required
                 />
+                <p className="text-xs text-muted-foreground">
+                  Minimum withdrawal amount: ₹{minWithdrawalAmount}
+                </p>
               </div>
 
               <div className="space-y-2">
@@ -132,7 +183,16 @@ export default function WithdrawalPage() {
                 </AlertDescription>
               </Alert>
 
-              <Button type="submit" className="w-full" disabled={loading || !amount || !bankDetails}>
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={
+                  loading || 
+                  !amount || 
+                  !bankDetails || 
+                  (profile ? profile.withdrawable_balance < minWithdrawalAmount : false)
+                }
+              >
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

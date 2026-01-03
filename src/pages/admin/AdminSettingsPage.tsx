@@ -24,6 +24,7 @@ export default function AdminSettingsPage() {
   const [companyNotice, setCompanyNotice] = useState('');
   const [companyDetails, setCompanyDetails] = useState('');
   const [referralCommission, setReferralCommission] = useState('5');
+  const [minWithdrawalAmount, setMinWithdrawalAmount] = useState('500');
 
   useEffect(() => {
     loadSettings();
@@ -40,6 +41,7 @@ export default function AdminSettingsPage() {
         if (s.key === 'company_notice') setCompanyNotice(s.value);
         if (s.key === 'company_details') setCompanyDetails(s.value);
         if (s.key === 'referral_commission_percentage') setReferralCommission(s.value);
+        if (s.key === 'min_withdrawal_amount') setMinWithdrawalAmount(s.value);
       });
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -108,6 +110,7 @@ export default function AdminSettingsPage() {
         companyApi.updateSetting('company_notice', companyNotice),
         companyApi.updateSetting('company_details', companyDetails),
         companyApi.updateSetting('referral_commission_percentage', referralCommission),
+        companyApi.updateSetting('min_withdrawal_amount', minWithdrawalAmount),
       ]);
 
       toast({
@@ -281,6 +284,30 @@ export default function AdminSettingsPage() {
               />
               <p className="text-sm text-muted-foreground">
                 Percentage of product price paid to referrer when their referred user makes a purchase
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Minimum Withdrawal Amount */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Minimum Withdrawal Amount</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <Label htmlFor="minWithdrawalAmount">Minimum Amount (₹)</Label>
+              <Input
+                id="minWithdrawalAmount"
+                type="number"
+                min="0"
+                step="0.01"
+                value={minWithdrawalAmount}
+                onChange={(e) => setMinWithdrawalAmount(e.target.value)}
+                placeholder="Enter minimum withdrawal amount (e.g., 500)"
+              />
+              <p className="text-sm text-muted-foreground">
+                Users must have at least this amount in their withdrawable balance to submit a withdrawal request
               </p>
             </div>
           </CardContent>

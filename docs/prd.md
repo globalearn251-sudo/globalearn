@@ -1,5 +1,7 @@
 # Investment Product Web Application Requirements Document
-\n## 1. Application Overview\n
+
+## 1. Application Overview
+
 ### 1.1 Application Name
 Investment Product Platform
 
@@ -73,6 +75,11 @@ Investment Product Platform
 - View notification history
 - Track notification delivery status
 
+### 2.12 Withdrawal Settings
+- Set minimum withdrawal amount limit
+- Configure minimum balance threshold that users must reach before submitting withdrawal requests
+- Update withdrawal limit anytime
+
 ## 3. Technical Requirements
 
 ### 3.1 Database
@@ -107,43 +114,42 @@ Fixed bottom navigation bar (mobile) with five sections:\n- Home
 ### 6.1 Header Layout
 - Fixed top header bar across all user pages
 - Left side: Notification bell icon with unread count badge
-- Right side: 'Welcome back, [User Name]' greeting text\n
-### 6.2 Notification Icon
-- Bell icon with red badge showing unread notification count
-- Click to open notification center
-- Badge disappears when all notifications are read
+- Right side: Welcome back, [User Name] greeting text
 
-## 7. Notification Center\n
-### 7.1 Notification List
-- Display all notifications sent by admin
+### 6.2 Notification Icon\n- Bell icon with red badge showing unread notification count
+- Click to open notification center
+- Badge disappears when all notifications are read\n
+## 7. Notification Center
+
+### 7.1 Notification List\n- Display all notifications sent by admin
 - Show notification title and content
 - Display timestamp for each notification
 - Mark notifications as Important or General with visual indicators
-- Important notifications highlighted with distinct color or icon
-- Mark individual notifications as read
-- Mark all as read option
-
+- Important notifications highlighted with distinct color or icon\n- Mark individual notifications as read\n- Mark all as read option\n
 ### 7.2 Notification Types
 - Important: Highlighted with red or orange indicator
 - General: Standard display style
-\n## 8. User Dashboard\n
+
+## 8. User Dashboard
+
 ### 8.1 Top Section
-- User app header (Welcome message and notification icon)\n- Company banner (admin-updatable)
+- User app header (Welcome message and notification icon)
+- Company banner (admin-updatable)
 - Company notice and information display
 
 ### 8.2 Wallet Summary
-- Total Balance display
-- Earnings display
+- Total Balance display\n- Earnings display
 - Withdrawable Amount display
 - Recharge button
-- Withdraw button\n
-### 8.3 Important Notification Marquee\n- Positioned below 'My Wallet' section
+- Withdraw button
+
+### 8.3 Important Notification Marquee
+- Positioned below My Wallet section
 - Display important notifications in left-to-right scrolling style
 - Continuous loop animation
 - Click to view full notification details
 - Only show notifications marked as Important by admin
-
-### 8.4 Dashboard Sections
+\n### 8.4 Dashboard Sections
 - My Assets overview
 - Daily Check-in Bonus
 - Company Details (admin-updatable)
@@ -151,41 +157,42 @@ Fixed bottom navigation bar (mobile) with five sections:\n- Home
 ## 9. KYC Verification
 
 ### 9.1 User Submission
-- Government ID upload (front and back)
-- Bank details submission
-
-### 9.2 Admin Review
+- Government ID upload (front and back)\n- Bank details submission
+\n### 9.2 Admin Review
 - Approve or reject KYC submissions
 - Simple verification workflow
 
 ## 10. Products Module
-\n### 10.1 Product Display
-Each product shows:\n- Product image
-- Price
-- Daily earnings amount
-- Contract duration
-- Buy button
 
+### 10.1 Product Display
+Each product shows:
+- Product image
+- Price\n- Daily earnings amount
+- Contract duration
+- Buy button\n
 ### 10.2 Purchase Flow
 - Deduct amount from user wallet
 - Activate daily earning schedule
 - Record transaction
 
-## 11. Recharge System\n
+## 11. Recharge System
+
 ### 11.1 User Process
 1. Enter recharge amount
 2. View admin QR code
 3. Upload payment screenshot
 4. Status shows as pending
 
-### 11.2 Admin Management\n- Approve recharge requests (add balance to user wallet)
+### 11.2 Admin Management
+- Approve recharge requests (add balance to user wallet)
 - Reject recharge requests
 - Update QR code anytime
+\n## 12. Daily Earning System
 
-## 12. Daily Earning System
-
-### 12.1 Automatic Distribution\n- System runs daily at a fixed time (e.g., 00:00 UTC) to calculate earnings for all active investments
-- For each active investment product:\n  - Calculate daily earnings based on product's daily income rate
+### 12.1 Automatic Distribution
+- System runs daily at a fixed time (e.g., 00:00 UTC) to calculate earnings for all active investments
+- For each active investment product:
+  - Calculate daily earnings based on product's daily income rate
   - Add calculated earnings to user's Total Balance
   - Add calculated earnings to user's Withdrawable Amount
   - Record earning transaction in wallet transaction logs
@@ -198,39 +205,50 @@ Each product shows:\n- Product image
 - Daily earnings = Product daily income amount (as configured by admin)
 - Earnings are added to both Total Balance and Withdrawable Amount simultaneously
 - Track number of days earnings have been distributed
-- Compare with contract duration to determine when to stop\n\n### 12.3 Withdrawable Amount Management
-- Withdrawable Amount increases with:\n  - Daily earnings from active investments
+- Compare with contract duration to determine when to stop
+
+### 12.3 Withdrawable Amount Management
+- Withdrawable Amount consists exclusively of:
+  - Daily earnings from active investments
   - Referral bonuses
   - Lucky draw rewards
-  - Daily check-in bonuses
+- Withdrawable Amount increases with:
+  - Daily earnings from active investments
+  - Referral bonuses
+  - Lucky draw rewards
 - Withdrawable Amount decreases with:
   - Approved withdrawal requests
-  - Product purchases (deducted from Total Balance, not Withdrawable Amount)
 - Display Withdrawable Amount separately on dashboard
-- Only allow withdrawal requests up to available Withdrawable Amount
+- Validate withdrawal requests against minimum withdrawal limit set by admin
+- Only allow withdrawal requests when Withdrawable Amount meets or exceeds the minimum limit
+- Show error message if withdrawal amount is below minimum limit
 
 ## 13. Withdrawal System
 
-### 13.1 User Request
-- Submit withdrawal request from available Withdrawable Amount
+### 13.1 User Request\n- Submit withdrawal request from available Withdrawable Amount
 - System validates request amount does not exceed Withdrawable Amount
-- Display pending status after submission
+- System validates Withdrawable Amount meets minimum withdrawal limit set by admin
+- Display error message if Withdrawable Amount is below minimum limit (e.g., if limit is 500 and user has less than 500, request cannot be submitted)
+- Display pending status after successful submission
 
 ### 13.2 Admin Processing
 - Manual transfer processing
 - Approve or reject requests
-- Upon approval:\n  - Deduct amount from user's Total Balance
+- Upon approval:
+  - Deduct amount from user's Total Balance
   - Deduct amount from user's Withdrawable Amount
   - Record transaction in withdrawal history
 - Upon rejection:
   - No changes to wallet balances
   - Notify user with rejection reason
-\n## 14. Lucky Draw\n
+
+## 14. Lucky Draw
+
 ### 14.1 User Features
 - One spin per day limit
 - Random bonus rewards
 - Auto-add rewards to wallet
-
+- Rewards added to both Total Balance and Withdrawable Amount\n
 ### 14.2 Admin Management
 - Configure reward options
 - Manage reward probabilities
@@ -242,28 +260,28 @@ Each product shows:\n- Product image
 - Display list of referred users
 - Show referral earnings summary
 - Single-level referral structure
-
+- Referral bonuses added to both Total Balance and Withdrawable Amount\n
 ## 16. User Profile
 
 ### 16.1 Profile Sections
 - Personal details
 - KYC status display
-- Order history\n- Transaction history
+- Order history
+- Transaction history
 - Withdrawal history
 - Change password functionality
 
 ## 17. Security Requirements
 
-### 17.1 Security Measures\n- Secure login authentication
-- Admin access protection
+### 17.1 Security Measures
+- Secure login authentication\n- Admin access protection
 - Input validation
 - Wallet transaction security
-- Prevention of balance manipulation\n
+- Prevention of balance manipulation
+
 ## 18. Development Goals
 
-### 18.1 Core Objectives
-- Simple and fast user experience
-- Working investment features
+### 18.1 Core Objectives\n- Simple and fast user experience\n- Working investment features
 - Reliable wallet system
 - Automated daily earnings distribution
 - Manual recharge and withdrawal processes
