@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import KycGate from '@/components/KycGate';
 
 interface RouteGuardProps {
   children: React.ReactNode;
@@ -8,6 +9,9 @@ interface RouteGuardProps {
 
 // Please add the pages that can be accessed without logging in to PUBLIC_ROUTES.
 const PUBLIC_ROUTES = ['/login', '/signup', '/403', '/404'];
+
+// Routes that don't require KYC (login, signup, kyc page itself, admin routes)
+const KYC_EXEMPT_ROUTES = ['/login', '/signup', '/kyc-submit', '/403', '/404'];
 
 function matchPublicRoute(path: string, patterns: string[]) {
   return patterns.some(pattern => {
@@ -20,7 +24,7 @@ function matchPublicRoute(path: string, patterns: string[]) {
 }
 
 export function RouteGuard({ children }: RouteGuardProps) {
-  const { user, loading } = useAuth();
+  const { user, profile, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -40,6 +44,14 @@ export function RouteGuard({ children }: RouteGuardProps) {
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
+  }
+
+  // If user is logged in and not on exempt route and not admin, apply KYC gate
+  const isKycExempt = matchPublicRoute(location.pathname, KYC_EXEMPT_ROUTES) || 
+                      location.pathname.startsWith('/admin');
+  
+  if (user && profile && !isKycExempt && profile.role !== 'admin') {
+    return <KycGate>{children}</KycGate>;
   }
 
   return <>{children}</>;

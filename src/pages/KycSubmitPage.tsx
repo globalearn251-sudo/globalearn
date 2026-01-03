@@ -12,7 +12,7 @@ import { prepareImageForUpload, generateStoragePath } from '@/lib/imageUtils';
 import { Upload, Loader2, FileText } from 'lucide-react';
 
 export default function KycSubmitPage() {
-  const { profile } = useAuth();
+  const { profile, refreshProfile } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [idFront, setIdFront] = useState<File | null>(null);
@@ -78,12 +78,15 @@ export default function KycSubmitPage() {
       // Submit KYC
       await kycApi.submitKyc(profile.id, frontUrl, backUrl, bankName, accountNumber, accountHolderName);
 
+      // Refresh profile to update KYC status
+      await refreshProfile();
+
       toast({
         title: 'Success!',
         description: 'KYC documents submitted. Waiting for admin review.',
       });
 
-      navigate('/profile');
+      navigate('/');
     } catch (error: any) {
       toast({
         title: 'Error',

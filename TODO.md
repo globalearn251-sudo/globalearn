@@ -72,11 +72,21 @@
   - [x] Disable withdrawal form when below minimum
   - [x] Add admin configuration for minimum withdrawal amount
   - [x] Create comprehensive documentation
+- [x] Step 12: Implement KYC verification gate
+  - [x] Create KycGate component with 4 status states (null, pending, approved, rejected)
+  - [x] Integrate KYC gate into RouteGuard to block all user actions
+  - [x] Update BottomNav to hide when KYC not approved
+  - [x] Update KycSubmitPage to refresh profile after submission
+  - [x] Add KYC exempt routes (login, signup, kyc-submit, admin)
+  - [x] Exempt admin users from KYC requirement
+  - [x] Create comprehensive documentation
 
 ## Notes
 - Using Supabase for backend (database, auth, storage)
 - Username + password authentication (simulated as email with @miaoda.com)
 - **IMPORTANT**: First registered user becomes admin automatically
+- **KYC REQUIREMENT**: All users (except admins) must complete KYC verification before accessing any features
+- **KYC STATUSES**: null (not submitted), pending (under review), approved (full access), rejected (must resubmit)
 - Mobile-first responsive design with bottom navigation
 - Primary color: Blue (#2563eb), Accent: Green (#10b981)
 - Image uploads: KYC documents, payment screenshots, product images, company banner
@@ -104,6 +114,7 @@
 - **FIXED**: Missing reject functions - added reject_withdrawal_request and reject_recharge_request RPC functions
 - **IMPLEMENTED**: Complete referral commission system - referrers earn configurable percentage when referred users purchase products
 - **IMPLEMENTED**: Minimum withdrawal limit - users must have at least the configured amount (default ₹500) in withdrawable balance to submit withdrawal requests
+- **IMPLEMENTED**: KYC verification gate - blocks all user actions until KYC is approved by admin, with clear status messages for each state
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account
