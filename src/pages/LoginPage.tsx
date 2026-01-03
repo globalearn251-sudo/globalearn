@@ -43,11 +43,26 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
-          <CardDescription className="text-center">
-            Sign in to your investment account
-          </CardDescription>
+        <CardHeader className="space-y-4">
+          {/* Logo and Brand */}
+          <div className="flex flex-col items-center space-y-3">
+            <img 
+              src="/btrade-logo.jpg" 
+              alt="BTRADE Logo" 
+              className="w-32 h-32 object-contain"
+            />
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-primary">BTRADE</h1>
+              <p className="text-sm text-muted-foreground">Global Trading & Investment</p>
+            </div>
+          </div>
+          
+          <div className="space-y-1">
+            <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
+            <CardDescription className="text-center">
+              Sign in to your investment account
+            </CardDescription>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

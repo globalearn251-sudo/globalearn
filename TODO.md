@@ -80,8 +80,15 @@
   - [x] Add KYC exempt routes (login, signup, kyc-submit, admin)
   - [x] Exempt admin users from KYC requirement
   - [x] Create comprehensive documentation
+- [x] Step 13: Add BTRADE branding to login and signup pages
+  - [x] Download and save BTRADE logo to public folder
+  - [x] Add logo display to LoginPage with brand name and tagline
+  - [x] Add logo display to SignupPage with brand name and tagline
+  - [x] Update page title in index.html to "BTRADE - Global Trading & Investment"
 
 ## Notes
+- **APPLICATION NAME**: BTRADE - Global Trading & Investment
+- **BRANDING**: Logo displayed on login and signup pages with brand name and tagline
 - Using Supabase for backend (database, auth, storage)
 - Username + password authentication (simulated as email with @miaoda.com)
 - **IMPORTANT**: First registered user becomes admin automatically
