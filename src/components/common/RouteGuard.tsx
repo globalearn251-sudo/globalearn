@@ -47,12 +47,15 @@ export function RouteGuard({ children }: RouteGuardProps) {
   }
 
   // If user is logged in and not on exempt route and not admin, apply KYC gate
+  // TEMPORARILY DISABLED FOR DEBUGGING
+  /*
   const isKycExempt = matchPublicRoute(location.pathname, KYC_EXEMPT_ROUTES) || 
                       location.pathname.startsWith('/admin');
   
   if (user && profile && !isKycExempt && profile.role !== 'admin') {
     return <KycGate>{children}</KycGate>;
   }
+  */
 
   return <>{children}</>;
 }

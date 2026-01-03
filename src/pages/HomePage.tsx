@@ -23,23 +23,42 @@ export default function HomePage() {
 
   useEffect(() => {
     if (profile) {
+      console.log('HomePage: Profile loaded, loading data...', profile.id);
       loadData();
+    } else {
+      console.log('HomePage: No profile yet');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile?.id]); // Only depend on profile.id to avoid unnecessary re-renders
 
   const loadData = async () => {
-    if (!profile) return;
+    if (!profile) {
+      console.log('HomePage: loadData called but no profile');
+      return;
+    }
+    
+    console.log('HomePage: Starting to load data for user', profile.id);
     
     try {
       setLoading(true); // Set loading at start
       
       // Fetch all data in parallel immediately for fast UI display
       const [settings, products, transactions] = await Promise.all([
-        companyApi.getAllSettings().catch(() => [] as CompanySetting[]),
-        userProductApi.getActiveUserProducts(profile.id).catch(() => []),
-        transactionApi.getUserTransactions(profile.id, 5).catch(() => []),
+        companyApi.getAllSettings().catch((err) => {
+          console.error('Error loading settings:', err);
+          return [] as CompanySetting[];
+        }),
+        userProductApi.getActiveUserProducts(profile.id).catch((err) => {
+          console.error('Error loading products:', err);
+          return [];
+        }),
+        transactionApi.getUserTransactions(profile.id, 5).catch((err) => {
+          console.error('Error loading transactions:', err);
+          return [];
+        }),
       ]);
+
+      console.log('HomePage: Data loaded successfully', { settings: settings.length, products: products.length, transactions: transactions.length });
 
       // Process settings
       settings.forEach((s: CompanySetting) => {
@@ -51,6 +70,8 @@ export default function HomePage() {
       setActiveProducts(products);
       setRecentTransactions(transactions);
       setLoading(false); // Show UI immediately
+      
+      console.log('HomePage: UI should now be visible');
       
       // Calculate daily earnings in background (non-blocking)
       // Temporarily disabled for debugging

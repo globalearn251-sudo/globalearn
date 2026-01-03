@@ -16,9 +16,12 @@ export function BottomNav() {
   const { profile } = useAuth();
 
   // Hide bottom nav if KYC is not approved (unless admin)
+  // TEMPORARILY DISABLED FOR DEBUGGING
+  /*
   if (profile && profile.role !== 'admin' && profile.kyc_status !== 'approved') {
     return null;
   }
+  */
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50">
