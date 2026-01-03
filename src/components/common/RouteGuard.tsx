@@ -10,8 +10,8 @@ interface RouteGuardProps {
 // Please add the pages that can be accessed without logging in to PUBLIC_ROUTES.
 const PUBLIC_ROUTES = ['/login', '/signup', '/403', '/404'];
 
-// Routes that don't require KYC (login, signup, kyc page itself, admin routes)
-const KYC_EXEMPT_ROUTES = ['/login', '/signup', '/kyc-submit', '/403', '/404'];
+// Routes that don't require KYC (login, signup, kyc page itself, profile page, admin routes)
+const KYC_EXEMPT_ROUTES = ['/login', '/signup', '/kyc-submit', '/profile', '/403', '/404'];
 
 function matchPublicRoute(path: string, patterns: string[]) {
   return patterns.some(pattern => {

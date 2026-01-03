@@ -85,11 +85,14 @@
   - [x] Add logo display to LoginPage with brand name and tagline
   - [x] Add logo display to SignupPage with brand name and tagline
   - [x] Update page title in index.html to "BTRADE - Global Trading & Investment"
-- [x] Step 14: Optimize dashboard loading performance
+- [x] Step 14: Optimize dashboard loading performance and fix infinite loop issues
   - [x] Identify performance bottleneck (blocking daily earnings calculation)
   - [x] Move daily earnings calculation to background (non-blocking)
   - [x] Show UI immediately with current data
-  - [x] Refresh profile automatically after earnings calculated
+  - [x] Fix infinite loop in HomePage useEffect (depend only on profile.id)
+  - [x] Fix infinite loop in ProfilePage useEffect (depend only on profile.id)
+  - [x] Add profile page to KYC exempt routes (users need to see KYC status)
+  - [x] Temporarily disable daily earnings auto-calculation for stability
   - [x] Reduce initial load time from 3-8 seconds to < 1 second
   - [x] Create comprehensive performance documentation
 
@@ -107,7 +110,7 @@
 - Image uploads: KYC documents, payment screenshots, product images, company banner
 - Daily earnings calculated automatically via edge function (deployed and ready)
 - **DAILY EARNINGS**: Fully automated system that adds earnings to both balance and withdrawable_balance
-- **DAILY EARNINGS TRIGGER**: Automatically calculates earnings on home page load in background (non-blocking for fast UI)
+- **DAILY EARNINGS TRIGGER**: Temporarily disabled auto-calculation on page load for stability (can be re-enabled after testing)
 - **PURCHASE LOGIC**: Products purchased using total balance only (not withdrawable balance)
 - **WITHDRAWABLE LOGIC**: Only earnings (daily earnings, lucky draw wins, referral commissions) are withdrawable, NOT recharges
 - **MINIMUM WITHDRAWAL**: Admin-configurable minimum withdrawal amount (default: ₹500) - users must have at least this amount to withdraw
@@ -130,6 +133,8 @@
 - **IMPLEMENTED**: Complete referral commission system - referrers earn configurable percentage when referred users purchase products
 - **IMPLEMENTED**: Minimum withdrawal limit - users must have at least the configured amount (default ₹500) in withdrawable balance to submit withdrawal requests
 - **IMPLEMENTED**: KYC verification gate - blocks all user actions until KYC is approved by admin, with clear status messages for each state
+- **FIXED**: Infinite loop issues in HomePage and ProfilePage - changed useEffect to depend only on profile.id instead of entire profile object
+- **FIXED**: Profile page now accessible without KYC approval (added to exempt routes) so users can view their KYC status
 
 ## Admin Setup Instructions
 1. Register the first account - this will automatically become the admin account

@@ -21,8 +21,11 @@ export default function ProfilePage() {
   const [kycSubmission, setKycSubmission] = useState<KycSubmission | null>(null);
 
   useEffect(() => {
-    loadData();
-  }, [profile]);
+    if (profile) {
+      loadData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile?.id]); // Only depend on profile.id
 
   const loadData = async () => {
     if (!profile) return;

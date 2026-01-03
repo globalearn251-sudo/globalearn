@@ -25,6 +25,7 @@ export default function HomePage() {
     if (profile) {
       loadData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile?.id]); // Only depend on profile.id to avoid unnecessary re-renders
 
   const loadData = async () => {
@@ -52,16 +53,20 @@ export default function HomePage() {
       setLoading(false); // Show UI immediately
       
       // Calculate daily earnings in background (non-blocking)
-      // This runs after UI is displayed
-      dailyEarningsApi.calculateDailyEarnings()
-        .then(() => {
-          // Refresh profile to get updated balance and earnings
-          refreshProfile();
-        })
-        .catch((err) => {
-          console.error('Daily earnings calculation error:', err);
-          // Silent fail - don't disrupt user experience
-        });
+      // Temporarily disabled for debugging
+      /*
+      setTimeout(() => {
+        dailyEarningsApi.calculateDailyEarnings()
+          .then(() => {
+            // Refresh profile to get updated balance and earnings
+            return refreshProfile();
+          })
+          .catch((err) => {
+            console.error('Daily earnings calculation error:', err);
+            // Silent fail - don't disrupt user experience
+          });
+      }, 100);
+      */
       
     } catch (error) {
       console.error('Error loading dashboard data:', error);
