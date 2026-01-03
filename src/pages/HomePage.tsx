@@ -31,19 +31,9 @@ export default function HomePage() {
     if (!profile) return;
     
     try {
-      setLoading(true);
+      setLoading(true); // Set loading at start
       
-      // First, trigger daily earnings calculation and wait for it
-      try {
-        await dailyEarningsApi.calculateDailyEarnings();
-        // Refresh profile to get updated balance and earnings
-        await refreshProfile();
-      } catch (err) {
-        console.error('Daily earnings calculation error:', err);
-        // Continue even if this fails
-      }
-      
-      // Then fetch all data in parallel for better performance
+      // Fetch all data in parallel immediately for fast UI display
       const [settings, products, transactions] = await Promise.all([
         companyApi.getAllSettings().catch(() => [] as CompanySetting[]),
         userProductApi.getActiveUserProducts(profile.id).catch(() => []),
@@ -59,9 +49,22 @@ export default function HomePage() {
 
       setActiveProducts(products);
       setRecentTransactions(transactions);
+      setLoading(false); // Show UI immediately
+      
+      // Calculate daily earnings in background (non-blocking)
+      // This runs after UI is displayed
+      dailyEarningsApi.calculateDailyEarnings()
+        .then(() => {
+          // Refresh profile to get updated balance and earnings
+          refreshProfile();
+        })
+        .catch((err) => {
+          console.error('Daily earnings calculation error:', err);
+          // Silent fail - don't disrupt user experience
+        });
+      
     } catch (error) {
       console.error('Error loading dashboard data:', error);
-    } finally {
       setLoading(false);
     }
   };
