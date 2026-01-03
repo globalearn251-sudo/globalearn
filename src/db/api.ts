@@ -267,20 +267,14 @@ export const rechargeApi = {
   },
 
   rejectRechargeRequest: async (requestId: string, adminId: string, adminNote: string) => {
-    const { data, error } = await supabase
-      .from('recharge_requests')
-      .update({
-        status: 'rejected',
-        processed_by: adminId,
-        processed_at: new Date().toISOString(),
-        admin_note: adminNote,
-      })
-      .eq('id', requestId)
-      .select()
-      .maybeSingle();
+    const { data, error } = await supabase.rpc('reject_recharge_request', {
+      p_request_id: requestId,
+      p_admin_id: adminId,
+      p_admin_note: adminNote,
+    });
     
     if (error) throw error;
-    return data as RechargeRequest;
+    return data;
   },
 };
 
@@ -345,20 +339,14 @@ export const withdrawalApi = {
   },
 
   rejectWithdrawalRequest: async (requestId: string, adminId: string, adminNote: string) => {
-    const { data, error } = await supabase
-      .from('withdrawal_requests')
-      .update({
-        status: 'rejected',
-        processed_by: adminId,
-        processed_at: new Date().toISOString(),
-        admin_note: adminNote,
-      })
-      .eq('id', requestId)
-      .select()
-      .maybeSingle();
+    const { data, error } = await supabase.rpc('reject_withdrawal_request', {
+      p_request_id: requestId,
+      p_admin_id: adminId,
+      p_admin_note: adminNote,
+    });
     
     if (error) throw error;
-    return data as WithdrawalRequest;
+    return data;
   },
 };
 

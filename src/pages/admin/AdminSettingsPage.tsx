@@ -23,6 +23,7 @@ export default function AdminSettingsPage() {
   const [rechargeQrFile, setRechargeQrFile] = useState<File | null>(null);
   const [companyNotice, setCompanyNotice] = useState('');
   const [companyDetails, setCompanyDetails] = useState('');
+  const [referralCommission, setReferralCommission] = useState('5');
 
   useEffect(() => {
     loadSettings();
@@ -38,6 +39,7 @@ export default function AdminSettingsPage() {
         if (s.key === 'recharge_qr_code_url') setRechargeQrUrl(s.value);
         if (s.key === 'company_notice') setCompanyNotice(s.value);
         if (s.key === 'company_details') setCompanyDetails(s.value);
+        if (s.key === 'referral_commission_percentage') setReferralCommission(s.value);
       });
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -105,6 +107,7 @@ export default function AdminSettingsPage() {
         companyApi.updateSetting('recharge_qr_code_url', finalQrUrl),
         companyApi.updateSetting('company_notice', companyNotice),
         companyApi.updateSetting('company_details', companyDetails),
+        companyApi.updateSetting('referral_commission_percentage', referralCommission),
       ]);
 
       toast({
@@ -255,6 +258,31 @@ export default function AdminSettingsPage() {
               placeholder="Enter company description and details..."
               rows={6}
             />
+          </CardContent>
+        </Card>
+
+        {/* Referral Commission */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Referral Commission</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <Label htmlFor="referralCommission">Commission Percentage (%)</Label>
+              <Input
+                id="referralCommission"
+                type="number"
+                min="0"
+                max="100"
+                step="0.1"
+                value={referralCommission}
+                onChange={(e) => setReferralCommission(e.target.value)}
+                placeholder="Enter commission percentage (e.g., 5)"
+              />
+              <p className="text-sm text-muted-foreground">
+                Percentage of product price paid to referrer when their referred user makes a purchase
+              </p>
+            </div>
           </CardContent>
         </Card>
 
