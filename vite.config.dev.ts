@@ -113,8 +113,6 @@
   }
 },
 ,
-        // Sentry monitoring disabled to reduce console noise
-        /*
         monitorPlugin(
           {
             scriptSrc: 'https://miaoda-resource-static.s3cdn.medo.dev/sentry/browser.sentry.min.js',
@@ -123,7 +121,6 @@
             appId: 'app-8ildgs548gzl'
           }
         )
-        */
       ]
     });
     

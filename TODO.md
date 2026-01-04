@@ -103,6 +103,7 @@
   - [x] Load Telegram link in HomePage from company settings
   - [x] Update support button to open Telegram link in new tab
   - [x] Add fallback message when link not configured
+  - [x] Fix updateSetting to use upsert instead of update for new settings
 - [x] Step 16: Fix admin user page loading issues
   - [x] Add enhanced logging for admin users in HomePage
   - [x] Add enhanced logging for admin users in ProfilePage
@@ -153,6 +154,7 @@
 - **IMPLEMENTED**: Minimum withdrawal limit - users must have at least the configured amount (default ₹500) in withdrawable balance to submit withdrawal requests
 - **IMPLEMENTED**: KYC verification gate - blocks all user actions until KYC is approved by admin, with clear status messages for each state
 - **IMPLEMENTED**: Telegram support link - admin can configure support channel link, users can click support button to open Telegram in new tab
+- **FIXED**: updateSetting API now uses upsert to insert new settings if they don't exist, preventing silent failures when adding new configuration options
 - **FIXED**: Infinite loop issues in HomePage and ProfilePage - changed useEffect to depend only on profile.id instead of entire profile object
 - **FIXED**: Profile page now accessible without KYC approval (added to exempt routes) so users can view their KYC status
 

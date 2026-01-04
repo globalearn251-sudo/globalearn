@@ -597,8 +597,10 @@ export const companyApi = {
   updateSetting: async (key: string, value: string) => {
     const { data, error } = await supabase
       .from('company_settings')
-      .update({ value, updated_at: new Date().toISOString() })
-      .eq('key', key)
+      .upsert(
+        { key, value, updated_at: new Date().toISOString() },
+        { onConflict: 'key' }
+      )
       .select()
       .maybeSingle();
     
