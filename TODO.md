@@ -96,6 +96,13 @@
   - [x] Add profile page to KYC exempt routes
   - [x] Temporarily disable daily earnings auto-calculation
   - [x] Create detailed investigation and fix documentation
+- [x] Step 15: Add Telegram support link feature
+  - [x] Add support_telegram_link field to admin settings page
+  - [x] Add state management for Telegram link in AdminSettingsPage
+  - [x] Include Telegram link in settings save operation
+  - [x] Load Telegram link in HomePage from company settings
+  - [x] Update support button to open Telegram link in new tab
+  - [x] Add fallback message when link not configured
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
@@ -137,6 +144,7 @@
 - **IMPLEMENTED**: Complete referral commission system - referrers earn configurable percentage when referred users purchase products
 - **IMPLEMENTED**: Minimum withdrawal limit - users must have at least the configured amount (default ₹500) in withdrawable balance to submit withdrawal requests
 - **IMPLEMENTED**: KYC verification gate - blocks all user actions until KYC is approved by admin, with clear status messages for each state
+- **IMPLEMENTED**: Telegram support link - admin can configure support channel link, users can click support button to open Telegram in new tab
 - **FIXED**: Infinite loop issues in HomePage and ProfilePage - changed useEffect to depend only on profile.id instead of entire profile object
 - **FIXED**: Profile page now accessible without KYC approval (added to exempt routes) so users can view their KYC status
 

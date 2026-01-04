@@ -20,23 +20,24 @@ Investment Product Platform
 
 ### 2.1 Admin Dashboard
 - Overview statistics (total users, active investments, pending requests)
-- Quick access to all management modules\n- Real-time transaction monitoring\n
-### 2.2 User Management
-- View all registered users
+- Quick access to all management modules
+- Real-time transaction monitoring
+
+### 2.2 User Management\n- View all registered users
 - User details and activity logs
 - Wallet balance overview
 - Suspend or activate user accounts
 
 ### 2.3 KYC Approval System
-- Review submitted KYC documents
-- View government ID uploads (front and back)
+- Review submitted KYC documents\n- View government ID uploads (front and back)
 - Review bank details
-- Approve or reject KYC submissions\n- Simple verification workflow
-\n### 2.4 Product Management
+- Approve or reject KYC submissions
+- Simple verification workflow
+
+### 2.4 Product Management
 - Add new investment products
 - Edit existing products
-- Delete products
-- Set price, daily income, and duration
+- Delete products\n- Set price, daily income, and duration
 - Activate or deactivate products
 - Upload product images
 
@@ -48,45 +49,55 @@ Investment Product Platform
 - Update payment QR code anytime
 
 ### 2.6 Withdrawal Request Processing
-- View pending withdrawal requests\n- Manual transfer processing
+- View pending withdrawal requests
+- Manual transfer processing
 - Approve or reject requests
 - Update user wallet upon approval
 - Maintain withdrawal history logs
-\n### 2.7 Wallet Transaction Logs
+
+### 2.7 Wallet Transaction Logs
 - Complete transaction history
 - Filter by user, date, or transaction type
 - Export transaction reports
 
 ### 2.8 Company Information Updates
-- Update company banner\n- Edit company notice and information\n- Manage company details displayed on dashboard
-
-### 2.9 Banner Management
+- Update company banner
+- Edit company notice and information
+- Manage company details displayed on dashboard
+\n### 2.9 Banner Management
 - Upload and update dashboard banners
 - Set banner display order
 - Activate or deactivate banners
 
-### 2.10 Lucky Draw Reward Configuration\n- Configure reward options
-- Set reward amounts
-- Manage reward probabilities
-- View lucky draw history
+### 2.10 Lucky Draw Reward Configuration
+- Configure reward options
+- Set reward amounts\n- Manage reward probabilities\n- View lucky draw history
 
-### 2.11 Notification Management\n- Create notifications for all users\n- Set notification priority (Important or General)
-- Edit notification content\n- Delete notifications
+### 2.11 Notification Management
+- Create notifications for all users
+- Set notification priority (Important or General)
+- Edit notification content
+- Delete notifications
 - View notification history
 - Track notification delivery status
-
-### 2.12 Withdrawal Settings
+\n### 2.12 Withdrawal Settings
 - Set minimum withdrawal amount limit
 - Configure minimum balance threshold that users must reach before submitting withdrawal requests
 - Update withdrawal limit anytime
 
+### 2.13 Support Channel Settings
+- Add Telegram channel support link
+- Update support channel link anytime
+- Display support link in user dashboard support option
+
 ## 3. Technical Requirements
 
 ### 3.1 Database
-Local database\n
+Local database
+
 ### 3.2 Responsive Design
-Mobile-first responsive design approach
-\n## 4. User Interface Design
+Mobile-first responsive design approach\n
+## 4. User Interface Design
 
 ### 4.1 Theme
 Light theme with clean financial app aesthetic
@@ -96,28 +107,32 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Home
 - Products
 - Lucky Draw
-- Team
-- Profile
+- Team\n- Profile
 
-### 4.3 Design Style
-- Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions, red badge (#ef4444) for notification indicators
+### 4.3 Design Style\n- Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions, red badge (#ef4444) for notification indicators
 - Visual Details: Subtle shadows for card elevation, 8px rounded corners, minimalist icons, smooth transitions, marquee animation for important notifications
-- Layout: Card-based layout with clear visual hierarchy and adequate white space\n
+- Layout: Card-based layout with clear visual hierarchy and adequate white space
+
 ## 5. User Authentication
 
-### 5.1 Login & Signup\n- Simple phone number and password authentication
-- Forgot password functionality\n- No OTP verification required\n- Redirect to KYC verification prompt if KYC is incomplete after login
+### 5.1 Login & Signup
+- Simple phone number and password authentication
+- Forgot password functionality
+- No OTP verification required
+- Redirect to KYC verification prompt if KYC is incomplete after login
 - Redirect to dashboard after successful login if KYC is complete
 
 ## 6. KYC Verification Gate
 
 ### 6.1 KYC Completion Check
-- System checks KYC status immediately after user login
-- If KYC is not complete, display full-screen KYC prompt overlay on dashboard
+- System checks KYC status immediately after user login\n- If KYC is not complete, display full-screen KYC prompt overlay on dashboard
 - Block all app functionality until KYC is completed
-- User cannot access any features including:\n  - Product browsing and purchasing
+- User cannot access any features including:
+  - Product browsing and purchasing
   - Wallet operations (recharge, withdrawal)
-  - Lucky draw\n  - Referral team\n  - Profile sections (except KYC submission)
+  - Lucky draw
+  - Referral team
+  - Profile sections (except KYC submission)
 
 ### 6.2 KYC Prompt Display
 - Full-screen overlay message: Please complete your KYC verification to access all features
@@ -125,28 +140,28 @@ Fixed bottom navigation bar (mobile) with five sections:
 - No close or dismiss option
 - Clicking Complete Now redirects to KYC submission form
 \n### 6.3 KYC Submission Form
-- Government ID upload (front and back)
-- Bank details submission
-- Submit button to send for admin review
-- After submission, show pending approval status
+- Government ID upload (front and back)\n- Bank details submission
+- Submit button to send for admin review\n- After submission, show pending approval status
 - User remains blocked from app features until admin approves KYC
 
 ### 6.4 Post-Approval Access
 - Once admin approves KYC, user gains full access to all app features
 - KYC prompt overlay is removed
 - User can freely navigate and use all modules
-\n## 7. User App Header
 
-### 7.1 Header Layout
-- Fixed top header bar across all user pages
+## 7. User App Header
+
+### 7.1 Header Layout\n- Fixed top header bar across all user pages
 - Left side: Notification bell icon with unread count badge
-- Right side: Welcome back, [User Name] greeting text\n- Header only visible after KYC completion
+- Right side: Welcome back, [User Name] greeting text
+- Header only visible after KYC completion
 
 ### 7.2 Notification Icon
 - Bell icon with red badge showing unread notification count
 - Click to open notification center
 - Badge disappears when all notifications are read
-\n## 8. Notification Center
+
+## 8. Notification Center
 
 ### 8.1 Notification List
 - Display all notifications sent by admin
@@ -156,18 +171,18 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Important notifications highlighted with distinct color or icon
 - Mark individual notifications as read
 - Mark all as read option
-\n### 8.2 Notification Types
+
+### 8.2 Notification Types
 - Important: Highlighted with red or orange indicator
 - General: Standard display style
 
 ## 9. User Dashboard
 
-### 9.1 Top Section
-- User app header (Welcome message and notification icon)
+### 9.1 Top Section\n- User app header (Welcome message and notification icon)
 - Company banner (admin-updatable)
 - Company notice and information display
-
-### 9.2 Wallet Summary\n- Total Balance display
+\n### 9.2 Wallet Summary
+- Total Balance display
 - Earnings display
 - Withdrawable Amount display
 - Recharge button
@@ -178,48 +193,54 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Display important notifications in left-to-right scrolling style
 - Continuous loop animation
 - Click to view full notification details
-- Only show notifications marked as Important by admin
-\n### 9.4 Dashboard Sections
+- Only show notifications marked as Important by admin\n
+### 9.4 Dashboard Sections
 - My Assets overview
 - Daily Check-in Bonus
 - Company Details (admin-updatable)
+- Support option with Telegram channel link (admin-configurable)
 
 ### 9.5 Access Control
 - All dashboard features only accessible after KYC completion
 - If KYC incomplete, show KYC prompt overlay instead
-\n## 10. Products Module\n
+
+## 10. Products Module
+
 ### 10.1 Product Display
 Each product shows:
 - Product image
-- Price
-- Daily earnings amount
+- Price\n- Daily earnings amount
 - Contract duration
-- Buy button
-\n### 10.2 Purchase Flow
+- Buy button\n
+### 10.2 Purchase Flow
 - Deduct amount from user wallet
 - Activate daily earning schedule
 - Record transaction
 
 ### 10.3 Access Control
-- Products module only accessible after KYC completion\n\n## 11. Recharge System
+- Products module only accessible after KYC completion
+
+## 11. Recharge System
 
 ### 11.1 User Process
 1. Enter recharge amount
 2. View admin QR code
 3. Upload payment screenshot
 4. Status shows as pending
-\n### 11.2 Admin Management
-- Approve recharge requests (add balance to user wallet)\n- Reject recharge requests\n- Update QR code anytime
 
-### 11.3 Access Control
-- Recharge functionality only accessible after KYC completion\n\n## 12. Daily Earning System
+### 11.2 Admin Management
+- Approve recharge requests (add balance to user wallet)
+- Reject recharge requests
+- Update QR code anytime
+\n### 11.3 Access Control
+- Recharge functionality only accessible after KYC completion\n
+## 12. Daily Earning System
 
 ### 12.1 Automatic Distribution
 - System runs daily at a fixed time (e.g., 00:00 UTC) to calculate earnings for all active investments
 - For each active investment product:
   - Calculate daily earnings based on product's daily income rate
-  - Add calculated earnings to user's Total Balance
-  - Add calculated earnings to user's Withdrawable Amount
+  - Add calculated earnings to user's Total Balance\n  - Add calculated earnings to user's Withdrawable Amount
   - Record earning transaction in wallet transaction logs
   - Update earning history for the user
 - Automatically stop earnings distribution when contract period expires
@@ -235,11 +256,10 @@ Each product shows:
 ### 12.3 Withdrawable Amount Management
 - Withdrawable Amount consists exclusively of:
   - Daily earnings from active investments
+  - Referral bonuses\n  - Lucky draw rewards
+- Withdrawable Amount increases with:\n  - Daily earnings from active investments
   - Referral bonuses
   - Lucky draw rewards
-- Withdrawable Amount increases with:
-  - Daily earnings from active investments
-  - Referral bonuses\n  - Lucky draw rewards
 - Withdrawable Amount decreases with:
   - Approved withdrawal requests
 - Display Withdrawable Amount separately on dashboard
@@ -256,39 +276,37 @@ Each product shows:
 - Display error message if Withdrawable Amount is below minimum limit (e.g., if limit is 500 and user has less than 500, request cannot be submitted)
 - Display pending status after successful submission
 
-### 13.2 Admin Processing
-- Manual transfer processing
+### 13.2 Admin Processing\n- Manual transfer processing
 - Approve or reject requests
 - Upon approval:
-  - Deduct amount from user's Total Balance
-  - Deduct amount from user's Withdrawable Amount
-  - Record transaction in withdrawal history
-- Upon rejection:
+  - Deduct amount from user's Total Balance\n  - Deduct amount from user's Withdrawable Amount
+  - Record transaction in withdrawal history\n- Upon rejection:
   - No changes to wallet balances
   - Notify user with rejection reason
 
-### 13.3 Access Control\n- Withdrawal functionality only accessible after KYC completion
-\n## 14. Lucky Draw\n
-### 14.1 User Features
-- One spin per day limit
-- Random bonus rewards
+### 13.3 Access Control
+- Withdrawal functionality only accessible after KYC completion
+
+## 14. Lucky Draw
+
+### 14.1 User Features\n- One spin per day limit\n- Random bonus rewards
 - Auto-add rewards to wallet
 - Rewards added to both Total Balance and Withdrawable Amount
+\n### 14.2 Admin Management
+- Configure reward options\n- Manage reward probabilities\n
+### 14.3 Access Control
+- Lucky draw feature only accessible after KYC completion
 
-### 14.2 Admin Management
-- Configure reward options
-- Manage reward probabilities
-
-### 14.3 Access Control\n- Lucky draw feature only accessible after KYC completion\n
 ## 15. Referral Team System
-
-### 15.1 Features\n- Unique referral link generation
+\n### 15.1 Features
+- Unique referral link generation
 - Display list of referred users
 - Show referral earnings summary
 - Single-level referral structure
 - Referral bonuses added to both Total Balance and Withdrawable Amount
 
-### 15.2 Access Control\n- Referral team module only accessible after KYC completion\n
+### 15.2 Access Control
+- Referral team module only accessible after KYC completion\n
 ## 16. User Profile
 
 ### 16.1 Profile Sections
@@ -305,22 +323,19 @@ Each product shows:
 
 ## 17. Security Requirements
 
-### 17.1 Security Measures\n- Secure login authentication
-- Admin access protection
+### 17.1 Security Measures
+- Secure login authentication\n- Admin access protection
 - Input validation
 - Wallet transaction security
-- Prevention of balance manipulation\n- KYC verification enforcement at application level
+- Prevention of balance manipulation
+- KYC verification enforcement at application level
 
 ## 18. Development Goals
-
-### 18.1 Core Objectives
+\n### 18.1 Core Objectives
 - Simple and fast user experience
 - Working investment features
-- Reliable wallet system
-- Automated daily earnings distribution
-- Manual recharge and withdrawal processes
-- Basic referral functionality
-- Lucky draw engagement feature
+- Reliable wallet system\n- Automated daily earnings distribution\n- Manual recharge and withdrawal processes
+- Basic referral functionality\n- Lucky draw engagement feature
 - Complete admin control
 - Real-time notification system
 - Mandatory KYC verification with strict access control

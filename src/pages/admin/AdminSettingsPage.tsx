@@ -25,6 +25,7 @@ export default function AdminSettingsPage() {
   const [companyDetails, setCompanyDetails] = useState('');
   const [referralCommission, setReferralCommission] = useState('5');
   const [minWithdrawalAmount, setMinWithdrawalAmount] = useState('500');
+  const [supportTelegramLink, setSupportTelegramLink] = useState('');
 
   useEffect(() => {
     loadSettings();
@@ -42,6 +43,7 @@ export default function AdminSettingsPage() {
         if (s.key === 'company_details') setCompanyDetails(s.value);
         if (s.key === 'referral_commission_percentage') setReferralCommission(s.value);
         if (s.key === 'min_withdrawal_amount') setMinWithdrawalAmount(s.value);
+        if (s.key === 'support_telegram_link') setSupportTelegramLink(s.value);
       });
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -111,6 +113,7 @@ export default function AdminSettingsPage() {
         companyApi.updateSetting('company_details', companyDetails),
         companyApi.updateSetting('referral_commission_percentage', referralCommission),
         companyApi.updateSetting('min_withdrawal_amount', minWithdrawalAmount),
+        companyApi.updateSetting('support_telegram_link', supportTelegramLink),
       ]);
 
       toast({
@@ -308,6 +311,28 @@ export default function AdminSettingsPage() {
               />
               <p className="text-sm text-muted-foreground">
                 Users must have at least this amount in their withdrawable balance to submit a withdrawal request
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Support Telegram Link */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Support Telegram Link</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <Label htmlFor="supportTelegramLink">Telegram Channel/Group Link</Label>
+              <Input
+                id="supportTelegramLink"
+                type="url"
+                value={supportTelegramLink}
+                onChange={(e) => setSupportTelegramLink(e.target.value)}
+                placeholder="Enter Telegram link (e.g., https://t.me/yoursupport)"
+              />
+              <p className="text-sm text-muted-foreground">
+                This link will be displayed in the user dashboard support section. Users can click to join your Telegram support channel.
               </p>
             </div>
           </CardContent>

@@ -18,6 +18,7 @@ export default function HomePage() {
   const [bannerUrl, setBannerUrl] = useState('');
   const [companyNotice, setCompanyNotice] = useState('');
   const [companyDetails, setCompanyDetails] = useState('');
+  const [supportTelegramLink, setSupportTelegramLink] = useState('');
   const [activeProducts, setActiveProducts] = useState<UserProduct[]>([]);
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
 
@@ -65,6 +66,7 @@ export default function HomePage() {
         if (s.key === 'banner_url') setBannerUrl(s.value);
         if (s.key === 'company_notice') setCompanyNotice(s.value);
         if (s.key === 'company_details') setCompanyDetails(s.value);
+        if (s.key === 'support_telegram_link') setSupportTelegramLink(s.value);
       });
 
       setActiveProducts(products);
@@ -211,8 +213,11 @@ export default function HomePage() {
 
           <button
             onClick={() => {
-              // You can add a support page or open a dialog
-              alert('Support feature coming soon!');
+              if (supportTelegramLink) {
+                window.open(supportTelegramLink, '_blank', 'noopener,noreferrer');
+              } else {
+                alert('Support link not configured. Please contact admin.');
+              }
             }}
             className="flex flex-col items-center gap-2"
           >
