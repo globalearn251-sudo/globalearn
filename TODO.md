@@ -106,6 +106,8 @@
   - [x] Fix updateSetting to use upsert instead of update for new settings
   - [x] Fix RLS policy on company_settings to allow admin INSERT operations
   - [x] Fix RLS policies on all admin-managed tables (products, kyc_submissions, lucky_draw_config, notifications, profiles, recharge_requests, withdrawal_requests)
+  - [x] Grant EXECUTE permissions on is_admin function to authenticated, anon, and public roles
+  - [x] Add explicit INSERT policy for products table to ensure admin can add new products
 - [x] Step 16: Fix admin user page loading issues
   - [x] Add enhanced logging for admin users in HomePage
   - [x] Add enhanced logging for admin users in ProfilePage
