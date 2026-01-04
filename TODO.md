@@ -110,6 +110,7 @@
   - [x] Add individual error handling for each API call with catch blocks
   - [x] Add detailed console logs showing user role and data loading status
   - [x] Ensure loading state is set to false even when profile is missing
+  - [x] Disable Sentry monitoring to reduce console noise and errors
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
