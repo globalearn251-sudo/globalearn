@@ -103,6 +103,13 @@
   - [x] Load Telegram link in HomePage from company settings
   - [x] Update support button to open Telegram link in new tab
   - [x] Add fallback message when link not configured
+- [x] Step 16: Fix admin user page loading issues
+  - [x] Add enhanced logging for admin users in HomePage
+  - [x] Add enhanced logging for admin users in ProfilePage
+  - [x] Add safety check to prevent stuck loading state when profile is null
+  - [x] Add individual error handling for each API call with catch blocks
+  - [x] Add detailed console logs showing user role and data loading status
+  - [x] Ensure loading state is set to false even when profile is missing
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

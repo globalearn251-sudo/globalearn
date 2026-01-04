@@ -24,7 +24,11 @@ export default function HomePage() {
 
   useEffect(() => {
     if (profile) {
-      console.log('HomePage: Profile loaded, loading data...', profile.id);
+      console.log('HomePage: Profile loaded, loading data...', { 
+        id: profile.id, 
+        role: profile.role,
+        isAdmin: profile.role === 'admin'
+      });
       loadData();
     } else {
       console.log('HomePage: No profile yet');
@@ -35,10 +39,11 @@ export default function HomePage() {
   const loadData = async () => {
     if (!profile) {
       console.log('HomePage: loadData called but no profile');
+      setLoading(false); // Don't stay in loading state
       return;
     }
     
-    console.log('HomePage: Starting to load data for user', profile.id);
+    console.log('HomePage: Starting to load data for user', profile.id, 'role:', profile.role);
     
     try {
       setLoading(true); // Set loading at start
@@ -59,7 +64,12 @@ export default function HomePage() {
         }),
       ]);
 
-      console.log('HomePage: Data loaded successfully', { settings: settings.length, products: products.length, transactions: transactions.length });
+      console.log('HomePage: Data loaded successfully', { 
+        settings: settings.length, 
+        products: products.length, 
+        transactions: transactions.length,
+        userRole: profile.role 
+      });
 
       // Process settings
       settings.forEach((s: CompanySetting) => {
@@ -73,7 +83,7 @@ export default function HomePage() {
       setRecentTransactions(transactions);
       setLoading(false); // Show UI immediately
       
-      console.log('HomePage: UI should now be visible');
+      console.log('HomePage: UI should now be visible for', profile.role, 'user');
       
       // Calculate daily earnings in background (non-blocking)
       // Temporarily disabled for debugging

@@ -22,29 +22,68 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (profile) {
+      console.log('ProfilePage: Profile loaded, loading data...', {
+        id: profile.id,
+        role: profile.role,
+        isAdmin: profile.role === 'admin'
+      });
       loadData();
+    } else {
+      console.log('ProfilePage: No profile yet');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile?.id]); // Only depend on profile.id
 
   const loadData = async () => {
-    if (!profile) return;
+    if (!profile) {
+      console.log('ProfilePage: loadData called but no profile');
+      setLoading(false); // Don't stay in loading state
+      return;
+    }
+    
+    console.log('ProfilePage: Starting to load data for user', profile.id, 'role:', profile.role);
     
     try {
       setLoading(true);
       const [ordersData, txData, rechargeData, withdrawalData, kycData] = await Promise.all([
-        userProductApi.getUserProducts(profile.id),
-        transactionApi.getUserTransactions(profile.id, 20),
-        rechargeApi.getUserRechargeRequests(profile.id),
-        withdrawalApi.getUserWithdrawalRequests(profile.id),
-        kycApi.getUserKyc(profile.id),
+        userProductApi.getUserProducts(profile.id).catch((err) => {
+          console.error('Error loading orders:', err);
+          return [];
+        }),
+        transactionApi.getUserTransactions(profile.id, 20).catch((err) => {
+          console.error('Error loading transactions:', err);
+          return [];
+        }),
+        rechargeApi.getUserRechargeRequests(profile.id).catch((err) => {
+          console.error('Error loading recharge requests:', err);
+          return [];
+        }),
+        withdrawalApi.getUserWithdrawalRequests(profile.id).catch((err) => {
+          console.error('Error loading withdrawal requests:', err);
+          return [];
+        }),
+        kycApi.getUserKyc(profile.id).catch((err) => {
+          console.error('Error loading KYC:', err);
+          return null;
+        }),
       ]);
+      
+      console.log('ProfilePage: Data loaded successfully', {
+        orders: ordersData.length,
+        transactions: txData.length,
+        recharges: rechargeData.length,
+        withdrawals: withdrawalData.length,
+        hasKyc: !!kycData,
+        userRole: profile.role
+      });
       
       setOrders(ordersData);
       setTransactions(txData);
       setRechargeRequests(rechargeData);
       setWithdrawalRequests(withdrawalData);
       setKycSubmission(kycData);
+      
+      console.log('ProfilePage: UI should now be visible for', profile.role, 'user');
     } catch (error) {
       console.error('Error loading profile data:', error);
     } finally {
