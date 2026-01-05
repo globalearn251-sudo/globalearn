@@ -849,4 +849,39 @@ export const dailyEarningsApi = {
     
     return data;
   },
+
+  // Get user's daily earnings history
+  getUserDailyEarnings: async (userId: string) => {
+    const { data, error } = await supabase
+      .from('daily_earnings')
+      .select(`
+        *,
+        user_products:user_product_id (
+          id,
+          product_id,
+          products:product_id (
+            name,
+            image_url
+          )
+        )
+      `)
+      .eq('user_id', userId)
+      .order('earning_date', { ascending: false });
+    
+    if (error) throw error;
+    return (Array.isArray(data) ? data : []) as DailyEarning[];
+  },
+
+  // Get total earnings for a user
+  getTotalEarnings: async (userId: string) => {
+    const { data, error } = await supabase
+      .from('daily_earnings')
+      .select('amount')
+      .eq('user_id', userId);
+    
+    if (error) throw error;
+    
+    const total = (Array.isArray(data) ? data : []).reduce((sum, earning) => sum + Number(earning.amount), 0);
+    return total;
+  },
 };

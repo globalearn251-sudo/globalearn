@@ -116,6 +116,14 @@
   - [x] Add detailed console logs showing user role and data loading status
   - [x] Ensure loading state is set to false even when profile is missing
   - [x] Disable Sentry monitoring to reduce console noise and errors
+- [x] Step 17: Implement daily earnings system
+  - [x] Add getUserDailyEarnings and getTotalEarnings functions to dailyEarningsApi
+  - [x] Create DailyEarningsPage for users to view their earnings history
+  - [x] Add Daily Earnings button to HomePage action buttons
+  - [x] Update edge function to track last_earning_date to prevent duplicate earnings
+  - [x] Add logic to exclude products that already received earnings today
+  - [x] Deploy updated daily-earnings edge function
+  - [x] Add route for /daily-earnings page
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

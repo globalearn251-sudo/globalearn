@@ -212,6 +212,16 @@ export default function HomePage() {
           </button>
 
           <button
+            onClick={() => navigate('/daily-earnings')}
+            className="flex flex-col items-center gap-2"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center">
+              <TrendingUp className="h-6 w-6 text-green-600" />
+            </div>
+            <span className="text-sm font-medium">Earnings</span>
+          </button>
+
+          <button
             onClick={() => navigate('/team')}
             className="flex flex-col items-center gap-2"
           >
@@ -220,7 +230,10 @@ export default function HomePage() {
             </div>
             <span className="text-sm font-medium">Invite</span>
           </button>
+        </div>
 
+        {/* Support Button - Separate Row */}
+        <div className="flex justify-center">
           <button
             onClick={() => {
               if (supportTelegramLink) {

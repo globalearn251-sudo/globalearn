@@ -42,12 +42,16 @@ Deno.serve(async (req) => {
 
     console.log('Starting daily earnings calculation...');
 
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
     // Fetch all active user products with remaining days
+    // Exclude products that already received earnings today
     const { data: activeProducts, error: fetchError } = await supabase
       .from('user_products')
       .select('*')
       .eq('is_active', true)
-      .gt('days_remaining', 0);
+      .gt('days_remaining', 0)
+      .or(`last_earning_date.is.null,last_earning_date.neq.${today}`);
 
     if (fetchError) {
       console.error('Error fetching active products:', fetchError);
@@ -96,6 +100,7 @@ Deno.serve(async (req) => {
             days_remaining: newDaysRemaining,
             total_earned: newTotalEarned,
             is_active: !shouldDeactivate,
+            last_earning_date: today,
           })
           .eq('id', product.id);
 
@@ -118,7 +123,6 @@ Deno.serve(async (req) => {
         }
 
         // Create daily earnings record
-        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
         const { error: earningsError } = await supabase
           .from('daily_earnings')
           .insert({

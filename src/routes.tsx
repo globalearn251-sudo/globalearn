@@ -10,6 +10,7 @@ const TeamPage = lazy(() => import('./pages/TeamPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const RechargePage = lazy(() => import('./pages/RechargePage'));
 const WithdrawalPage = lazy(() => import('./pages/WithdrawalPage'));
+const DailyEarningsPage = lazy(() => import('./pages/DailyEarningsPage'));
 const KycSubmitPage = lazy(() => import('./pages/KycSubmitPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
@@ -69,6 +70,11 @@ const routes: RouteConfig[] = [
     name: 'Withdrawal',
     path: '/withdrawal',
     element: <WithdrawalPage />,
+  },
+  {
+    name: 'Daily Earnings',
+    path: '/daily-earnings',
+    element: <DailyEarningsPage />,
   },
   {
     name: 'KYC Submit',
