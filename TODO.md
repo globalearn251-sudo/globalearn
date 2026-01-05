@@ -128,6 +128,14 @@
   - [x] Fixed purchase_product RPC function to use 'referral' instead of 'referral_commission'
   - [x] Updated transaction type for referral commission to match enum values
   - [x] Verified enum values: recharge, withdrawal, purchase, earning, referral, lucky_draw
+- [x] Step 19: Add IFSC code and UPI ID to KYC submission
+  - [x] Added ifsc_code (required) and upi_id (optional) columns to kyc_submissions table
+  - [x] Updated KycSubmission TypeScript interface with new fields
+  - [x] Updated submitKyc API function to accept ifscCode and upiId parameters
+  - [x] Added IFSC Code input field with uppercase formatting and 11-character limit
+  - [x] Added UPI ID optional input field with placeholder and helper text
+  - [x] Updated form validation to require IFSC code
+  - [x] Updated AdminKycPage to display IFSC code and UPI ID in submission details
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

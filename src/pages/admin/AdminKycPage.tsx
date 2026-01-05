@@ -284,6 +284,14 @@ export default function AdminKycPage() {
                   <p className="text-sm text-muted-foreground">Account Holder Name</p>
                   <p className="font-medium">{viewingSubmission.account_holder_name}</p>
                 </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">IFSC Code</p>
+                  <p className="font-medium font-mono">{viewingSubmission.ifsc_code}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">UPI ID</p>
+                  <p className="font-medium">{viewingSubmission.upi_id || 'Not provided'}</p>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">

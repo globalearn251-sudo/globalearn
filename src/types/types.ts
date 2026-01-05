@@ -141,6 +141,8 @@ export interface KycSubmission {
   bank_name: string;
   account_number: string;
   account_holder_name: string;
+  ifsc_code: string;
+  upi_id: string | null;
   status: KycStatus;
   admin_note: string | null;
   reviewed_by: string | null;

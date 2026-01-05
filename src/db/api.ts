@@ -483,7 +483,9 @@ export const kycApi = {
     idBackUrl: string,
     bankName: string,
     accountNumber: string,
-    accountHolderName: string
+    accountHolderName: string,
+    ifscCode: string,
+    upiId?: string
   ) => {
     const { data, error } = await supabase
       .from('kyc_submissions')
@@ -494,6 +496,8 @@ export const kycApi = {
         bank_name: bankName,
         account_number: accountNumber,
         account_holder_name: accountHolderName,
+        ifsc_code: ifscCode,
+        upi_id: upiId || null,
       })
       .select()
       .maybeSingle();

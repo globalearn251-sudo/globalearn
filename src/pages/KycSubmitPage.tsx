@@ -20,6 +20,8 @@ export default function KycSubmitPage() {
   const [bankName, setBankName] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [accountHolderName, setAccountHolderName] = useState('');
+  const [ifscCode, setIfscCode] = useState('');
+  const [upiId, setUpiId] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
 
@@ -54,10 +56,10 @@ export default function KycSubmitPage() {
     e.preventDefault();
     if (!profile || !idFront || !idBack) return;
 
-    if (!bankName || !accountNumber || !accountHolderName) {
+    if (!bankName || !accountNumber || !accountHolderName || !ifscCode) {
       toast({
         title: 'Missing Information',
-        description: 'Please fill in all fields',
+        description: 'Please fill in all required fields',
         variant: 'destructive',
       });
       return;
@@ -75,8 +77,17 @@ export default function KycSubmitPage() {
         storageApi.uploadImage(idBack, backPath),
       ]);
 
-      // Submit KYC
-      await kycApi.submitKyc(profile.id, frontUrl, backUrl, bankName, accountNumber, accountHolderName);
+      // Submit KYC with new fields
+      await kycApi.submitKyc(
+        profile.id,
+        frontUrl,
+        backUrl,
+        bankName,
+        accountNumber,
+        accountHolderName,
+        ifscCode,
+        upiId || undefined
+      );
 
       // Refresh profile to update KYC status
       await refreshProfile();
@@ -206,6 +217,36 @@ export default function KycSubmitPage() {
                 />
               </div>
 
+              <div className="space-y-2">
+                <Label htmlFor="ifscCode">IFSC Code *</Label>
+                <Input
+                  id="ifscCode"
+                  value={ifscCode}
+                  onChange={(e) => setIfscCode(e.target.value.toUpperCase())}
+                  placeholder="e.g., SBIN0001234"
+                  disabled={loading}
+                  required
+                  maxLength={11}
+                />
+                <p className="text-xs text-muted-foreground">
+                  11-character bank IFSC code
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="upiId">UPI ID (Optional)</Label>
+                <Input
+                  id="upiId"
+                  value={upiId}
+                  onChange={(e) => setUpiId(e.target.value)}
+                  placeholder="e.g., yourname@paytm"
+                  disabled={loading}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Your UPI ID for faster payments
+                </p>
+              </div>
+
               <Alert>
                 <AlertDescription>
                   Your documents will be reviewed by our admin team. This usually takes 1-2 business days.
@@ -215,7 +256,7 @@ export default function KycSubmitPage() {
               <Button
                 type="submit"
                 className="w-full"
-                disabled={loading || !idFront || !idBack || !bankName || !accountNumber || !accountHolderName}
+                disabled={loading || !idFront || !idBack || !bankName || !accountNumber || !accountHolderName || !ifscCode}
               >
                 {loading ? (
                   <>
