@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { productApi } from '@/db/api';
-import { ShoppingCart, TrendingUp, Calendar, DollarSign } from 'lucide-react';
+import { ShoppingCart, TrendingUp, Calendar, IndianRupee } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import type { Product } from '@/types/types';
 
@@ -92,7 +92,7 @@ export default function ProductsPage() {
 
         {profile && (
           <Alert>
-            <DollarSign className="h-4 w-4" />
+            <IndianRupee className="h-4 w-4" />
             <AlertDescription>
               Your Balance: <span className="font-bold">₹{profile.balance.toFixed(2)}</span>
             </AlertDescription>
@@ -127,7 +127,7 @@ export default function ProductsPage() {
                 <CardContent className="space-y-3">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex items-center gap-2">
-                      <DollarSign className="h-4 w-4 text-primary" />
+                      <IndianRupee className="h-4 w-4 text-primary" />
                       <div>
                         <p className="text-xs text-muted-foreground">Price</p>
                         <p className="font-bold text-lg">₹{product.price.toFixed(2)}</p>

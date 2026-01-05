@@ -136,6 +136,13 @@
   - [x] Added UPI ID optional input field with placeholder and helper text
   - [x] Updated form validation to require IFSC code
   - [x] Updated AdminKycPage to display IFSC code and UPI ID in submission details
+- [x] Step 20: Update currency icons and referral text
+  - [x] Replaced DollarSign icon with IndianRupee icon in ProductsPage (2 locations)
+  - [x] Replaced DollarSign icon with IndianRupee icon in TeamPage
+  - [x] Changed $ symbols to ₹ symbols in both pages
+  - [x] Updated referral text to dynamically show commission percentage
+  - [x] Added state to fetch and display referral_commission_percentage from settings
+  - [x] Text now reads: "Share this link with your friends to earn X% referral rewards"
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

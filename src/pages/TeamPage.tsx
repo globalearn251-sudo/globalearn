@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { referralApi } from '@/db/api';
-import { Users, Copy, DollarSign } from 'lucide-react';
+import { referralApi, companyApi } from '@/db/api';
+import { Users, Copy, IndianRupee } from 'lucide-react';
 import type { Referral } from '@/types/types';
 
 export default function TeamPage() {
@@ -15,6 +15,7 @@ export default function TeamPage() {
   const [referrals, setReferrals] = useState<Referral[]>([]);
   const [stats, setStats] = useState({ totalReferrals: 0, totalCommission: 0 });
   const [loading, setLoading] = useState(true);
+  const [commissionPercentage, setCommissionPercentage] = useState<number>(5);
 
   useEffect(() => {
     loadData();
@@ -25,13 +26,20 @@ export default function TeamPage() {
     
     try {
       setLoading(true);
-      const [referralList, referralStats] = await Promise.all([
+      const [referralList, referralStats, settings] = await Promise.all([
         referralApi.getUserReferrals(profile.id),
         referralApi.getReferralStats(profile.id),
+        companyApi.getAllSettings(),
       ]);
       
       setReferrals(referralList);
       setStats(referralStats);
+      
+      // Get referral commission percentage from settings
+      const commissionSetting = settings.find(s => s.key === 'referral_commission_percentage');
+      if (commissionSetting) {
+        setCommissionPercentage(parseFloat(commissionSetting.value) || 5);
+      }
     } catch (error) {
       console.error('Error loading referral data:', error);
     } finally {
@@ -72,7 +80,7 @@ export default function TeamPage() {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground">
-              Share this link with your friends to earn referral rewards
+              Share this link with your friends to earn {commissionPercentage}% referral rewards
             </p>
           </CardContent>
         </Card>
@@ -91,8 +99,8 @@ export default function TeamPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-center">
-                <DollarSign className="h-8 w-8 mx-auto mb-2 text-success" />
-                <p className="text-2xl font-bold">${stats.totalCommission.toFixed(2)}</p>
+                <IndianRupee className="h-8 w-8 mx-auto mb-2 text-success" />
+                <p className="text-2xl font-bold">₹{stats.totalCommission.toFixed(2)}</p>
                 <p className="text-sm text-muted-foreground">Total Earned</p>
               </div>
             </CardContent>
@@ -115,7 +123,7 @@ export default function TeamPage() {
                       </p>
                     </div>
                     <p className="font-bold text-success">
-                      ${referral.commission_earned.toFixed(2)}
+                      ₹{referral.commission_earned.toFixed(2)}
                     </p>
                   </div>
                 ))}
