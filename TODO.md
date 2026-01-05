@@ -124,6 +124,10 @@
   - [x] Add logic to exclude products that already received earnings today
   - [x] Deploy updated daily-earnings edge function
   - [x] Add route for /daily-earnings page
+- [x] Step 18: Fix product purchase transaction type error
+  - [x] Fixed purchase_product RPC function to use 'referral' instead of 'referral_commission'
+  - [x] Updated transaction type for referral commission to match enum values
+  - [x] Verified enum values: recharge, withdrawal, purchase, earning, referral, lucky_draw
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
