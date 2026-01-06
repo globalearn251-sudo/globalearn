@@ -402,6 +402,16 @@ export const referralApi = {
       totalCommission,
     };
   },
+
+  getAllReferrals: async () => {
+    const { data, error } = await supabase
+      .from('referrals')
+      .select('*, referrer:profiles!referrals_referrer_id_fkey(id, username, email), referred_user:profiles!referrals_referred_id_fkey(id, username, email, created_at)')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return (Array.isArray(data) ? data : []) as Referral[];
+  },
 };
 
 // Lucky Draw API

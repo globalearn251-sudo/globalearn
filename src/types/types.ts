@@ -111,6 +111,7 @@ export interface Referral {
   referred_id: string;
   commission_earned: number;
   created_at: string;
+  referrer?: Profile;
   referred_user?: Profile;
 }
 

@@ -21,6 +21,7 @@ const navItems = [
   { path: '/admin/users', label: 'Users', icon: Users },
   { path: '/admin/products', label: 'Products', icon: Package },
   { path: '/admin/purchase-report', label: 'Purchase Report', icon: ShoppingBag },
+  { path: '/admin/referral-report', label: 'Referral Report', icon: Users },
   { path: '/admin/recharges', label: 'Recharges', icon: TrendingUp },
   { path: '/admin/withdrawals', label: 'Withdrawals', icon: DollarSign },
   { path: '/admin/kyc', label: 'KYC Verification', icon: FileText },

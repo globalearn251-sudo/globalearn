@@ -152,6 +152,16 @@
   - [x] Added summary statistics showing total purchases, revenue, earnings, and active contracts
   - [x] Added route /admin/purchase-report to routes configuration
   - [x] Added "Purchase Report" link to AdminLayout sidebar navigation with ShoppingBag icon
+- [x] Step 22: Create Referral Report page in admin panel
+  - [x] Added getAllReferrals function to referralApi to fetch all referrals with referrer and referred user details
+  - [x] Added referrer field to Referral TypeScript interface
+  - [x] Created AdminReferralReportPage with comprehensive referral details display
+  - [x] Added search functionality to filter by referrer or referred user username
+  - [x] Displayed referrer info, referred user info, commission earned, and referral date
+  - [x] Added summary statistics showing total referrals, total commission, active referrers, and average commission
+  - [x] Created "Top Referrers" section showing top 5 referrers by commission earned
+  - [x] Added route /admin/referral-report to routes configuration
+  - [x] Added "Referral Report" link to AdminLayout sidebar navigation with Users icon
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
