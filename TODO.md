@@ -143,6 +143,15 @@
   - [x] Updated referral text to dynamically show commission percentage
   - [x] Added state to fetch and display referral_commission_percentage from settings
   - [x] Text now reads: "Share this link with your friends to earn X% referral rewards"
+- [x] Step 21: Create Purchase Report page in admin panel
+  - [x] Added getAllUserProducts function to userProductApi to fetch all purchases with user and product details
+  - [x] Added user field to UserProduct TypeScript interface
+  - [x] Created AdminPurchaseReportPage with comprehensive purchase details display
+  - [x] Added search functionality to filter by username or product name
+  - [x] Displayed user info, product info, purchase date, status, financial details, and contract progress
+  - [x] Added summary statistics showing total purchases, revenue, earnings, and active contracts
+  - [x] Added route /admin/purchase-report to routes configuration
+  - [x] Added "Purchase Report" link to AdminLayout sidebar navigation with ShoppingBag icon
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

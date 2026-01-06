@@ -178,6 +178,16 @@ export const userProductApi = {
     if (error) throw error;
     return (Array.isArray(data) ? data : []) as UserProduct[];
   },
+
+  getAllUserProducts: async () => {
+    const { data, error } = await supabase
+      .from('user_products')
+      .select('*, product:products(*), user:profiles!user_products_user_id_fkey(id, username, email)')
+      .order('purchased_at', { ascending: false });
+    
+    if (error) throw error;
+    return (Array.isArray(data) ? data : []) as UserProduct[];
+  },
 };
 
 // Transaction API

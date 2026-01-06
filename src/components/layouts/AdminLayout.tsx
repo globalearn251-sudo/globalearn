@@ -12,13 +12,15 @@ import {
   Home,
   Gift,
   Coins,
-  Bell
+  Bell,
+  ShoppingBag
 } from 'lucide-react';
 
 const navItems = [
   { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/admin/users', label: 'Users', icon: Users },
   { path: '/admin/products', label: 'Products', icon: Package },
+  { path: '/admin/purchase-report', label: 'Purchase Report', icon: ShoppingBag },
   { path: '/admin/recharges', label: 'Recharges', icon: TrendingUp },
   { path: '/admin/withdrawals', label: 'Withdrawals', icon: DollarSign },
   { path: '/admin/kyc', label: 'KYC Verification', icon: FileText },

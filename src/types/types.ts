@@ -48,6 +48,7 @@ export interface UserProduct {
   expires_at: string;
   last_earning_date: string | null;
   product?: Product;
+  user?: Profile;
 }
 
 // Transaction Types
