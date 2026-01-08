@@ -21,6 +21,14 @@ export default function HomePage() {
   const [supportTelegramLink, setSupportTelegramLink] = useState('');
   const [activeProducts, setActiveProducts] = useState<UserProduct[]>([]);
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
+  const [transactionBreakdown, setTransactionBreakdown] = useState({
+    recharge: 0,
+    earning: 0,
+    lucky_draw: 0,
+    withdrawal: 0,
+    purchase: 0,
+    referral: 0,
+  });
 
   useEffect(() => {
     if (profile) {
@@ -49,7 +57,7 @@ export default function HomePage() {
       setLoading(true); // Set loading at start
       
       // Fetch all data in parallel immediately for fast UI display
-      const [settings, products, transactions] = await Promise.all([
+      const [settings, products, transactions, allTransactions] = await Promise.all([
         companyApi.getAllSettings().catch((err) => {
           console.error('Error loading settings:', err);
           return [] as CompanySetting[];
@@ -62,12 +70,17 @@ export default function HomePage() {
           console.error('Error loading transactions:', err);
           return [];
         }),
+        transactionApi.getUserTransactions(profile.id, 1000).catch((err) => {
+          console.error('Error loading all transactions:', err);
+          return [];
+        }),
       ]);
 
       console.log('HomePage: Data loaded successfully', { 
         settings: settings.length, 
         products: products.length, 
         transactions: transactions.length,
+        allTransactions: allTransactions.length,
         userRole: profile.role 
       });
 
@@ -79,6 +92,33 @@ export default function HomePage() {
         if (s.key === 'support_telegram_link') setSupportTelegramLink(s.value);
       });
 
+      // Calculate transaction breakdown
+      const breakdown = {
+        recharge: 0,
+        earning: 0,
+        lucky_draw: 0,
+        withdrawal: 0,
+        purchase: 0,
+        referral: 0,
+      };
+
+      (allTransactions as Transaction[]).forEach((tx) => {
+        if (tx.type === 'recharge') {
+          breakdown.recharge += tx.amount;
+        } else if (tx.type === 'earning') {
+          breakdown.earning += tx.amount;
+        } else if (tx.type === 'lucky_draw') {
+          breakdown.lucky_draw += tx.amount;
+        } else if (tx.type === 'withdrawal') {
+          breakdown.withdrawal += Math.abs(tx.amount);
+        } else if (tx.type === 'purchase') {
+          breakdown.purchase += Math.abs(tx.amount);
+        } else if (tx.type === 'referral') {
+          breakdown.referral += tx.amount;
+        }
+      });
+
+      setTransactionBreakdown(breakdown);
       setActiveProducts(products);
       setRecentTransactions(transactions);
       setLoading(false); // Show UI immediately
@@ -173,7 +213,7 @@ export default function HomePage() {
           </div>
 
           {/* Withdrawable and Daily Earnings */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 mb-4">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
               <p className="text-xs opacity-80 mb-1">Withdrawable</p>
               <p className="text-xl font-bold">
@@ -185,6 +225,43 @@ export default function HomePage() {
               <p className="text-xl font-bold text-green-300">
                 +₹{profile?.total_earnings?.toFixed(2) || '0.00'}
               </p>
+            </div>
+          </div>
+
+          {/* Balance Breakdown */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+            <p className="text-xs opacity-80 mb-3 font-semibold">Balance Breakdown</p>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="opacity-90">+ Recharge</span>
+                <span className="font-semibold text-green-300">₹{transactionBreakdown.recharge.toFixed(2)}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="opacity-90">+ Daily Earning</span>
+                <span className="font-semibold text-green-300">₹{transactionBreakdown.earning.toFixed(2)}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="opacity-90">+ Lucky Draw</span>
+                <span className="font-semibold text-green-300">₹{transactionBreakdown.lucky_draw.toFixed(2)}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="opacity-90">+ Referral</span>
+                <span className="font-semibold text-green-300">₹{transactionBreakdown.referral.toFixed(2)}</span>
+              </div>
+              <div className="h-px bg-white/20 my-2"></div>
+              <div className="flex items-center justify-between">
+                <span className="opacity-90">- Withdrawal</span>
+                <span className="font-semibold text-red-300">₹{transactionBreakdown.withdrawal.toFixed(2)}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="opacity-90">- Purchase</span>
+                <span className="font-semibold text-red-300">₹{transactionBreakdown.purchase.toFixed(2)}</span>
+              </div>
+              <div className="h-px bg-white/30 my-2"></div>
+              <div className="flex items-center justify-between font-bold">
+                <span>Total Balance</span>
+                <span className="text-lg">₹{profile?.balance?.toFixed(2) || '0.00'}</span>
+              </div>
             </div>
           </div>
         </div>
