@@ -220,6 +220,23 @@
   - [x] Added error handling for reward not found in segments
   - [x] Reset winningIndex state after spin completes
   - [x] Wheel now always stops at the exact reward user receives from backend
+- [x] Step 27: Add user management features for admin
+  - [x] Added status column to profiles table (active/blocked)
+  - [x] Created database migration with status field and index
+  - [x] Updated Profile type to include status field
+  - [x] Added updateUserStatus API function to block/unblock users
+  - [x] Added deleteUser API function to permanently remove users
+  - [x] Updated AdminUsersPage with block/unblock functionality
+  - [x] Added delete user functionality with confirmation dialog
+  - [x] Added status badge to display user status (active/blocked)
+  - [x] Implemented AlertDialog for block/unblock confirmation
+  - [x] Implemented AlertDialog for delete confirmation with warning
+  - [x] Added Ban, CheckCircle, and Trash2 icons for actions
+  - [x] Updated button layout with Edit, Block/Unblock, and Delete actions
+  - [x] Added login check to prevent blocked users from accessing platform
+  - [x] Modified signInWithUsername to check user status after authentication
+  - [x] Auto sign-out blocked users with error message
+  - [x] All admin user management features working correctly
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

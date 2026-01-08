@@ -67,12 +67,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInWithUsername = async (username: string, password: string) => {
     try {
       const email = `${username}@miaoda.com`;
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) throw error;
+
+      // Check if user is blocked
+      if (data.user) {
+        const profileData = await getProfile(data.user.id);
+        if (profileData?.status === 'blocked') {
+          // Sign out the user immediately
+          await supabase.auth.signOut();
+          throw new Error('Your account has been blocked. Please contact support.');
+        }
+      }
+
       return { error: null };
     } catch (error) {
       return { error: error as Error };

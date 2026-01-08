@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
 import { profileApi } from '@/db/api';
-import { Users, Shield, Edit } from 'lucide-react';
+import { Users, Shield, Edit, Ban, Trash2, CheckCircle } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -21,6 +21,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import type { Profile } from '@/types/types';
 
 export default function AdminUsersPage() {
@@ -30,6 +40,8 @@ export default function AdminUsersPage() {
   const [editingUser, setEditingUser] = useState<Profile | null>(null);
   const [newRole, setNewRole] = useState<'user' | 'admin'>('user');
   const [updating, setUpdating] = useState(false);
+  const [deletingUser, setDeletingUser] = useState<Profile | null>(null);
+  const [blockingUser, setBlockingUser] = useState<Profile | null>(null);
 
   useEffect(() => {
     loadUsers();
@@ -75,6 +87,57 @@ export default function AdminUsersPage() {
       toast({
         title: 'Error',
         description: error.message || 'Failed to update user role',
+        variant: 'destructive',
+      });
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const handleToggleBlockUser = async () => {
+    if (!blockingUser) return;
+
+    try {
+      setUpdating(true);
+      const newStatus = blockingUser.status === 'active' ? 'blocked' : 'active';
+      await profileApi.updateUserStatus(blockingUser.id, newStatus);
+      
+      toast({
+        title: 'Success',
+        description: `User ${newStatus === 'blocked' ? 'blocked' : 'unblocked'} successfully`,
+      });
+
+      setBlockingUser(null);
+      await loadUsers();
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to update user status',
+        variant: 'destructive',
+      });
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    if (!deletingUser) return;
+
+    try {
+      setUpdating(true);
+      await profileApi.deleteUser(deletingUser.id);
+      
+      toast({
+        title: 'Success',
+        description: 'User deleted successfully',
+      });
+
+      setDeletingUser(null);
+      await loadUsers();
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to delete user',
         variant: 'destructive',
       });
     } finally {
@@ -133,7 +196,7 @@ export default function AdminUsersPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div className="text-right">
                     <p className="text-sm text-muted-foreground">Balance</p>
                     <p className="font-bold">₹{user.balance.toFixed(2)}</p>
@@ -144,6 +207,9 @@ export default function AdminUsersPage() {
                   </div>
                   <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
                     {user.role}
+                  </Badge>
+                  <Badge variant={user.status === 'active' ? 'default' : 'destructive'}>
+                    {user.status}
                   </Badge>
                   {user.kyc_status && (
                     <Badge
@@ -158,14 +224,40 @@ export default function AdminUsersPage() {
                       KYC: {user.kyc_status}
                     </Badge>
                   )}
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleEditRole(user)}
-                  >
-                    <Edit className="h-4 w-4 mr-1" />
-                    Edit Role
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleEditRole(user)}
+                    >
+                      <Edit className="h-4 w-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={user.status === 'active' ? 'destructive' : 'default'}
+                      onClick={() => setBlockingUser(user)}
+                    >
+                      {user.status === 'active' ? (
+                        <>
+                          <Ban className="h-4 w-4 mr-1" />
+                          Block
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="h-4 w-4 mr-1" />
+                          Unblock
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => setDeletingUser(user)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -206,6 +298,51 @@ export default function AdminUsersPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Block/Unblock User Confirmation */}
+      <AlertDialog open={!!blockingUser} onOpenChange={() => setBlockingUser(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {blockingUser?.status === 'active' ? 'Block User' : 'Unblock User'}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {blockingUser?.status === 'active' 
+                ? `Are you sure you want to block ${blockingUser?.username}? They will not be able to access the platform.`
+                : `Are you sure you want to unblock ${blockingUser?.username}? They will regain access to the platform.`
+              }
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleToggleBlockUser} disabled={updating}>
+              {updating ? 'Processing...' : 'Confirm'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Delete User Confirmation */}
+      <AlertDialog open={!!deletingUser} onOpenChange={() => setDeletingUser(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete User</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete {deletingUser?.username}? This action cannot be undone and will permanently remove all user data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleDeleteUser} 
+              disabled={updating}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {updating ? 'Deleting...' : 'Delete User'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

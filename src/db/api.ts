@@ -75,6 +75,29 @@ export const profileApi = {
     if (error) throw error;
     return data as Profile;
   },
+
+  // Admin function to block/unblock user
+  updateUserStatus: async (userId: string, status: 'active' | 'blocked') => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ status })
+      .eq('id', userId)
+      .select()
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data as Profile;
+  },
+
+  // Admin function to delete user
+  deleteUser: async (userId: string) => {
+    const { error } = await supabase
+      .from('profiles')
+      .delete()
+      .eq('id', userId);
+    
+    if (error) throw error;
+  },
 };
 
 // Product API

@@ -3,38 +3,40 @@
 ## 1. Application Overview
 
 ### 1.1 Application Name
-Investment Product Platform\n
+Investment Product Platform
+
 ### 1.2 Application Description
 A full production-ready responsive web application for investment product management, featuring user investment, daily earnings, wallet management, referral system, lucky draw functionality, and comprehensive notification system.
 
 ### 1.3 Core Features
-- Comprehensive admin panel\n- User authentication and profile management\n- Investment product browsing and purchasing
-- Wallet system with recharge and withdrawal
-- Daily automatic earnings distribution
+- Comprehensive admin panel\n- User authentication and profile management
+- Investment product browsing and purchasing
+- Wallet system with recharge and withdrawal\n- Daily automatic earnings distribution
 - Referral team management
 - Lucky draw system\n- Mandatory KYC verification with access control
 - Notification system with admin broadcast capability
 - Product purchase report and analytics
 - Referral report and analytics
 - User balance and transaction report
-
-## 2. Admin Panel
-
+\n## 2. Admin Panel\n
 ### 2.1 Admin Dashboard
 - Overview statistics (total users, active investments, pending requests)\n- Quick access to all management modules
 - Real-time transaction monitoring
 \n### 2.2 User Management
-- View all registered users\n- User details and activity logs
-- Wallet balance overview
+- View all registered users
+- User details and activity logs
+- Wallet balance overview\n- Edit user information
+- Block user accounts (prevent login and access)
+- Delete user accounts (permanently remove user data)
 - Suspend or activate user accounts
 \n### 2.3 KYC Approval System
 - Review submitted KYC documents
-- View government ID uploads (front and back)\n- Review bank details including bank IFSC code
+- View government ID uploads (front and back)
+- Review bank details including bank IFSC code
 - Review UPI ID (optional field)
 - Approve or reject KYC submissions
 - Simple verification workflow
-
-### 2.4 Product Management
+\n### 2.4 Product Management
 - Add new investment products
 - Edit existing products
 - Delete products
@@ -46,7 +48,8 @@ A full production-ready responsive web application for investment product manage
 - View comprehensive list of all product purchases
 - Display purchase details including:
   - User name
-  - Product name\n  - Purchase date
+  - Product name
+  - Purchase date
   - Product price
   - Daily income amount
   - Contract duration
@@ -54,11 +57,12 @@ A full production-ready responsive web application for investment product manage
   - Total earnings generated to date
 - Filter purchases by:
   - Date range
-  - User name\n  - Product name
-  - Purchase status
+  - User name
+  - Product name\n  - Purchase status
 - Sort by purchase date, user name, or product name
 - Export purchase report to CSV or Excel format
-- View detailed purchase history for individual users\n- Display total purchase statistics (total purchases, total investment amount, active contracts)
+- View detailed purchase history for individual users
+- Display total purchase statistics (total purchases, total investment amount, active contracts)
 
 ### 2.6 Referral Report
 - View comprehensive list of all referral activities
@@ -70,22 +74,17 @@ A full production-ready responsive web application for investment product manage
   - Referral status (Active/Inactive)\n  - Total referrals per user
   - Total referral earnings per user
 - Filter referrals by:
-  - Date range
-  - Referrer name
-  - Referred user name
-  - Referral status
-- Sort by referral date, referrer name, or bonus amount
+  - Date range\n  - Referrer name\n  - Referred user name\n  - Referral status\n- Sort by referral date, referrer name, or bonus amount
 - Export referral report to CSV or Excel format
 - View detailed referral history for individual users
 - Display total referral statistics (total referrals, total referral bonuses paid, active referrals)
-
-### 2.7 User Balance and Transaction Report
+\n### 2.7 User Balance and Transaction Report
 - Search functionality to find specific users by name or user ID
 - Display comprehensive wallet transaction history for selected user
 - Show all transaction types including:
   - Recharge transactions
-  - Withdrawal transactions
-  - Daily earnings\n  - Referral rewards
+  - Withdrawal transactions\n  - Daily earnings
+  - Referral rewards
   - Lucky draw rewards\n  - Product purchases
   - Other wallet activities
 - Day-wise transaction breakdown showing:
@@ -107,14 +106,14 @@ A full production-ready responsive web application for investment product manage
   - Total earnings
   - Total rewards
   - Current balance
-\n### 2.8 Recharge Request Handling
+
+### 2.8 Recharge Request Handling
 - View pending recharge requests
 - Review payment screenshots
 - Approve requests (add balance to user wallet)
 - Reject requests with reason
 - Update payment QR code anytime
-
-### 2.9 Withdrawal Request Processing
+\n### 2.9 Withdrawal Request Processing
 - View pending withdrawal requests\n- Manual transfer processing
 - Approve or reject requests
 - Update user wallet upon approval
@@ -158,8 +157,7 @@ A full production-ready responsive web application for investment product manage
 
 ## 3. Technical Requirements
 
-### 3.1 Database
-Local database\n
+### 3.1 Database\nLocal database\n
 ### 3.2 Responsive Design
 Mobile-first responsive design approach
 
@@ -176,8 +174,7 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Team
 - Profile
 \n### 4.3 Design Style
-- Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions, red badge (#ef4444) for notification indicators
-- Visual Details: Subtle shadows for card elevation, 8px rounded corners, minimalist icons, smooth transitions, marquee animation for important notifications
+- Color Scheme: Professional financial tones with primary blue (#2563eb) and accent green (#10b981) for positive actions, red badge (#ef4444) for notification indicators\n- Visual Details: Subtle shadows for card elevation, 8px rounded corners, minimalist icons, smooth transitions, marquee animation for important notifications
 - Layout: Card-based layout with clear visual hierarchy and adequate white space
 
 ## 5. User Authentication
@@ -217,7 +214,8 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Once admin approves KYC, user gains full access to all app features
 - KYC prompt overlay is removed
 - User can freely navigate and use all modules
-\n## 7. User App Header
+
+## 7. User App Header
 
 ### 7.1 Header Layout
 - Fixed top header bar across all user pages
@@ -259,8 +257,7 @@ Fixed bottom navigation bar (mobile) with five sections:
 \n### 9.3 Important Notification Marquee
 - Positioned below My Wallet section
 - Display important notifications in left-to-right scrolling style
-- Continuous loop animation
-- Click to view full notification details
+- Continuous loop animation\n- Click to view full notification details
 - Only show notifications marked as Important by admin
 
 ### 9.4 Dashboard Sections
@@ -291,7 +288,8 @@ Each product shows:
 2. View admin QR code
 3. Upload payment screenshot
 4. Status shows as pending
-\n### 11.2 Admin Management
+
+### 11.2 Admin Management
 - Approve recharge requests (add balance to user wallet)
 - Reject recharge requests\n- Update QR code anytime
 
@@ -338,8 +336,7 @@ Each product shows:
 - System validates Withdrawable Amount meets minimum withdrawal limit set by admin
 - Display error message if Withdrawable Amount is below minimum limit (e.g., if limit is 500 and user has less than 500, request cannot be submitted)
 - Display pending status after successful submission
-
-### 13.2 Admin Processing
+\n### 13.2 Admin Processing
 - Manual transfer processing
 - Approve or reject requests
 - Upon approval:\n  - Deduct amount from user's Total Balance
@@ -378,8 +375,7 @@ Each product shows:
 - Transaction history
 - Withdrawal history
 - Change password functionality
-
-### 16.2 Access Control
+\n### 16.2 Access Control
 - Full profile access only available after KYC completion
 - Only KYC submission section accessible before KYC approval
 
