@@ -220,18 +220,6 @@
   - [x] Added error handling for reward not found in segments
   - [x] Reset winningIndex state after spin completes
   - [x] Wheel now always stops at the exact reward user receives from backend
-- [x] Step 27: Add balance breakdown in wallet section
-  - [x] Added transactionBreakdown state to store totals by transaction type
-  - [x] Fetch all user transactions (up to 1000) in loadData function
-  - [x] Calculate breakdown totals for each transaction type (recharge, earning, lucky_draw, withdrawal, purchase, referral)
-  - [x] Handle negative amounts for withdrawal and purchase transactions
-  - [x] Created Balance Breakdown section in wallet card with detailed view
-  - [x] Display credits with green color: Recharge, Daily Earning, Lucky Draw, Referral
-  - [x] Display debits with red color: Withdrawal, Purchase
-  - [x] Added visual separators between credit/debit sections
-  - [x] Show final Total Balance calculation at bottom
-  - [x] Styled with semi-transparent background matching wallet design
-  - [x] Formula displayed: Total = Recharge + Earning + Lucky Draw + Referral - Withdrawal - Purchase
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
