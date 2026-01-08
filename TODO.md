@@ -180,6 +180,8 @@
   - [x] Fixed daily earnings edge function to include balance_after field in transaction records
   - [x] Added user balance fetch after balance update to ensure accurate balance_after value
   - [x] Deployed updated daily-earnings edge function (version 4)
+  - [x] Verified all 6 transaction types exist in database (recharge, withdrawal, purchase, earning, referral, lucky_draw)
+  - [x] Created test earning transaction to verify balance report displays all transaction types correctly
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
