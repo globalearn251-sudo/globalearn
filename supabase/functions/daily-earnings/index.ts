@@ -122,6 +122,19 @@ Deno.serve(async (req) => {
           continue;
         }
 
+        // Fetch updated user balance
+        const { data: userData, error: userFetchError } = await supabase
+          .from('profiles')
+          .select('balance')
+          .eq('id', product.user_id)
+          .single();
+
+        if (userFetchError || !userData) {
+          console.error(`Error fetching user balance for ${product.user_id}:`, userFetchError);
+          result.errors.push(`User ${product.user_id} fetch: ${userFetchError?.message || 'User not found'}`);
+          continue;
+        }
+
         // Create daily earnings record
         const { error: earningsError } = await supabase
           .from('daily_earnings')
@@ -145,6 +158,7 @@ Deno.serve(async (req) => {
             user_id: product.user_id,
             type: 'earning',
             amount: product.daily_earning,
+            balance_after: userData.balance,
             description: `Daily earnings from product investment`,
             reference_id: product.id,
           });

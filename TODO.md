@@ -177,6 +177,9 @@
   - [x] Added "Balance Report" link to AdminLayout sidebar navigation with Wallet icon
   - [x] Enhanced daily earnings visibility with dedicated summary card showing total earnings amount
   - [x] Updated transaction breakdown to show both count and total amount for daily earnings
+  - [x] Fixed daily earnings edge function to include balance_after field in transaction records
+  - [x] Added user balance fetch after balance update to ensure accurate balance_after value
+  - [x] Deployed updated daily-earnings edge function (version 4)
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
