@@ -214,6 +214,27 @@ export const transactionApi = {
     if (error) throw error;
     return (Array.isArray(data) ? data : []) as Transaction[];
   },
+
+  getAllTransactionsWithUsers: async () => {
+    const { data, error } = await supabase
+      .from('transactions')
+      .select('*, user:profiles!transactions_user_id_fkey(id, username, email)')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return (Array.isArray(data) ? data : []) as Transaction[];
+  },
+
+  getUserTransactionsWithBalance: async (userId: string) => {
+    const { data, error } = await supabase
+      .from('transactions')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return (Array.isArray(data) ? data : []) as Transaction[];
+  },
 };
 
 // Recharge Request API

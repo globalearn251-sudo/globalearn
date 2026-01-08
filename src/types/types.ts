@@ -63,6 +63,7 @@ export interface Transaction {
   description: string | null;
   reference_id: string | null;
   created_at: string;
+  user?: Profile;
 }
 
 // Request Types

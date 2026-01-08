@@ -1,47 +1,48 @@
 # Investment Product Web Application Requirements Document
-\n## 1. Application Overview\n
-### 1.1 Application Name
-Investment Product Platform
 
-### 1.2 Application Description\nA full production-ready responsive web application for investment product management, featuring user investment, daily earnings, wallet management, referral system, lucky draw functionality, and comprehensive notification system.
+## 1. Application Overview
+
+### 1.1 Application Name
+Investment Product Platform\n
+### 1.2 Application Description
+A full production-ready responsive web application for investment product management, featuring user investment, daily earnings, wallet management, referral system, lucky draw functionality, and comprehensive notification system.
 
 ### 1.3 Core Features
 - Comprehensive admin panel\n- User authentication and profile management\n- Investment product browsing and purchasing
 - Wallet system with recharge and withdrawal
 - Daily automatic earnings distribution
 - Referral team management
-- Lucky draw system
-- Mandatory KYC verification with access control
+- Lucky draw system\n- Mandatory KYC verification with access control
 - Notification system with admin broadcast capability
 - Product purchase report and analytics
 - Referral report and analytics
+- User balance and transaction report
 
 ## 2. Admin Panel
 
-### 2.1 Admin Dashboard\n- Overview statistics (total users, active investments, pending requests)
-- Quick access to all management modules
+### 2.1 Admin Dashboard
+- Overview statistics (total users, active investments, pending requests)\n- Quick access to all management modules
 - Real-time transaction monitoring
-
-### 2.2 User Management
-- View all registered users
-- User details and activity logs
+\n### 2.2 User Management
+- View all registered users\n- User details and activity logs
 - Wallet balance overview
 - Suspend or activate user accounts
-
-### 2.3 KYC Approval System
+\n### 2.3 KYC Approval System
 - Review submitted KYC documents
-- View government ID uploads (front and back)
-- Review bank details including bank IFSC code
+- View government ID uploads (front and back)\n- Review bank details including bank IFSC code
 - Review UPI ID (optional field)
 - Approve or reject KYC submissions
 - Simple verification workflow
 
 ### 2.4 Product Management
-- Add new investment products\n- Edit existing products
+- Add new investment products
+- Edit existing products
 - Delete products
 - Set price, daily income, and duration
-- Activate or deactivate products\n- Upload product images
-\n### 2.5 Product Purchase Report
+- Activate or deactivate products
+- Upload product images
+
+### 2.5 Product Purchase Report
 - View comprehensive list of all product purchases
 - Display purchase details including:
   - User name
@@ -50,14 +51,14 @@ Investment Product Platform
   - Daily income amount
   - Contract duration
   - Purchase status (Active/Completed/Expired)
-  - Total earnings generated to date\n- Filter purchases by:
+  - Total earnings generated to date
+- Filter purchases by:
   - Date range
-  - User name
-  - Product name\n  - Purchase status
+  - User name\n  - Product name
+  - Purchase status
 - Sort by purchase date, user name, or product name
 - Export purchase report to CSV or Excel format
-- View detailed purchase history for individual users
-- Display total purchase statistics (total purchases, total investment amount, active contracts)
+- View detailed purchase history for individual users\n- Display total purchase statistics (total purchases, total investment amount, active contracts)
 
 ### 2.6 Referral Report
 - View comprehensive list of all referral activities
@@ -66,60 +67,91 @@ Investment Product Platform
   - Referred user name
   - Referral date
   - Referral bonus amount
-  - Referral status (Active/Inactive)
-  - Total referrals per user
+  - Referral status (Active/Inactive)\n  - Total referrals per user
   - Total referral earnings per user
 - Filter referrals by:
-  - Date range\n  - Referrer name\n  - Referred user name\n  - Referral status\n- Sort by referral date, referrer name, or bonus amount
+  - Date range
+  - Referrer name
+  - Referred user name
+  - Referral status
+- Sort by referral date, referrer name, or bonus amount
 - Export referral report to CSV or Excel format
 - View detailed referral history for individual users
 - Display total referral statistics (total referrals, total referral bonuses paid, active referrals)
 
-### 2.7 Recharge Request Handling
+### 2.7 User Balance and Transaction Report
+- Search functionality to find specific users by name or user ID
+- Display comprehensive wallet transaction history for selected user
+- Show all transaction types including:
+  - Recharge transactions
+  - Withdrawal transactions
+  - Daily earnings\n  - Referral rewards
+  - Lucky draw rewards\n  - Product purchases
+  - Other wallet activities
+- Day-wise transaction breakdown showing:
+  - Transaction date
+  - Transaction type
+  - Transaction amount (credit/debit)
+  - Running balance after each transaction
+  - Transaction description
+  - Transaction status
+- Filter transactions by:
+  - Date range (from date to date)
+  - Transaction type (recharge, withdrawal, daily earning, reward, etc.)
+  - Transaction status\n- Sort transactions by date (ascending/descending)
+- Display daily balance summary for each day
+- Show opening balance and closing balance for selected date range
+- Export user transaction report to CSV or Excel format
+- View total transaction statistics for selected user:\n  - Total recharges
+  - Total withdrawals
+  - Total earnings
+  - Total rewards
+  - Current balance
+\n### 2.8 Recharge Request Handling
 - View pending recharge requests
 - Review payment screenshots
 - Approve requests (add balance to user wallet)
 - Reject requests with reason
 - Update payment QR code anytime
 
-### 2.8 Withdrawal Request Processing
+### 2.9 Withdrawal Request Processing
 - View pending withdrawal requests\n- Manual transfer processing
 - Approve or reject requests
 - Update user wallet upon approval
 - Maintain withdrawal history logs
 
-### 2.9 Wallet Transaction Logs
-- Complete transaction history
-- Filter by user, date, or transaction type
-- Export transaction reports
-\n### 2.10 Company Information Updates
+### 2.10 Wallet Transaction Logs
+- Complete transaction history\n- Filter by user, date, or transaction type
+- Export transaction reports\n\n### 2.11 Company Information Updates
 - Update company banner
 - Edit company notice and information
 - Manage company details displayed on dashboard
 
-### 2.11 Banner Management
+### 2.12 Banner Management
 - Upload and update dashboard banners
 - Set banner display order
 - Activate or deactivate banners
-\n### 2.12 Lucky Draw Reward Configuration
+
+### 2.13 Lucky Draw Reward Configuration
 - Configure reward options
 - Set reward amounts
 - Manage reward probabilities
 - View lucky draw history
 
-### 2.13 Notification Management
+### 2.14 Notification Management
 - Create notifications for all users
 - Set notification priority (Important or General)
 - Edit notification content
-- Delete notifications\n- View notification history
+- Delete notifications
+- View notification history
 - Track notification delivery status
 
-### 2.14 Withdrawal Settings
+### 2.15 Withdrawal Settings
 - Set minimum withdrawal amount limit
 - Configure minimum balance threshold that users must reach before submitting withdrawal requests
 - Update withdrawal limit anytime
 
-### 2.15 Support Channel Settings
+### 2.16 Support Channel Settings
 - Add Telegram channel support link
 - Update support channel link anytime
 - Display support link in user dashboard support option
@@ -127,7 +159,8 @@ Investment Product Platform
 ## 3. Technical Requirements
 
 ### 3.1 Database
-Local database\n\n### 3.2 Responsive Design
+Local database\n
+### 3.2 Responsive Design
 Mobile-first responsive design approach
 
 ## 4. User Interface Design
@@ -148,7 +181,8 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Layout: Card-based layout with clear visual hierarchy and adequate white space
 
 ## 5. User Authentication
-\n### 5.1 Login & Signup
+
+### 5.1 Login & Signup
 - Simple phone number and password authentication
 - Forgot password functionality
 - No OTP verification required
@@ -175,8 +209,7 @@ Fixed bottom navigation bar (mobile) with five sections:
 - Government ID upload (front and back)
 - Bank details submission:\n  - Bank account number
   - Bank name
-  - Bank IFSC code (required)\n  - UPI ID (optional field, not required)
-- Submit button to send for admin review
+  - Bank IFSC code (required)\n  - UPI ID (optional field, not required)\n- Submit button to send for admin review
 - After submission, show pending approval status
 - User remains blocked from app features until admin approves KYC
 
@@ -258,8 +291,7 @@ Each product shows:
 2. View admin QR code
 3. Upload payment screenshot
 4. Status shows as pending
-
-### 11.2 Admin Management
+\n### 11.2 Admin Management
 - Approve recharge requests (add balance to user wallet)
 - Reject recharge requests\n- Update QR code anytime
 
@@ -278,7 +310,8 @@ Each product shows:
   - Update earning history for the user
 - Automatically stop earnings distribution when contract period expires
 - Mark expired investments as completed
-- Maintain detailed earning logs with date, amount, and product information\n
+- Maintain detailed earning logs with date, amount, and product information
+
 ### 12.2 Earning Calculation Logic
 - Daily earnings = Product daily income amount (as configured by admin)
 - Earnings are added to both Total Balance and Withdrawable Amount simultaneously
@@ -323,8 +356,7 @@ Each product shows:
 - One spin per day limit
 - Random bonus rewards
 - Auto-add rewards to wallet
-- Rewards added to both Total Balance and Withdrawable Amount\n
-### 14.2 Admin Management
+- Rewards added to both Total Balance and Withdrawable Amount\n\n### 14.2 Admin Management
 - Configure reward options
 - Manage reward probabilities
 \n### 14.3 Access Control
@@ -346,7 +378,8 @@ Each product shows:
 - Transaction history
 - Withdrawal history
 - Change password functionality
-\n### 16.2 Access Control
+
+### 16.2 Access Control
 - Full profile access only available after KYC completion
 - Only KYC submission section accessible before KYC approval
 
@@ -374,5 +407,6 @@ Each product shows:
 - Mandatory KYC verification with strict access control
 - Comprehensive product purchase reporting and analytics
 - Comprehensive referral reporting and analytics
+- Comprehensive user balance and transaction reporting
 - No OTP complexity
 - Streamlined development approach

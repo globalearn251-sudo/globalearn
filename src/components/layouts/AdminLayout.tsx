@@ -13,7 +13,8 @@ import {
   Gift,
   Coins,
   Bell,
-  ShoppingBag
+  ShoppingBag,
+  Wallet
 } from 'lucide-react';
 
 const navItems = [
@@ -22,6 +23,7 @@ const navItems = [
   { path: '/admin/products', label: 'Products', icon: Package },
   { path: '/admin/purchase-report', label: 'Purchase Report', icon: ShoppingBag },
   { path: '/admin/referral-report', label: 'Referral Report', icon: Users },
+  { path: '/admin/balance-report', label: 'Balance Report', icon: Wallet },
   { path: '/admin/recharges', label: 'Recharges', icon: TrendingUp },
   { path: '/admin/withdrawals', label: 'Withdrawals', icon: DollarSign },
   { path: '/admin/kyc', label: 'KYC Verification', icon: FileText },

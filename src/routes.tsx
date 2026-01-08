@@ -28,6 +28,7 @@ const AdminEarningsPage = lazy(() => import('./pages/admin/AdminEarningsPage'));
 const AdminNotificationsPage = lazy(() => import('./pages/admin/AdminNotificationsPage'));
 const AdminPurchaseReportPage = lazy(() => import('./pages/admin/AdminPurchaseReportPage'));
 const AdminReferralReportPage = lazy(() => import('./pages/admin/AdminReferralReportPage'));
+const AdminBalanceReportPage = lazy(() => import('./pages/admin/AdminBalanceReportPage'));
 
 interface RouteConfig {
   name: string;
@@ -147,6 +148,11 @@ const routes: RouteConfig[] = [
         name: 'Referral Report',
         path: 'referral-report',
         element: <AdminReferralReportPage />,
+      },
+      {
+        name: 'Balance Report',
+        path: 'balance-report',
+        element: <AdminBalanceReportPage />,
       },
       {
         name: 'Notifications',

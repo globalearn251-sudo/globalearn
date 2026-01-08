@@ -162,6 +162,19 @@
   - [x] Created "Top Referrers" section showing top 5 referrers by commission earned
   - [x] Added route /admin/referral-report to routes configuration
   - [x] Added "Referral Report" link to AdminLayout sidebar navigation with Users icon
+- [x] Step 23: Create Balance & Transaction Report page in admin panel
+  - [x] Added getAllTransactionsWithUsers and getUserTransactionsWithBalance functions to transactionApi
+  - [x] Added user field to Transaction TypeScript interface
+  - [x] Created AdminBalanceReportPage with comprehensive transaction history display
+  - [x] Implemented user search functionality with dropdown selection
+  - [x] Displayed day-wise transaction grouping with date headers
+  - [x] Added daily statistics showing credits, debits, and net balance per day
+  - [x] Implemented transaction type icons and color coding (green for credits, red for debits)
+  - [x] Added overall summary statistics: total credits, total debits, net balance, and transaction count
+  - [x] Created transaction breakdown by type when user is selected (recharges, withdrawals, earnings, etc.)
+  - [x] Displayed balance after each transaction with running balance tracking
+  - [x] Added route /admin/balance-report to routes configuration
+  - [x] Added "Balance Report" link to AdminLayout sidebar navigation with Wallet icon
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
