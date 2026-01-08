@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Header } from '@/components/layouts/Header';
 import { ImportantNotificationBanner } from '@/components/layouts/ImportantNotificationBanner';
 import { companyApi, userProductApi, transactionApi, dailyEarningsApi } from '@/db/api';
-import { Wallet, TrendingUp, Plus, ArrowUpRight, UserPlus, Headphones, Eye, History, Gift, Info } from 'lucide-react';
+import { Wallet, TrendingUp, Plus, ArrowUpRight, UserPlus, Headphones, Eye, History, Gift, Info, ShieldCheck } from 'lucide-react';
 import type { UserProduct, Transaction, CompanySetting } from '@/types/types';
 
 export default function HomePage() {
@@ -188,6 +188,39 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* KYC Completion Prompt */}
+        {profile?.kyc_status !== 'approved' && (
+          <Card className="border-2 border-warning/50 bg-warning/5">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-warning/10 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="h-6 w-6 text-warning" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg mb-1">Complete Your KYC</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {profile?.kyc_status === 'pending' 
+                      ? 'Your KYC verification is under review. You will be notified once approved.'
+                      : profile?.kyc_status === 'rejected'
+                      ? 'Your KYC was rejected. Please submit again with correct information.'
+                      : 'Complete your KYC verification to unlock all features including withdrawals and higher investment limits.'}
+                  </p>
+                  {profile?.kyc_status !== 'pending' && (
+                    <Button 
+                      onClick={() => navigate('/kyc-submit')}
+                      size="sm"
+                      className="w-full sm:w-auto"
+                    >
+                      <ShieldCheck className="mr-2 h-4 w-4" />
+                      {profile?.kyc_status === 'rejected' ? 'Resubmit KYC' : 'Complete KYC Now'}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Action Buttons */}
         <div className="grid grid-cols-4 gap-4">

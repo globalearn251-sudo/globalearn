@@ -197,6 +197,17 @@
   - [x] Added minimum canvas size of 200px to ensure proper rendering
   - [x] Added guards for all radius calculations (wheel, center circle, inner circle)
   - [x] Fixed IndexSizeError when canvas size is too small
+- [x] Step 25: Add KYC completion prompt in user dashboard
+  - [x] Added KYC completion card below wallet section on HomePage
+  - [x] Card displays when user's kyc_status is not 'approved'
+  - [x] Shows different messages based on KYC status (null, pending, rejected)
+  - [x] Added ShieldCheck icon for visual emphasis
+  - [x] Styled with warning border and background color for visibility
+  - [x] Button navigates to /kyc-submit page for KYC submission
+  - [x] Button text changes based on status: "Complete KYC Now" or "Resubmit KYC"
+  - [x] Button hidden when status is 'pending' (under review)
+  - [x] Responsive design with full width on mobile, auto width on desktop
+  - [x] Clear messaging explaining benefits of KYC completion
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
