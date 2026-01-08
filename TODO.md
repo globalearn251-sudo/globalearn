@@ -193,6 +193,10 @@
   - [x] Spin wheel automatically updates when admin changes rewards
   - [x] Added proper error handling for reward loading failures
   - [x] Disabled spin button when no rewards are available
+  - [x] Fixed canvas radius calculation to prevent negative values
+  - [x] Added minimum canvas size of 200px to ensure proper rendering
+  - [x] Added guards for all radius calculations (wheel, center circle, inner circle)
+  - [x] Fixed IndexSizeError when canvas size is too small
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

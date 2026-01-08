@@ -22,8 +22,8 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
     const updateSize = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
-        // Set canvas size to container width, max 400px
-        const size = Math.min(containerWidth - 40, 400);
+        // Set canvas size to container width, min 200px, max 400px
+        const size = Math.max(200, Math.min(containerWidth - 40, 400));
         setCanvasSize(size);
       }
     };
@@ -80,9 +80,12 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Ensure canvas size is valid
+    if (canvasSize <= 0 || segments.length === 0) return;
+
     const centerX = canvasSize / 2;
     const centerY = canvasSize / 2;
-    const radius = Math.min(centerX, centerY) - 10;
+    const radius = Math.max(10, Math.min(centerX, centerY) - 10);
 
     // Clear canvas
     ctx.clearRect(0, 0, canvasSize, canvasSize);
@@ -123,14 +126,14 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#ffffff';
       // Responsive font size
-      const fontSize = Math.max(14, canvasSize / 22);
+      const fontSize = Math.max(10, Math.min(14, canvasSize / 22));
       ctx.font = `bold ${fontSize}px Arial`;
       ctx.fillText(segment.label, radius * 0.65, 0);
       ctx.restore();
     });
 
-    // Draw center circle (responsive)
-    const centerCircleRadius = canvasSize / 10;
+    // Draw center circle (responsive) - ensure positive radius
+    const centerCircleRadius = Math.max(5, canvasSize / 10);
     ctx.beginPath();
     ctx.arc(centerX, centerY, centerCircleRadius, 0, 2 * Math.PI);
     ctx.fillStyle = '#ffffff';
@@ -139,8 +142,8 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
     ctx.lineWidth = 4;
     ctx.stroke();
 
-    // Draw inner circle (responsive)
-    const innerCircleRadius = canvasSize / 16;
+    // Draw inner circle (responsive) - ensure positive radius
+    const innerCircleRadius = Math.max(3, canvasSize / 16);
     ctx.beginPath();
     ctx.arc(centerX, centerY, innerCircleRadius, 0, 2 * Math.PI);
     ctx.fillStyle = '#3b82f6';
