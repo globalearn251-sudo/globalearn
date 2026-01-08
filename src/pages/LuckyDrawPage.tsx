@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 import { luckyDrawApi } from '@/db/api';
 import { Trophy, Gift } from 'lucide-react';
 import { SpinWheel } from '@/components/ui/SpinWheel';
-import type { LuckyDrawHistory } from '@/types/types';
+import type { LuckyDrawHistory, LuckyDrawConfig } from '@/types/types';
 
 export default function LuckyDrawPage() {
   const { profile, refreshProfile } = useAuth();
@@ -17,28 +17,63 @@ export default function LuckyDrawPage() {
   const [loading, setLoading] = useState(true);
   const [totalWon, setTotalWon] = useState(0);
   const [spinsLeft, setSpinsLeft] = useState(0);
-
-  // Wheel segments with colors matching the image
-  const wheelSegments = [
-    { label: '₹5', color: '#3b82f6', value: 5 },      // Blue
-    { label: '₹10', color: '#10b981', value: 10 },    // Green
-    { label: '₹2', color: '#8b5cf6', value: 2 },      // Purple
-    { label: '₹20', color: '#f59e0b', value: 20 },    // Orange
-    { label: '₹1', color: '#ec4899', value: 1 },      // Pink
-    { label: '₹25', color: '#ef4444', value: 25 },    // Red
-    { label: '₹3', color: '#6366f1', value: 3 },      // Indigo
-    { label: '₹15', color: '#14b8a6', value: 15 },    // Teal
-  ];
+  const [rewards, setRewards] = useState<LuckyDrawConfig[]>([]);
+  const [wheelSegments, setWheelSegments] = useState<Array<{
+    label: string;
+    color: string;
+    value: number;
+  }>>([]);
 
   useEffect(() => {
     loadData();
   }, [profile]);
+
+  // Generate vibrant colors for wheel segments
+  const generateWheelColors = (count: number): string[] => {
+    const colors = [
+      '#3b82f6', // Blue
+      '#10b981', // Green
+      '#8b5cf6', // Purple
+      '#f59e0b', // Orange
+      '#ec4899', // Pink
+      '#ef4444', // Red
+      '#6366f1', // Indigo
+      '#14b8a6', // Teal
+      '#f97316', // Orange-red
+      '#06b6d4', // Cyan
+      '#8b5cf6', // Violet
+      '#84cc16', // Lime
+    ];
+    
+    // If we need more colors than available, cycle through them
+    const result: string[] = [];
+    for (let i = 0; i < count; i++) {
+      result.push(colors[i % colors.length]);
+    }
+    return result;
+  };
 
   const loadData = async () => {
     if (!profile) return;
     
     try {
       setLoading(true);
+      
+      // Fetch active rewards from admin settings
+      const activeRewards = await luckyDrawApi.getActiveRewards();
+      setRewards(activeRewards);
+      
+      // Generate wheel segments from active rewards
+      if (activeRewards.length > 0) {
+        const colors = generateWheelColors(activeRewards.length);
+        const segments = activeRewards.map((reward, index) => ({
+          label: reward.reward_name,
+          color: colors[index],
+          value: reward.reward_amount,
+        }));
+        setWheelSegments(segments);
+      }
+      
       const canSpinToday = await luckyDrawApi.canSpinToday(profile.id);
       setCanSpin(canSpinToday);
       setSpinsLeft(canSpinToday ? 1 : 0);
@@ -51,6 +86,11 @@ export default function LuckyDrawPage() {
       setTotalWon(total);
     } catch (error) {
       console.error('Error loading lucky draw data:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to load lucky draw data',
+        variant: 'destructive',
+      });
     } finally {
       setLoading(false);
     }
@@ -132,22 +172,39 @@ export default function LuckyDrawPage() {
         {/* Spin Wheel */}
         <Card>
           <CardContent className="pt-6 pb-8">
-            <div className="flex flex-col items-center gap-6">
-              <SpinWheel
-                segments={wheelSegments}
-                isSpinning={spinning}
-                onSpinEnd={handleSpinEnd}
-              />
-              
-              <Button
-                onClick={handleSpin}
-                disabled={!canSpin || spinning}
-                size="lg"
-                className="w-full max-w-xs h-12 text-lg font-semibold"
-              >
-                {spinning ? 'Spinning...' : canSpin ? 'Spin Now!' : 'Come Back Tomorrow'}
-              </Button>
-            </div>
+            {loading ? (
+              <div className="flex flex-col items-center gap-6 py-12">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+                <p className="text-muted-foreground">Loading lucky draw...</p>
+              </div>
+            ) : wheelSegments.length === 0 ? (
+              <div className="flex flex-col items-center gap-6 py-12">
+                <Gift className="h-16 w-16 text-muted-foreground opacity-50" />
+                <div className="text-center">
+                  <p className="font-semibold text-lg">No Rewards Available</p>
+                  <p className="text-muted-foreground text-sm">
+                    Lucky draw rewards are being configured. Please check back later!
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-6">
+                <SpinWheel
+                  segments={wheelSegments}
+                  isSpinning={spinning}
+                  onSpinEnd={handleSpinEnd}
+                />
+                
+                <Button
+                  onClick={handleSpin}
+                  disabled={!canSpin || spinning || wheelSegments.length === 0}
+                  size="lg"
+                  className="w-full max-w-xs h-12 text-lg font-semibold"
+                >
+                  {spinning ? 'Spinning...' : canSpin ? 'Spin Now!' : 'Come Back Tomorrow'}
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
 

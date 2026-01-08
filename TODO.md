@@ -182,6 +182,17 @@
   - [x] Deployed updated daily-earnings edge function (version 4)
   - [x] Verified all 6 transaction types exist in database (recharge, withdrawal, purchase, earning, referral, lucky_draw)
   - [x] Created test earning transaction to verify balance report displays all transaction types correctly
+- [x] Step 24: Make lucky draw spin wheel dynamic based on admin settings
+  - [x] Updated LuckyDrawPage to fetch active rewards from admin settings dynamically
+  - [x] Removed hardcoded wheel segments and replaced with dynamic generation from database
+  - [x] Created generateWheelColors function to assign vibrant colors to wheel segments
+  - [x] Implemented automatic color cycling for any number of rewards (supports 12+ colors)
+  - [x] Added loading state while fetching rewards from database
+  - [x] Added empty state when no rewards are configured by admin
+  - [x] Wheel segments now display reward names and amounts from admin configuration
+  - [x] Spin wheel automatically updates when admin changes rewards
+  - [x] Added proper error handling for reward loading failures
+  - [x] Disabled spin button when no rewards are available
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
