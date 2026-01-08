@@ -155,6 +155,10 @@ export default function AdminBalanceReportPage() {
       .filter((t) => ['withdrawal', 'purchase'].includes(t.type))
       .reduce((sum, t) => sum + t.amount, 0);
     
+    const totalEarnings = filteredTransactions
+      .filter((t) => t.type === 'earning')
+      .reduce((sum, t) => sum + t.amount, 0);
+    
     const recharges = filteredTransactions.filter((t) => t.type === 'recharge').length;
     const withdrawals = filteredTransactions.filter((t) => t.type === 'withdrawal').length;
     const earnings = filteredTransactions.filter((t) => t.type === 'earning').length;
@@ -162,6 +166,7 @@ export default function AdminBalanceReportPage() {
     return {
       totalCredits,
       totalDebits,
+      totalEarnings,
       netBalance: totalCredits - totalDebits,
       recharges,
       withdrawals,
@@ -205,7 +210,7 @@ export default function AdminBalanceReportPage() {
       </div>
 
       {/* Summary Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
@@ -228,6 +233,20 @@ export default function AdminBalanceReportPage() {
                 <p className="text-sm text-muted-foreground">Total Debits</p>
                 <p className="text-2xl font-bold text-destructive">
                   ₹{stats.totalDebits.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <Coins className="h-8 w-8 text-success" />
+              <div>
+                <p className="text-sm text-muted-foreground">Daily Earnings</p>
+                <p className="text-2xl font-bold text-success">
+                  ₹{stats.totalEarnings.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -325,8 +344,9 @@ export default function AdminBalanceReportPage() {
           </Card>
           <Card>
             <CardContent className="pt-6 text-center">
-              <p className="text-sm text-muted-foreground">Earnings</p>
+              <p className="text-sm text-muted-foreground">Daily Earnings</p>
               <p className="text-xl font-bold">{stats.earnings}</p>
+              <p className="text-xs text-success font-bold">₹{stats.totalEarnings.toFixed(2)}</p>
             </CardContent>
           </Card>
           <Card>

@@ -175,6 +175,8 @@
   - [x] Displayed balance after each transaction with running balance tracking
   - [x] Added route /admin/balance-report to routes configuration
   - [x] Added "Balance Report" link to AdminLayout sidebar navigation with Wallet icon
+  - [x] Enhanced daily earnings visibility with dedicated summary card showing total earnings amount
+  - [x] Updated transaction breakdown to show both count and total amount for daily earnings
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
