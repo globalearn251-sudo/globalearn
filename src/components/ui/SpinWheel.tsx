@@ -8,9 +8,10 @@ interface SpinWheelProps {
   }>;
   onSpinEnd?: (winningIndex: number) => void;
   isSpinning: boolean;
+  winningIndex?: number; // Add prop to specify winning segment
 }
 
-export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
+export function SpinWheel({ segments, onSpinEnd, isSpinning, winningIndex }: SpinWheelProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
@@ -39,10 +40,13 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
 
   useEffect(() => {
     if (isSpinning) {
-      // Random winning segment
-      const winningIndex = Math.floor(Math.random() * segments.length);
+      // Use provided winning index or random if not specified
+      const finalWinningIndex = winningIndex !== undefined 
+        ? winningIndex 
+        : Math.floor(Math.random() * segments.length);
+      
       const segmentAngle = 360 / segments.length;
-      const targetAngle = 360 * 5 + (360 - winningIndex * segmentAngle) + segmentAngle / 2;
+      const targetAngle = 360 * 5 + (360 - finalWinningIndex * segmentAngle) + segmentAngle / 2;
       
       setTargetRotation(targetAngle);
       
@@ -65,13 +69,13 @@ export function SpinWheel({ segments, onSpinEnd, isSpinning }: SpinWheelProps) {
         if (progress < 1) {
           requestAnimationFrame(animate);
         } else {
-          onSpinEnd?.(winningIndex);
+          onSpinEnd?.(finalWinningIndex);
         }
       };
 
       animate();
     }
-  }, [isSpinning]);
+  }, [isSpinning, winningIndex]);
 
   const drawWheel = () => {
     const canvas = canvasRef.current;

@@ -23,6 +23,7 @@ export default function LuckyDrawPage() {
     color: string;
     value: number;
   }>>([]);
+  const [winningIndex, setWinningIndex] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     loadData();
@@ -99,20 +100,44 @@ export default function LuckyDrawPage() {
   const handleSpin = async () => {
     if (!profile || !canSpin || spinning) return;
 
-    setSpinning(true);
+    try {
+      // Call backend API first to get the actual winning reward
+      const result = await luckyDrawApi.spin(profile.id);
+      
+      // Find the index of the winning reward in the segments array
+      const winIndex = rewards.findIndex(
+        (reward) => reward.reward_name === result.reward_name
+      );
+      
+      if (winIndex === -1) {
+        throw new Error('Winning reward not found in segments');
+      }
+      
+      // Set the winning index and start spinning
+      setWinningIndex(winIndex);
+      setSpinning(true);
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to spin',
+        variant: 'destructive',
+      });
+    }
   };
 
-  const handleSpinEnd = async (winningIndex: number) => {
+  const handleSpinEnd = async (winningIdx: number) => {
     if (!profile) return;
 
     try {
-      const result = await luckyDrawApi.spin(profile.id);
-      
+      // Refresh profile to get updated balance
       await refreshProfile();
+      
+      // Get the reward details from the winning index
+      const wonReward = rewards[winningIdx];
       
       toast({
         title: 'Congratulations! 🎉',
-        description: `You won ${result.reward_name}! ₹${result.reward_amount} has been added to your balance.`,
+        description: `You won ${wonReward.reward_name}! ₹${wonReward.reward_amount} has been added to your balance.`,
       });
 
       setCanSpin(false);
@@ -121,11 +146,12 @@ export default function LuckyDrawPage() {
     } catch (error: any) {
       toast({
         title: 'Error',
-        description: error.message || 'Failed to spin',
+        description: error.message || 'Failed to process reward',
         variant: 'destructive',
       });
     } finally {
       setSpinning(false);
+      setWinningIndex(undefined);
     }
   };
 
@@ -193,6 +219,7 @@ export default function LuckyDrawPage() {
                   segments={wheelSegments}
                   isSpinning={spinning}
                   onSpinEnd={handleSpinEnd}
+                  winningIndex={winningIndex}
                 />
                 
                 <Button

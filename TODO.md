@@ -208,6 +208,18 @@
   - [x] Button hidden when status is 'pending' (under review)
   - [x] Responsive design with full width on mobile, auto width on desktop
   - [x] Clear messaging explaining benefits of KYC completion
+- [x] Step 26: Fix lucky draw spin wheel to match backend reward selection
+  - [x] Added winningIndex prop to SpinWheel component interface
+  - [x] Updated SpinWheel to accept and use provided winningIndex instead of random selection
+  - [x] Modified handleSpin to call backend API first before starting animation
+  - [x] Backend API returns actual winning reward based on probability
+  - [x] Find winning reward index in segments array by matching reward_name
+  - [x] Pass winning index to SpinWheel component to animate to correct segment
+  - [x] Updated handleSpinEnd to use winning index from animation
+  - [x] Display correct reward details in success toast notification
+  - [x] Added error handling for reward not found in segments
+  - [x] Reset winningIndex state after spin completes
+  - [x] Wheel now always stops at the exact reward user receives from backend
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment
