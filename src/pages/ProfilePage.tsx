@@ -136,7 +136,7 @@ export default function ProfilePage() {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Referral Code</span>
+              <span className="text-sm text-muted-foreground">Member ID</span>
               <span className="font-mono font-bold">{profile?.referral_code}</span>
             </div>
             <div className="flex items-center justify-between">

@@ -159,6 +159,9 @@ export default function WithdrawalPage() {
                 <p className="text-xs text-muted-foreground">
                   Minimum withdrawal amount: ₹{minWithdrawalAmount}
                 </p>
+                <p className="text-xs text-muted-foreground">
+                  Withdrawal Charges: 6%
+                </p>
               </div>
 
               <div className="space-y-2">

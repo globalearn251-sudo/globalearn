@@ -181,7 +181,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-              <p className="text-xs opacity-80 mb-1">Daily Earnings</p>
+              <p className="text-xs opacity-80 mb-1">Total Product Earning</p>
               <p className="text-xl font-bold text-green-300">
                 +₹{profile?.total_earnings?.toFixed(2) || '0.00'}
               </p>
