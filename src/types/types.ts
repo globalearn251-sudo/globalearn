@@ -75,6 +75,7 @@ export interface RechargeRequest {
   user_id: string;
   amount: number;
   payment_screenshot_url: string;
+  transaction_id: string | null;
   status: RequestStatus;
   admin_note: string | null;
   processed_by: string | null;

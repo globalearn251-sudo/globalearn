@@ -237,6 +237,18 @@
   - [x] Modified signInWithUsername to check user status after authentication
   - [x] Auto sign-out blocked users with error message
   - [x] All admin user management features working correctly
+- [x] Step 28: Add Transaction ID field to recharge requests
+  - [x] Created database migration adding transaction_id column to recharge_requests table
+  - [x] Updated RechargeRequest type to include transaction_id field (nullable)
+  - [x] Modified createRechargeRequest API function to accept optional transactionId parameter
+  - [x] Added transactionId state to RechargePage component
+  - [x] Added Transaction ID input field in recharge form (optional)
+  - [x] Added helper text explaining transaction ID purpose
+  - [x] Updated form submission to pass transaction ID to API
+  - [x] Modified AdminRechargesPage to display transaction ID in request details
+  - [x] Transaction ID shown in monospace font with background highlight
+  - [x] Transaction ID only displayed when provided by user
+  - [x] All recharge transaction ID features working correctly
 
 ## Notes
 - **APPLICATION NAME**: BTRADE - Global Trading & Investment

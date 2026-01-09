@@ -259,6 +259,14 @@ export default function AdminRechargesPage() {
                     {new Date(viewingRequest.created_at).toLocaleString()}
                   </p>
                 </div>
+                {viewingRequest.transaction_id && (
+                  <div className="col-span-2">
+                    <p className="text-sm text-muted-foreground">Transaction ID</p>
+                    <p className="font-medium font-mono text-sm bg-muted px-2 py-1 rounded">
+                      {viewingRequest.transaction_id}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {viewingRequest.payment_screenshot_url && (

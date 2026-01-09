@@ -16,6 +16,7 @@ export default function RechargePage() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [amount, setAmount] = useState('');
+  const [transactionId, setTransactionId] = useState('');
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -81,7 +82,12 @@ export default function RechargePage() {
       const screenshotUrl = await storageApi.uploadImage(screenshot, path);
 
       // Create recharge request
-      await rechargeApi.createRechargeRequest(profile.id, amountNum, screenshotUrl);
+      await rechargeApi.createRechargeRequest(
+        profile.id, 
+        amountNum, 
+        screenshotUrl,
+        transactionId.trim() || undefined
+      );
 
       toast({
         title: 'Success!',
@@ -130,7 +136,7 @@ export default function RechargePage() {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount ($)</Label>
+                <Label htmlFor="amount">Amount (₹) *</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -142,6 +148,21 @@ export default function RechargePage() {
                   disabled={loading}
                   required
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="transactionId">Transaction ID (Optional)</Label>
+                <Input
+                  id="transactionId"
+                  type="text"
+                  placeholder="Enter transaction ID (if available)"
+                  value={transactionId}
+                  onChange={(e) => setTransactionId(e.target.value)}
+                  disabled={loading}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Enter the transaction ID from your payment app if available
+                </p>
               </div>
 
               <div className="space-y-2">

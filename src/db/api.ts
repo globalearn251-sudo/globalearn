@@ -262,13 +262,14 @@ export const transactionApi = {
 
 // Recharge Request API
 export const rechargeApi = {
-  createRechargeRequest: async (userId: string, amount: number, screenshotUrl: string) => {
+  createRechargeRequest: async (userId: string, amount: number, screenshotUrl: string, transactionId?: string) => {
     const { data, error } = await supabase
       .from('recharge_requests')
       .insert({
         user_id: userId,
         amount,
         payment_screenshot_url: screenshotUrl,
+        transaction_id: transactionId || null,
       })
       .select()
       .maybeSingle();
