@@ -136,29 +136,15 @@ export default function ProductsPage() {
                     <div className="flex items-center gap-2">
                       <TrendingUp className="h-4 w-4 text-success" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Daily Earning</p>
+                        <p className="text-xs text-muted-foreground">Total Product Profit</p>
                         <p className="font-bold text-lg text-success">
                           ₹{product.daily_earning.toFixed(2)}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Contract Duration</p>
-                      <p className="font-medium">{product.contract_days} days</p>
-                    </div>
-                  </div>
-                  <div className="pt-2 border-t">
-                    <p className="text-sm text-muted-foreground">Total Return</p>
-                    <p className="text-xl font-bold text-primary">
-                      ₹{(product.daily_earning * product.contract_days).toFixed(2)}
-                    </p>
-                    <p className="text-xs text-success">
-                      ROI: {(((product.daily_earning * product.contract_days) / product.price - 1) * 100).toFixed(1)}%
-                    </p>
-                  </div>
+                  
+                  
                 </CardContent>
                 <CardFooter>
                   <Button
